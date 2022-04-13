@@ -1,12 +1,11 @@
 import React from 'react';
-import { Counter } from './components/counter/counter.component';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './routes/home/home.component';
 
-function App() {
+export default function App(): JSX.Element {
   return (
-    <div className="App">
-      <Counter />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
-
-export default App;

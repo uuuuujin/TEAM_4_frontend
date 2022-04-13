@@ -11,7 +11,7 @@ import {
 } from '../../store/modules/counter/counter.slice';
 import { CounterRow, CountValue, Button, TextBox, AsyncButton } from './counter.style';
 
-export function Counter() {
+export function Counter(): JSX.Element {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');

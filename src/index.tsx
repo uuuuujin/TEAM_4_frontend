@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './App';
+
 import { store } from './store/store';
 import theme from './style/theme';
 import * as serviceWorker from './serviceWorker';
@@ -11,7 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

@@ -1,5 +1,3 @@
-import { css } from 'styled-components';
-
 interface DeviceSize {
   mobile: number;
   tablet: number;
