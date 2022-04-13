@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { decrement, increment, incrementByAmount, incrementAsync, incrementIfOdd, selectCount } from './counterSlice';
-import styles from './Counter.module.css';
+import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+  incrementAsync,
+  incrementIfOdd,
+  selectCount,
+} from '../../store/modules/counter/counter.slice';
+import styles from './counter.module.css';
 
 export function Counter() {
   const count = useAppSelector(selectCount);
