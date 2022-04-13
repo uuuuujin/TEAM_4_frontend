@@ -8,10 +8,10 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from '../../store/modules/counter/counter.slice';
+} from '../../store/modules/counter/count.slice';
 import { CounterRow, CountValue, Button, TextBox, AsyncButton } from './counter.style';
 
-export function Counter(): JSX.Element {
+export default function Counter(): JSX.Element {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -23,13 +23,14 @@ export function Counter(): JSX.Element {
         <Button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
           -
         </Button>
-        <CountValue>{count}</CountValue>
+        <CountValue role="document">{count}</CountValue>
         <Button aria-label="Increment value" onClick={() => dispatch(increment())}>
           +
         </Button>
       </CounterRow>
       <CounterRow>
         <TextBox
+          role="textbox"
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
