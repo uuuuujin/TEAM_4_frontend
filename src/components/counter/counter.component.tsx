@@ -7,8 +7,8 @@ import {
   incrementByAmount,
   incrementAsync,
   incrementIfOdd,
-  selectCount,
-} from '../../store/modules/counter/count.slice';
+} from '../../store/modules/counter/counter.slice';
+import { selectCount } from '../../store/modules/counter/counter.select';
 import { CounterRow, CountValue, Button, TextBox, AsyncButton } from './counter.style';
 
 export default function Counter(): JSX.Element {

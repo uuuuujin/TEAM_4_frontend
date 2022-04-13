@@ -1,7 +1,6 @@
-// import original module declarations
 import 'styled-components';
 
-// and extend them!
+// 공동 스타일 속성 interface 샘플
 declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: string;

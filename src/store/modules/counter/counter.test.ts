@@ -1,5 +1,6 @@
-import counterReducer, { CounterState, increment, decrement, incrementByAmount } from './count.slice';
+import counterReducer, { CounterState, increment, decrement, incrementByAmount } from './counter.slice';
 
+// redux 테스트
 describe('counter reducer', () => {
   const initialState: CounterState = {
     value: 3,
