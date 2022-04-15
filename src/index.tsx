@@ -11,7 +11,8 @@ import theme from './style/theme';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode><ThemeProvider theme={theme}>
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
       <Provider store={store}>
         <BrowserRouter>
           <App />
