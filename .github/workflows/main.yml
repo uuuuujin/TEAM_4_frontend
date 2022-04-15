@@ -44,4 +44,17 @@ jobs:
         
       - run: npm run test
         if: ${{ always() }}
+
+      - name: send slack message when failed
+        if: ${{ failure() }}
+        uses: ./.github/actions.slack-notification
+        with:
+          slack_incoming_url: ${{ secrets.SLACK_INCOMING_URL }}
+
+      - name: send slack message when completed
+        if: ${{ success() }}
+        uses: ./.github/actions.slack-notification
+        with:
+          status: success
+          slack_incoming_url: ${{ secrets.SLACK_INCOMING_URL }}
         
