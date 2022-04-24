@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BaseButton, InvertedButton } from './button.style';
 
-interface ButtonProp {
+interface ButtonProp extends React.ComponentPropsWithRef<'button'> {
   children?: JSX.Element | JSX.Element[] | string;
   buttonType?: string;
 }
