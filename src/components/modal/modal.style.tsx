@@ -20,8 +20,8 @@ export const ModalContainer = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
-  width: 500px;
+export const ModalContent = styled.div<{ width: number }>`
+  width: ${({ width }) => `${width}px`};
   background-color: #fff;
 `;
 
