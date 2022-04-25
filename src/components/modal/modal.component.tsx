@@ -10,18 +10,26 @@ import {
   CloseButton,
 } from './modal.style';
 
-interface ModalProp {
+export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  contentWidth?: number;
   children: JSX.Element | string;
   footer?: JSX.Element | string;
 }
 
-export default function Modal({ isOpen, onClose, title, children, footer }: ModalProp): JSX.Element {
+export default function Modal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  footer,
+  contentWidth = 500,
+}: ModalProp): JSX.Element {
   return (
     <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
+      <ModalContent width={contentWidth} onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
           <CloseButton onClick={onClose}>&#x2715;</CloseButton>
