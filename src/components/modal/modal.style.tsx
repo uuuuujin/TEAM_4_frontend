@@ -39,11 +39,11 @@ export const ModalFooter = styled.div`
 export const ModalTitle = styled.div`
   margin: 0;
   font-weight: bold;
+  border-bottom: 1px solid #eee;
 `;
 
 export const ModalBody = styled.div`
   padding: 10px;
-  border-top: 1px solid #eee;
 `;
 
 export const CloseButton = styled.div`

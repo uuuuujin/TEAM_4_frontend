@@ -13,7 +13,7 @@ import {
 export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   contentWidth?: number;
   children: JSX.Element | string;
   footer?: JSX.Element | string;
@@ -31,7 +31,7 @@ export default function Modal({
     <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
       <ModalContent width={contentWidth} onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
-          <ModalTitle>{title}</ModalTitle>
+          {title ? <ModalTitle>{title}</ModalTitle> : <div />}
           <CloseButton onClick={onClose}>&#x2715;</CloseButton>
         </ModalHeader>
         <ModalBody>{children}</ModalBody>
