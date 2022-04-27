@@ -17,6 +17,6 @@ describe('state-bar', () => {
         </Provider>
       </ThemeProvider>
     );
-    expect(screen.getByText('상태 바 테스트')).toBeInTheDocument();
+    expect(screen.getByText('5분 휴식합니다.')).toBeInTheDocument();
   });
 });
