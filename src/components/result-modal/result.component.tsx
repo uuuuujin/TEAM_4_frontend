@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../modal/modal.component';
 import Button from '../button/button.component';
 import { ResultModalImgContainer, ButtonContainer } from './result.style';

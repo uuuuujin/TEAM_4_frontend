@@ -13,7 +13,7 @@ import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 
 export default function ProfileModal(): JSX.Element {
   const [isOpen, setIsOpen] = useState(true);
-  const [user, setUser] = useState(false);
+  const [user] = useState(false);
 
   return (
     <Modal

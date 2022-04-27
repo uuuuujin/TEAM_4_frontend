@@ -10,7 +10,7 @@ interface SocialLoginButtonProp extends React.ComponentPropsWithRef<'button'> {
 
 export interface SocialLoginButtonTheme {
   backgroundColor: string;
-  logoSrc: any;
+  logoSrc: string;
   text: string;
   textColor: string;
   logoSize: string;

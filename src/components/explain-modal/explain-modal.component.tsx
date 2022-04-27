@@ -5,7 +5,7 @@ import { ImgContainer, ButtonContainer, DescriptionImg } from './explain-modal.s
 
 interface ContentType {
   title: string;
-  imgSrc: any;
+  imgSrc: string;
   description: string;
 }
 
