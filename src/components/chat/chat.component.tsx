@@ -11,6 +11,8 @@ export default function Chat(): JSX.Element {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (chatContent === '') return;
+
     const newChatItem: ChatItemProp = {
       name: '양성훈',
       content: chatContent,
@@ -33,7 +35,7 @@ export default function Chat(): JSX.Element {
         ))}
       </ChatItemContainer>
       <ChatForm onSubmit={submitHandler}>
-        <ChatInput value={chatContent} onChange={changeInputHandler} />
+        <ChatInput maxLength={60} value={chatContent} onChange={changeInputHandler} />
         <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>입력</Button>
       </ChatForm>
     </ChatContainer>
