@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '../modal/modal.component';
 import Button from '../button/button.component';
 import { ResultModalImgContainer, ButtonContainer } from './result.style';
-import CombinedCharacter from '../character-combine/character-combine';
+import CombinedCharacter from '../character-combine/character-combine.component';
 
 export interface ResultModalProp {
   isOpen: boolean;

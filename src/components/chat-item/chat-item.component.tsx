@@ -11,7 +11,9 @@ export interface ChatItemProp {
 const formatDate = (date: Date) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  const format = `${hours > 12 ? '오후' : '오전'} ${hours % 12}:${minutes}`;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  const format = `${hours > 12 ? '오후' : '오전'} ${hours % 12}:${formattedMinutes}`;
   return format;
 };
 
