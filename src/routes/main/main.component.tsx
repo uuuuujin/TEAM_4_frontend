@@ -5,6 +5,7 @@ import MultiLink from '../../components/multi-link/multi-link.component';
 import CopyMsg from '../../components/copy-message/copy-message.component';
 import Character from '../../components/character/character.component';
 import CatImg from '../../assets/images/cat.png';
+import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 
 export default function Main(): JSX.Element {
   const [toastState, setToastState] = useState<boolean>(false);
@@ -22,6 +23,7 @@ export default function Main(): JSX.Element {
       <MultiLink setToastState={setToastState}>http://podongpodong.com/psa-hjjr-mwk</MultiLink>
       {toastState && <CopyMsg />}
       <Character nickname="용감한푸른도마뱀" characterImgSrc={CatImg} />
+      <PomodoroTimer />
     </div>
   );
 }
