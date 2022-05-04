@@ -4,8 +4,8 @@ export const ResultModalImgContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 3em;
-  // background-color: pink;
-  //border-bottom: 1px solid black;
+  position: relative;
+  height: 200px;
 `;
 
 export const ButtonContainer = styled.div`
