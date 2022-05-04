@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import Button, { ButtonTypeClasses } from '../button/button.component';
 import {
   MypageDropdownContainer,
   MypageProfileImg,
@@ -14,7 +14,7 @@ export default function MypageDropdown(): JSX.Element {
       <MypageProfileImg />
       <MypageProfileName>양성훈</MypageProfileName>
       <MypageProfileEmail>didtjdgns852@gmail.com</MypageProfileEmail>
-      <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>로그아웃</Button>
+      <Button buttonType={ButtonTypeClasses.inverted}>로그아웃</Button>
     </MypageDropdownContainer>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { ChatContainer, ChatItemContainer, ChatForm, ChatInput } from './chat.style';
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import Button, { ButtonTypeClasses } from '../button/button.component';
 import ChatItem, { ChatItemProp } from '../chat-item/chat-item.component';
 
 export default function Chat(): JSX.Element {
@@ -36,7 +36,7 @@ export default function Chat(): JSX.Element {
       </ChatItemContainer>
       <ChatForm onSubmit={submitHandler}>
         <ChatInput maxLength={60} value={chatContent} onChange={changeInputHandler} />
-        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>입력</Button>
+        <Button buttonType={ButtonTypeClasses.inverted}>입력</Button>
       </ChatForm>
     </ChatContainer>
   );
