@@ -5,15 +5,11 @@ import MultiLink from '../../components/multi-link/multi-link.component';
 import CopyMsg from '../../components/copy-message/copy-message.component';
 import Character from '../../components/character/character.component';
 import CatImg from '../../assets/images/cat.png';
+import ToastHook from '../../hooks/toast.hook';
 
 export default function Main(): JSX.Element {
   const [toastState, setToastState] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (toastState) {
-      setTimeout(() => setToastState(false), 3000);
-    }
-  }, [toastState]);
+  ToastHook(toastState, setToastState);
 
   return (
     <div className="App">
