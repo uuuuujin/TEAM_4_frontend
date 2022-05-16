@@ -13,6 +13,7 @@ export const ModalContainer = styled.div`
   opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
+  z-index: 5;
 
   &.show {
     opacity: 1;
