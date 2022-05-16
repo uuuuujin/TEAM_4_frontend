@@ -10,24 +10,24 @@ export const PomodoroTimerContainer = styled.div`
   height: 580px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -52%);
+  // align-items: center;
+  position: relative;
 `;
 
 export const TimerTextContainer = styled.div`
   display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -63%);
 `;
 
 export const TimerText = styled.div`
   color: #f9ffba;
-  font-size: 84px;
-  width: 50px;
+  font-size: 120px;
+  width: 70px;
   text-align: center;
 `;
 
 export const TimerColon = styled(TimerText)`
-  width: 20px;
+  width: 30px;
 `;
