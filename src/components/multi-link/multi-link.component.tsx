@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LinkContainer, CopyBtn, LinkAddress } from './multi-link.style';
+import { LinkContainer, CopyBtn, LinkAddressContainer, LinkAddress } from './multi-link.style';
 
 interface LinkType {
   children: string;
@@ -29,7 +29,9 @@ export default function MultiLink({ children, setToastState }: LinkType): JSX.El
 
   return (
     <LinkContainer>
-      <LinkAddress>{children}</LinkAddress>
+      <LinkAddressContainer>
+        <LinkAddress>{children}</LinkAddress>
+      </LinkAddressContainer>
       <CopyBtn onClick={() => handlerCopy(children)}>복사</CopyBtn>
     </LinkContainer>
   );
