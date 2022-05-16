@@ -3,27 +3,31 @@ import TimerImage from '../../assets/images/timer-background.png';
 
 export const PomodoroTimerContainer = styled.div`
   background-image: url(${TimerImage});
-  background-size: cover;
+  //background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 800px;
-  height: 400px;
+  width: 580px;
+  height: 580px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
+  position: relative;
 `;
 
 export const TimerTextContainer = styled.div`
   display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -63%);
 `;
 
 export const TimerText = styled.div`
   color: #f9ffba;
-  font-size: 84px;
-  width: 50px;
+  font-size: 120px;
+  width: 70px;
   text-align: center;
 `;
 
 export const TimerColon = styled(TimerText)`
-  width: 20px;
+  width: 30px;
 `;
