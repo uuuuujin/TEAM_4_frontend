@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
 export const TimerContainer = styled.div`
-  width: 800px;
+  width: 580px;
   margin: 0 auto;
-  margin-top: 10vh;
 `;
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  right: 28vw;
-  top: 35vh;
+  top: 50%;
+  left: calc(50% + 280px);
 `;
 
 export const StateBarContainer = styled.div`
-  text-align: center;
-  margin-top: 10vh;
+  position: absolute;
+  top: calc(50% + 260px);
+  left: 50%;
+  transform: translate(-50%, 0);
 `;

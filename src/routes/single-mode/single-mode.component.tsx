@@ -9,9 +9,7 @@ import { StateBarContainer, CharacterContainer, TimerContainer } from './single-
 export default function SingleMode(): JSX.Element {
   return (
     <div>
-      <TimerContainer>
-        <PomodoroTimer />
-      </TimerContainer>
+      <PomodoroTimer />
       <CharacterContainer>
         <Character nickname="용감한푸른도마뱀!" characterImgSrc={CatImg} />
       </CharacterContainer>
