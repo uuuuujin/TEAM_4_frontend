@@ -7,13 +7,13 @@ export const TimerContainer = styled.div`
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  top: 50%;
-  left: calc(50% + 280px);
+  top: 45%;
+  left: calc(50% + 310px);
 `;
 
 export const StateBarContainer = styled.div`
   position: absolute;
-  top: calc(50% + 260px);
+  top: calc(50% + 230px);
   left: 50%;
   transform: translate(-50%, 0);
 `;
