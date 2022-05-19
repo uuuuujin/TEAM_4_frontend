@@ -6,8 +6,8 @@ export const PomodoroTimerContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 550px;
-  height: 550px;
+  width: 29vw;
+  height: 29vw;
   display: flex;
   justify-content: center;
   // align-items: center;
@@ -17,14 +17,14 @@ export const PomodoroTimerContainer = styled.div`
 export const TimerTextContainer = styled.div`
   display: flex;
   position: absolute;
-  top: 50%;
-  transform: translate(0, -63%);
+  top: 52%;
+  transform: translate(0, -60%);
 `;
 
 export const TimerText = styled.div`
   color: #f9ffba;
-  font-size: 120px;
-  width: 70px;
+  font-size: 6.5rem;
+  width: 7vh;
   text-align: center;
 `;
 
