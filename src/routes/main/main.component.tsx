@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Counter from '../../components/counter/counter.component';
 import Chat from '../../components/chat/chat.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
