@@ -3,11 +3,11 @@ import TimerImage from '../../assets/images/timer-background.png';
 
 export const PomodoroTimerContainer = styled.div`
   background-image: url(${TimerImage});
-  //background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 580px;
-  height: 580px;
+  width: 550px;
+  height: 550px;
   display: flex;
   justify-content: center;
   // align-items: center;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TimerContainer = styled.div`
-  width: 580px;
+  width: 550px;
   margin: 0 auto;
 `;
 
