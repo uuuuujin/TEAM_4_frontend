@@ -7,6 +7,7 @@ import {
   Nickname,
   CharacterWrap,
   ShelfImg,
+  CharacterImgWrap,
   CharacterImg,
 } from './character.style';
 import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
@@ -32,9 +33,9 @@ export default function Character({ nickname, characterImgSrc }: CharacterType):
         <ShelfImg>
           <img src={Shelf} alt="캐릭터 받침대" />
         </ShelfImg>
-        <CharacterImg>
-          <img src={characterImgSrc} alt="캐릭터 이미지" />
-        </CharacterImg>
+        <CharacterImgWrap>
+          <CharacterImg src={characterImgSrc} alt="캐릭터 이미지" />
+        </CharacterImgWrap>
       </CharacterWrap>
       {modalOpen && (
         <ProfileModal

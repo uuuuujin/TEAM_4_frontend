@@ -31,9 +31,14 @@ export const ShelfImg = styled.div`
   transform: translate(-50%, 0);
 `;
 
-export const CharacterImg = styled.div`
+export const CharacterImgWrap = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -74%);
+`;
+
+export const CharacterImg = styled.img`
+  width: 150px;
+  height: 150px;
 `;

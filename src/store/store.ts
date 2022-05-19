@@ -3,11 +3,13 @@ import logger from 'redux-logger';
 import { multiMiddleware } from './middlewares/multi.middleware';
 import counterReducer from './modules/counter/counter.slice';
 import multiReducer from './modules/multi/multi.slice';
+import mainReducer from './modules/main/main.slice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     multi: multiReducer,
+    main: mainReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logger, multiMiddleware]),
 });
