@@ -5,9 +5,9 @@ export interface Member {
 }
 
 export interface ChatMessage {
-  email: string;
+  nickName: string;
   content: string;
-  date: Date;
+  date: string;
 }
 
 export enum MultiEvent {}

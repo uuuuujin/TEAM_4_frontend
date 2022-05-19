@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { createRoomAsync, enterRoomAsync, multiAction } from '../../store/modules/multi/multi.slice';
+import { createRoomAsync, enterRoomAsync, chatMessageAsync, multiAction } from '../../store/modules/multi/multi.slice';
 import { selectIsEntered, selectRoomId, selectIsConnected } from '../../store/modules/multi/multi.select';
 
 export default function MultiMode(): JSX.Element {
@@ -41,5 +41,17 @@ export default function MultiMode(): JSX.Element {
       dispatch(multiAction.startConnectSocket());
     }
   }, [dispatch, isEntered]);
+
+  useEffect(() => {
+    if (isConnected) {
+      dispatch(
+        chatMessageAsync({
+          roomId,
+          memberId: 126,
+          content: '하아',
+        })
+      );
+    }
+  }, [dispatch, isConnected, roomId]);
   return <div>{!isConnected && <Outlet />}</div>;
 }
