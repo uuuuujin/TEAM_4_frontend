@@ -39,6 +39,17 @@ export const enterRoomAsync = createAsyncThunk(
   }
 );
 
+export const chatMessageAsync = createAsyncThunk(
+  'multi/chat',
+  async ({ roomId, memberId, content }: { roomId: string; memberId: number; content: string }) => {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}/chats`, {
+      content,
+      memberId,
+    });
+    return response.data;
+  }
+);
+
 export const mutliSlice = createSlice({
   name: 'multi',
   initialState,
@@ -55,6 +66,9 @@ export const mutliSlice = createSlice({
     },
     updateRoomId: (state, action: PayloadAction<{ roomId: string }>) => {
       state.roomId = action.payload.roomId;
+    },
+    addChatMessage: (state, action: PayloadAction<ChatMessage>) => {
+      state.messages.push(action.payload);
     },
   },
   extraReducers: (builder) => {
