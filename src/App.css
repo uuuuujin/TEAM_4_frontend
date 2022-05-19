@@ -1,0 +1,12 @@
+body {
+  background-image:   
+  url(./assets/images/background_tree.png),
+  url(./assets/images/background_land.png),
+  url(./assets/images/background_sky.png);
+  background-size: cover, cover, cover;
+  background-position:top, bottom,center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
