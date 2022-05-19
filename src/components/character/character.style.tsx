@@ -18,3 +18,22 @@ export const Nickname = styled.p`
   font-size: 20px;
   font-weight: 500;
 `;
+
+export const CharacterWrap = styled.div`
+  position: relative;
+  height: 218px;
+`;
+
+export const ShelfImg = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+`;
+
+export const CharacterImg = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -74%);
+`;
