@@ -2,20 +2,23 @@ import { Middleware } from 'redux';
 import { io, Socket } from 'socket.io-client';
 import { multiAction } from '../modules/multi/multi.slice';
 
-const multiMiddleware: Middleware = (store) => {
+export const multiMiddleware: Middleware = (store) => {
   let socket: Socket;
   const { dispatch } = store;
 
   return (next) => (action) => {
-    if (multiAction.startConnecting.match(action)) {
-      try {
-        socket = io(process.env.REACT_APP_SOCKET_API_URL);
-      } catch (error) {
-        dispatch(multiAction.connectionFailed());
-        return next(action);
-      }
+    if (multiAction.startConnectSocket.match(action)) {
+      const multiStore = store.getState().multi;
+      socket = io(process.env.REACT_APP_API_URL.concat('/room-friends'));
 
       socket.on('connect', () => {
+        socket.emit('enter', {
+          id: multiStore.id,
+          roomId: multiStore.roomId,
+        });
+      });
+
+      socket.on('ConnectedUsers', () => {
         dispatch(multiAction.connectionSuccessed());
       });
 
