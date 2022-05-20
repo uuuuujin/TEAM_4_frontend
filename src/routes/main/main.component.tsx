@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi-mode-select-modal.component';
+import SingleModeSelectModal from '../../components/single-mode-select-modal/single-mode-select-modal.component';
 // import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
 import PodongLogo from '../../assets/images/logo.png';
 import SingleModeButtonHoverImg from '../../assets/images/single_mode_button_hover.png';
@@ -37,6 +38,11 @@ export default function Main(): JSX.Element {
   const handleMultiModalClick = () => {
     dispatch(modalAction.radioMultiModeSelectModal());
   };
+
+  const handleSingleModalClick = () => {
+    dispatch(modalAction.radioSingleModeSelectModal());
+  };
+
   return (
     <div className="App">
       <LogoContainer>
@@ -51,7 +57,11 @@ export default function Main(): JSX.Element {
         )}
       </CharacterContainer>
       <ButtonContainer>
-        <ButtonWrap hoverImg={SingleModeButtonHoverImg} clickImg={SingleModeButtonClickImg}>
+        <ButtonWrap
+          hoverImg={SingleModeButtonHoverImg}
+          clickImg={SingleModeButtonClickImg}
+          onClick={handleSingleModalClick}
+        >
           <ImgText>싱글모드</ImgText>
         </ButtonWrap>
         <ButtonWrap
@@ -62,6 +72,7 @@ export default function Main(): JSX.Element {
           <ImgText>멀티모드</ImgText>
         </ButtonWrap>
       </ButtonContainer>
+      <SingleModeSelectModal />
       <MultiModeSelectModal />
     </div>
   );
