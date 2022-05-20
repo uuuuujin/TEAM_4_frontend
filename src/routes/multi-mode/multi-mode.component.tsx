@@ -72,12 +72,12 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, isConnected, roomId]);
 
   const users = [
-    { position: 1, nickname: '유진', characterImg: catImg },
-    { position: 2, nickname: '성훈', characterImg: catImg },
-    { position: 3, nickname: '은우', characterImg: catImg },
-    { position: 4, nickname: '현석', characterImg: catImg },
-    { position: 5, nickname: '보민', characterImg: catImg },
-    { position: 6, nickname: '유천', characterImg: catImg },
+    { nickname: '유진', characterImg: catImg },
+    { nickname: '성훈', characterImg: catImg },
+    { nickname: '은우', characterImg: catImg },
+    { nickname: '현석', characterImg: catImg },
+    { nickname: '보민', characterImg: catImg },
+    { nickname: '유천', characterImg: catImg },
   ];
 
   const [toastState, setToastState] = useState<boolean>(false);
@@ -89,9 +89,9 @@ export default function MultiMode(): JSX.Element {
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
-      {users.map((item) => {
+      {users.map((item, index) => {
         return (
-          <ChracterPosition positionNum={item.position}>
+          <ChracterPosition positionNum={index + 1}>
             <Character nickname={item.nickname} characterImgSrc={item.characterImg} />
           </ChracterPosition>
         );
