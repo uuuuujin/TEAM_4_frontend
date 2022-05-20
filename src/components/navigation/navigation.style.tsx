@@ -17,8 +17,7 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const LogoImg = styled.img`
-  width: 200px;
-  height: 88px;
+  width: 100%;
 `;
 
 export const NavBoxContainer = styled.div`
@@ -32,4 +31,9 @@ export const NavBoxContainer = styled.div`
 export const NavBox = styled.div`
   padding: 10px 15px;
   cursor: pointer;
+`;
+
+export const NavImg = styled.img`
+  width: 45px;
+  height: 45px;
 `;
