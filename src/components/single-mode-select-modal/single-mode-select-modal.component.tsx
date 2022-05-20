@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Modal from '../modal/modal.component';
-import ModeSelectButton from '../mode-select-button/mode-select-button.component';
 import {
   SingleModeSelectModalContainer,
   SingleModeSelectModalTitle,
   SingleModeSelectModalContent,
   SingleModeSelectModalButtonContainer,
+  ImgButton,
+  Image,
 } from './single-mode-select-modal.style';
+import MutliFriendButton from '../../assets/images/multi_mode_friend_button.png';
+import MutliRandomButton from '../../assets/images/multi_mode_random_button.png';
+
+import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
+import { selectIsSingleModeSelectModalOpen } from '../../store/modules/modal/modal.select';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 
 export default function SingleModeSelectModal(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(true);
+  const dispatch = useAppDispatch();
+  const isSingleModeSelectModalOpen = useAppSelector(selectIsSingleModeSelectModalOpen);
 
   return (
     <Modal
       title=""
-      isOpen={isOpen}
+      isOpen={isSingleModeSelectModalOpen}
       onClose={() => {
-        setIsOpen(!isOpen);
+        dispatch(modalAction.radioSingleModeSelectModal());
       }}
-      contentWidth={450}
+      contentWidth={600}
     >
       <SingleModeSelectModalContainer>
         <SingleModeSelectModalTitle>싱글모드</SingleModeSelectModalTitle>
         <SingleModeSelectModalContent>{'홀로 강하게 키운다!\n오늘의 내가 갈 길은?'}</SingleModeSelectModalContent>
         <SingleModeSelectModalButtonContainer>
-          <ModeSelectButton text="일반 뽀모" subText="25분 집중 / 5분 휴식" />
-          <ModeSelectButton text="열정 뽀모" subText="50분 집중 / 10분 휴식" />
+          <ImgButton>
+            <Image alt="일반뽀모" src={MutliRandomButton} />
+          </ImgButton>
+          <ImgButton>
+            <Image alt="열정뽀모" src={MutliFriendButton} />
+          </ImgButton>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>
     </Modal>

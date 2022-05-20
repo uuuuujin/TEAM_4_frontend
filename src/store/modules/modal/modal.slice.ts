@@ -25,6 +25,9 @@ export const modalSlice = createSlice({
     radioMultiModeSelectModal: (state) => {
       state.isMultiModeSelectModalOpen = !state.isMultiModeSelectModalOpen;
     },
+    radioSingleModeSelectModal: (state) => {
+      state.isSingleModeSelectModalOpen = !state.isSingleModeSelectModalOpen;
+    },
   },
 });
 

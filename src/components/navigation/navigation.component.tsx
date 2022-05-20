@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox, LogoImg } from './navigation.style';
+import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox, LogoImg, NavImg } from './navigation.style';
 // import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
 import PodongLogo from '../../assets/images/logo.png';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
+import MyPageImg from '../../assets/images/mypage.png';
+import GuideImg from '../../assets/images/guide.png';
 
 export default function Navigation(): JSX.Element {
   const [currentUser, setCurrentUser] = useState(false);
@@ -26,11 +28,17 @@ export default function Navigation(): JSX.Element {
         </LogoContainer>
         <NavBoxContainer>
           {currentUser ? (
-            <NavBox onClick={toggleIsMypageOpen}>My Page</NavBox>
+            <NavBox onClick={toggleIsMypageOpen}>
+              <NavImg src={MyPageImg} alt="마이페이지" />
+            </NavBox>
           ) : (
-            <NavBox onClick={loginHandler}>SING IN</NavBox>
+            <NavBox onClick={loginHandler}>
+              <NavImg src={MyPageImg} alt="마이페이지" />
+            </NavBox>
           )}
-          <NavBox>가이드</NavBox>
+          <NavBox>
+            <NavImg src={GuideImg} alt="가이드" />
+          </NavBox>
         </NavBoxContainer>
         {isMypageOpen && <MypageDropdown />}
       </NavigationContainer>

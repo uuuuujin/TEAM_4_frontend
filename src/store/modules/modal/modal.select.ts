@@ -8,3 +8,8 @@ export const selectIsMultiModeSelectModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isMultiModeSelectModalOpen
 );
+
+export const selectIsSingleModeSelectModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isSingleModeSelectModalOpen
+);

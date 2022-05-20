@@ -16,8 +16,8 @@ export const ImgButton = styled.button`
 `;
 
 export const Image = styled.img`
-  width: 250px;
-  height: 260px;
+  width: 264px;
+  height: 292px;
 `;
 
 export const MultiModeSelectModalContent = styled.div`
