@@ -10,9 +10,10 @@ export const NavigationContainer = styled.div`
 
 export const LogoContainer = styled(Link)`
   height: 100%;
-  width: 70px;
+  width: 10vw;
   display: flex;
   align-items: center;
+  margin: 2vw 0 0 2vw;
 `;
 
 export const NavBoxContainer = styled.div`

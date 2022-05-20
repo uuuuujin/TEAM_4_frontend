@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Counter from '../../components/counter/counter.component';
-import Chat from '../../components/chat/chat.component';
-import MultiLink from '../../components/multi-link/multi-link.component';
-import CopyMsg from '../../components/copy-message/copy-message.component';
+
 import Character from '../../components/character/character.component';
-import ToastHook from '../../hooks/toast.hook';
+import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
+import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi-mode-select-modal.component';
+import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
+import SingleModeButtonImg from '../../assets/images/single_mode_button.png';
+import MultiModeButtonImg from '../../assets/images/multi_mode_button.png';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { getRandomAsync } from '../../store/modules/main/main.slice';
 import { selectGetRandomChracter } from '../../store/modules/main/main.select';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+
+import { TimerContainer, CharacterContainer, ButtonContainer, LogoContainer, ImgButton } from './main.style';
 
 export default function Main(): JSX.Element {
-  const [toastState, setToastState] = useState<boolean>(false);
-  ToastHook(toastState, setToastState);
-
   const dispatch = useAppDispatch();
 
   const getRandomCompleted = useAppSelector(selectGetRandomChracter);
@@ -29,15 +31,32 @@ export default function Main(): JSX.Element {
     fetchCharacter();
   }, [dispatch, getRandomCompleted]);
 
+  const handleMultiModalClick = () => {
+    console.log('asd');
+    dispatch(modalAction.radioMultiModeSelectModal());
+  };
   return (
     <div className="App">
-      <Counter />
-      <Chat />
-      <MultiLink setToastState={setToastState}>http://podongpodong.com/psa-hjjr-mwk</MultiLink>
-      {toastState && <CopyMsg />}
-      {getRandomCompleted && (
-        <Character nickname={nickname} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCode}.png`} />
-      )}
+      <LogoContainer>
+        <PodongLogo />
+      </LogoContainer>
+      <TimerContainer>
+        <PomodoroTimer />
+      </TimerContainer>
+      <CharacterContainer>
+        {getRandomCompleted && (
+          <Character nickname={nickname} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCode}.png`} />
+        )}
+      </CharacterContainer>
+      <ButtonContainer>
+        <ImgButton>
+          <img alt="singleModeButton" src={SingleModeButtonImg} />
+        </ImgButton>
+        <ImgButton onClick={handleMultiModalClick}>
+          <img alt="multiModeButton" src={MultiModeButtonImg} />
+        </ImgButton>
+      </ButtonContainer>
+      <MultiModeSelectModal />
     </div>
   );
 }
