@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const MultiModeSelectModalContainer = styled.div``;
+export const MultiModeSelectModalContainer = styled.div`
+  padding: 24px 0;
+`;
 
 export const MultiModeSelectModalTitle = styled.div`
   text-align: center;
@@ -8,11 +10,21 @@ export const MultiModeSelectModalTitle = styled.div`
   font-weight: bold;
 `;
 
+export const ImgButton = styled.button`
+  border: none;
+`;
+
+export const Image = styled.img`
+  width: 250px;
+  height: 260px;
+`;
+
 export const MultiModeSelectModalContent = styled.div`
   white-space: pre-wrap;
   text-align: center;
-  margin: 24px 0;
+  margin: 40px 0;
   color: grey;
+  font-size: 24px;
 `;
 
 export const MultiModeSelectModalButtonContainer = styled.div`
