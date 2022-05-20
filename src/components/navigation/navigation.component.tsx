@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox } from './navigation.style';
-import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
+import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox, LogoImg } from './navigation.style';
+// import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
+import PodongLogo from '../../assets/images/logo.png';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
 
 export default function Navigation(): JSX.Element {
@@ -21,7 +22,7 @@ export default function Navigation(): JSX.Element {
     <>
       <NavigationContainer>
         <LogoContainer to="/">
-          <PodongLogo />
+          <LogoImg src={PodongLogo} alt="로고이미지" />
         </LogoContainer>
         <NavBoxContainer>
           {currentUser ? (
