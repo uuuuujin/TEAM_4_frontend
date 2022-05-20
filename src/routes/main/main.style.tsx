@@ -10,29 +10,51 @@ export const LogoContainer = styled.div`
 
 export const TimerContainer = styled.div`
   position: absolute;
-  top: 52%;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
 
-export const ImgButton = styled.div`
+export const ImgText = styled.span`
+  font-family: 'neodgm';
+  font-size: 24px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-38%, -50%);
+`;
+
+export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
+  background-image: url(${({ hoverImg }) => hoverImg});
+  background-repeat: no-repeat;
+  background-size: cover;
   border: none;
   width: 284px;
-  hegith: 80px;
+  height: 80px;
   margin: 0 23px;
   padding: 0;
+  position: relative;
+  cursor: pointer;
+
+  &:active {
+    background-image: url(${({ clickImg }) => clickImg});
+    ${ImgText} {
+      display: none;
+    }
+  }
 `;
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  top: 45%;
-  left: calc(50% + 295px);
+  top: 43%;
+  left: calc(50% + 17vw);
 `;
 
 export const ButtonContainer = styled.div`
   position: absolute;
   display: flex;
-  top: calc(50% + 230px);
+  bottom: 13%;
   left: 50%;
   transform: translate(-50%, 0);
 `;
