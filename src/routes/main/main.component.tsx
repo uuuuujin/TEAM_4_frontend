@@ -35,7 +35,6 @@ export default function Main(): JSX.Element {
   }, [dispatch, getRandomCompleted]);
 
   const handleMultiModalClick = () => {
-    console.log('asd');
     dispatch(modalAction.radioMultiModeSelectModal());
   };
   return (
