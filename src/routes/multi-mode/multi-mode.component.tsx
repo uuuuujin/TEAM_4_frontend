@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { createRoomAsync, enterRoomAsync, multiAction } from '../../store/modules/multi/multi.slice';
+import { createRoomAsync, enterRoomAsync, chatMessageAsync, multiAction } from '../../store/modules/multi/multi.slice';
 import { selectIsEntered, selectRoomId, selectIsConnected } from '../../store/modules/multi/multi.select';
 import {
   TimerContainer,
@@ -58,6 +58,18 @@ export default function MultiMode(): JSX.Element {
       dispatch(multiAction.startConnectSocket());
     }
   }, [dispatch, isEntered]);
+
+  useEffect(() => {
+    if (isConnected) {
+      dispatch(
+        chatMessageAsync({
+          roomId,
+          memberId: 126,
+          content: '하아',
+        })
+      );
+    }
+  }, [dispatch, isConnected, roomId]);
 
   const users = [
     { position: 1, nickname: '유진', characterImg: catImg },

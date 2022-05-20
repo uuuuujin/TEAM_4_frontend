@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox } from './navigation.style';
-import { ReactComponent as GoogleLogo } from '../../assets/icons/google_login_logo.svg';
+import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
 
 export default function Navigation(): JSX.Element {
@@ -21,7 +21,7 @@ export default function Navigation(): JSX.Element {
     <>
       <NavigationContainer>
         <LogoContainer to="/">
-          <GoogleLogo />
+          <PodongLogo />
         </LogoContainer>
         <NavBoxContainer>
           {currentUser ? (
