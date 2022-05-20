@@ -3,18 +3,18 @@ import axios from 'axios';
 
 export interface MainState {
   getRandomChracter: boolean;
-  // nickname: string;
-  // imgCode: number;
+  nickname: string;
+  all: number;
 }
 
 const initialState: MainState = {
   getRandomChracter: false,
-  // nickname: '',
-  // imgCode: 0,
+  nickname: '',
+  all: 0,
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
-  const response = await axios.get(`http://${process.env.REACT_APP_API_URL}/user/random`);
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/random`);
   return response.data;
 });
 
@@ -29,10 +29,12 @@ export const mainSlice = createSlice({
         if (!window.localStorage.getItem('nickname_key')) {
           window.localStorage.setItem('nickname_key', action.payload.Nick);
           window.localStorage.setItem('imgCode_key', action.payload.code.all);
+          state.nickname = action.payload.Nick;
+          state.all = action.payload.code.all;
+        } else {
+          state.nickname = window.localStorage.getItem('nickname_key')!;
+          state.all = parseInt(window.localStorage.getItem('imgCode_key')!, 10);
         }
-
-        // state.nickname = action.payload.Nick;
-        // state.imgCode = action.payload.code.all;
       })
       .addCase(getRandomAsync.rejected, (state) => {
         state.getRandomChracter = false;

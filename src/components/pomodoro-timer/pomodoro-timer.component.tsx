@@ -3,16 +3,8 @@ import React, { useState } from 'react';
 import { PomodoroTimerContainer, TimerText, TimerTextContainer, TimerColon } from './pomodoro-timer.style';
 
 import useTimerInterval from '../../hooks/useTimerInterval.hook';
-
-export enum PomodoroTimerTypes {
-  stop = 'stop',
-  long_pomo = 'long_pomo',
-  short_pomo = 'short_pomo',
-  long_break = 'long_break',
-  short_break = 'short_break',
-}
-
-// const getNextPomodoroType = (currentType: PomodoroTimerTypes) => {};
+import { selectPomodoroTimerType } from '../../store/modules/multi/multi.select';
+import { useAppSelector } from '../../hooks/index.hook';
 
 const formatCount = (timerCount: number): number[] => [
   Math.floor(timerCount / 60 / 10),
@@ -23,14 +15,11 @@ const formatCount = (timerCount: number): number[] => [
 
 export default function PomodoroTimer(): JSX.Element {
   const [count, setCount] = useState(0);
-  const [pomoType, setPomoType] = useState<PomodoroTimerTypes>(PomodoroTimerTypes.stop);
+  const pomoType = useAppSelector(selectPomodoroTimerType);
 
   const intervalCallback = (limit: number) => {
     if (count === limit) {
-      // 타입 변경
       setCount(0);
-      // 다음 타입 설정
-      // setPomoType(PomodoroTimerTypes.short_break);
       return true;
     }
     setCount(count + 1);

@@ -6,6 +6,6 @@ export const selectMainReducer = (state: RootState) => state.main;
 
 export const selectGetRandomChracter = createSelector([selectMainReducer], (main) => main.getRandomChracter);
 
-// export const selectNickname = createSelector([selectMainReducer], (main) => main.nickname);
+export const selectNickname = createSelector([selectMainReducer], (main) => main.nickname);
 
-// export const selectImgCode = createSelector([selectMainReducer], (main) => main.imgCode);
+export const selectImgCodeAll = createSelector([selectMainReducer], (main) => main.all);

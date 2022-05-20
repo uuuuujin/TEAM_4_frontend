@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-import { PomodoroTimerTypes } from '../components/pomodoro-timer/pomodoro-timer.component';
+import { PomodoroTimerTypes } from '../store/modules/multi/multi.type';
 
 interface UseTimerIntervalCallback {
   (limit: number): boolean;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ChatItemContainer, ChatItemName, ChatItemText, ChatItemDate } from './chat-item.style';
+import { ChatMessage } from '../../store/modules/multi/multi.type';
 
 export interface ChatItemProp {
   name: string;
@@ -17,13 +18,13 @@ const formatDate = (date: Date) => {
   return format;
 };
 
-export default function ChatItem({ name, content, date }: ChatItemProp): JSX.Element {
+export default function ChatItem({ nickName, content, date }: ChatMessage): JSX.Element {
   return (
     <ChatItemContainer>
-      <ChatItemName>{name}&nbsp;&nbsp;:&nbsp;&nbsp;</ChatItemName>
+      <ChatItemName>{nickName}&nbsp;&nbsp;:&nbsp;&nbsp;</ChatItemName>
       <ChatItemText>
         {content}
-        <ChatItemDate>&nbsp;&nbsp;{formatDate(date)}</ChatItemDate>
+        <ChatItemDate>&nbsp;&nbsp;{formatDate(new Date(date))}</ChatItemDate>
       </ChatItemText>
     </ChatItemContainer>
   );

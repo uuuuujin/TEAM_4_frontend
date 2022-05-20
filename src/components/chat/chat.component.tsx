@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 
 import { ChatContainer, ChatItemContainer, ChatForm, ChatInput } from './chat.style';
 import Button, { ButtonTypeClasses } from '../button/button.component';
-import ChatItem, { ChatItemProp } from '../chat-item/chat-item.component';
+import ChatItem from '../chat-item/chat-item.component';
+
+import { ChatMessage } from '../../store/modules/multi/multi.type';
+import { chatMessageAsync } from '../../store/modules/multi/multi.slice';
+import { selectRoomId, selectMessages } from '../../store/modules/multi/multi.select';
+import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
+import { selectNickname } from '../../store/modules/main/main.select';
 
 export default function Chat(): JSX.Element {
-  const [chatRecords, setChatRecords] = useState<ChatItemProp[]>([]);
+  const dispatch = useAppDispatch();
+  const curNickName = useAppSelector(selectNickname);
+  const messages = useAppSelector(selectMessages);
+  const roomId = useAppSelector(selectRoomId);
   const [chatContent, setChatContent] = useState<string>('');
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
@@ -13,13 +22,13 @@ export default function Chat(): JSX.Element {
 
     if (chatContent === '') return;
 
-    const newChatItem: ChatItemProp = {
-      name: '양성훈',
-      content: chatContent,
-      date: new Date(),
-    };
-
-    setChatRecords([newChatItem, ...chatRecords]);
+    dispatch(
+      chatMessageAsync({
+        roomId,
+        content: chatContent,
+        nickName: curNickName,
+      })
+    );
     setChatContent('');
   };
 
@@ -30,8 +39,8 @@ export default function Chat(): JSX.Element {
   return (
     <ChatContainer>
       <ChatItemContainer>
-        {chatRecords.map(({ name, content, date }) => (
-          <ChatItem name={name} content={content} date={date} />
+        {messages.map(({ nickName, content, date }) => (
+          <ChatItem nickName={nickName} content={content} date={date} />
         ))}
       </ChatItemContainer>
       <ChatForm onSubmit={submitHandler}>
