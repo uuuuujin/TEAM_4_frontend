@@ -10,7 +10,7 @@ export const LogoContainer = styled.div`
 
 export const TimerContainer = styled.div`
   position: absolute;
-  top: 52%;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
@@ -47,14 +47,14 @@ export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  top: 45%;
-  left: calc(50% + 295px);
+  top: 43%;
+  left: calc(50% + 17vw);
 `;
 
 export const ButtonContainer = styled.div`
   position: absolute;
   display: flex;
-  top: calc(50% + 230px);
+  bottom: 13%;
   left: 50%;
   transform: translate(-50%, 0);
 `;
