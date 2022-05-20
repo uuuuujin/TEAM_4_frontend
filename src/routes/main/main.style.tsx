@@ -32,7 +32,7 @@ export const CharacterContainer = styled.div`
 export const ButtonContainer = styled.div`
   position: absolute;
   display: flex;
-  top: calc(50% + 230px);
+  top: 80%;
   left: 50%;
   transform: translate(-50%, 0);
 `;

@@ -8,6 +8,7 @@ interface UseTimerIntervalCallback {
 
 export const getPomoLimitCount = (type: PomodoroTimerTypes) =>
   ({
+    [PomodoroTimerTypes.stop]: 0,
     [PomodoroTimerTypes.long_pomo]: 3000,
     [PomodoroTimerTypes.short_pomo]: 1500,
     [PomodoroTimerTypes.long_break]: 600,

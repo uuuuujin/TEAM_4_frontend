@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import Modal from '../modal/modal.component';
 import ModeSelectButton from '../mode-select-button/mode-select-button.component';
@@ -19,7 +20,12 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 
 export default function MultiModeSelectModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isMultiModeSelectModalOpen = useAppSelector(selectIsMultiModeSelectModalOpen);
+
+  const handleFriendClick = () => {
+    navigate('/multi/createRoom');
+  };
 
   return (
     <Modal
@@ -37,7 +43,7 @@ export default function MultiModeSelectModal(): JSX.Element {
           <ImgButton>
             <Image alt="withRandomButton" src={MutliRandomButton} />
           </ImgButton>
-          <ImgButton>
+          <ImgButton onClick={handleFriendClick}>
             <Image alt="withFriendButton" src={MutliFriendButton} />
           </ImgButton>
           {/* <ModeSelectButton text="랜덤 매칭" subText="25분 집중 / 5분 휴식" />
