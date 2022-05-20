@@ -22,7 +22,7 @@ export const ImgText = styled.span`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-38%, -56%);
+  transform: translate(-38%, -50%);
 `;
 
 export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
