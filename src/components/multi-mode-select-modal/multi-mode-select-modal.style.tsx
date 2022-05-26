@@ -8,6 +8,7 @@ export const MultiModeSelectModalTitle = styled.div`
   text-align: center;
   font-size: 42px;
   font-weight: bold;
+  font-family: 'neodgm';
 `;
 
 export const ImgButton = styled.button`
@@ -15,8 +16,8 @@ export const ImgButton = styled.button`
 `;
 
 export const Image = styled.img`
-  width: 250px;
-  height: 260px;
+  width: 264px;
+  height: 292px;
 `;
 
 export const MultiModeSelectModalContent = styled.div`
@@ -25,6 +26,7 @@ export const MultiModeSelectModalContent = styled.div`
   margin: 40px 0;
   color: grey;
   font-size: 24px;
+  font-family: 'neodgm';
 `;
 
 export const MultiModeSelectModalButtonContainer = styled.div`

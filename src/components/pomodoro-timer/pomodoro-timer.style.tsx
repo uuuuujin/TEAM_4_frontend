@@ -6,8 +6,8 @@ export const PomodoroTimerContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 29vw;
-  height: 29vw;
+  width: 29.5vw;
+  height: 29.5vw;
   display: flex;
   justify-content: center;
   // align-items: center;

@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi-mode-select-modal.component';
-import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
-import SingleModeButtonImg from '../../assets/images/single_mode_button.png';
-import MultiModeButtonImg from '../../assets/images/multi_mode_button.png';
+import SingleModeSelectModal from '../../components/single-mode-select-modal/single-mode-select-modal.component';
+// import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
+import PodongLogo from '../../assets/images/logo.png';
+import SingleModeButtonHoverImg from '../../assets/images/single_mode_button_hover.png';
+import SingleModeButtonClickImg from '../../assets/images/single_mode_button_click.png';
+import MultiModeButtonHoverImg from '../../assets/images/multi_mode_button_hover.png';
+import MultiModeButtonClickImg from '../../assets/images/multi_mode_button_click.png';
 
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
@@ -14,7 +18,7 @@ import { getRandomAsync } from '../../store/modules/main/main.slice';
 import { selectGetRandomChracter, selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
-import { TimerContainer, CharacterContainer, ButtonContainer, LogoContainer, ImgButton } from './main.style';
+import { TimerContainer, CharacterContainer, ButtonContainer, LogoContainer, ButtonWrap, ImgText } from './main.style';
 
 export default function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,10 +34,14 @@ export default function Main(): JSX.Element {
     dispatch(modalAction.radioMultiModeSelectModal());
   };
 
+  const handleSingleModalClick = () => {
+    dispatch(modalAction.radioSingleModeSelectModal());
+  };
+
   return (
     <div className="App">
       <LogoContainer>
-        <PodongLogo />
+        <img src={PodongLogo} alt="포동포동 로고" />
       </LogoContainer>
       <TimerContainer>
         <PomodoroTimer />
@@ -44,13 +52,22 @@ export default function Main(): JSX.Element {
         )}
       </CharacterContainer>
       <ButtonContainer>
-        <ImgButton>
-          <img alt="singleModeButton" src={SingleModeButtonImg} />
-        </ImgButton>
-        <ImgButton onClick={handleMultiModalClick}>
-          <img alt="multiModeButton" src={MultiModeButtonImg} />
-        </ImgButton>
+        <ButtonWrap
+          hoverImg={SingleModeButtonHoverImg}
+          clickImg={SingleModeButtonClickImg}
+          onClick={handleSingleModalClick}
+        >
+          <ImgText>싱글모드</ImgText>
+        </ButtonWrap>
+        <ButtonWrap
+          hoverImg={MultiModeButtonHoverImg}
+          clickImg={MultiModeButtonClickImg}
+          onClick={handleMultiModalClick}
+        >
+          <ImgText>멀티모드</ImgText>
+        </ButtonWrap>
       </ButtonContainer>
+      <SingleModeSelectModal />
       <MultiModeSelectModal />
     </div>
   );
