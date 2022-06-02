@@ -26,15 +26,17 @@ export const mainSlice = createSlice({
     builder
       .addCase(getRandomAsync.fulfilled, (state, action) => {
         state.getRandomChracter = true;
-        if (!window.localStorage.getItem('nickname_key')) {
-          window.localStorage.setItem('nickname_key', action.payload.Nick);
-          window.localStorage.setItem('imgCode_key', action.payload.code.all);
-          state.nickname = action.payload.Nick;
-          state.all = action.payload.code.all;
-        } else {
-          state.nickname = window.localStorage.getItem('nickname_key')!;
-          state.all = parseInt(window.localStorage.getItem('imgCode_key')!, 10);
-        }
+        state.nickname = action.payload.Nick;
+        state.all = action.payload.code.all;
+        // if (!window.localStorage.getItem('nickname_key')) {
+        //   window.localStorage.setItem('nickname_key', action.payload.Nick);
+        //   window.localStorage.setItem('imgCode_key', action.payload.code.all);
+        //   state.nickname = action.payload.Nick;
+        //   state.all = action.payload.code.all;
+        // } else {
+        //   state.nickname = window.localStorage.getItem('nickname_key')!;
+        //   state.all = parseInt(window.localStorage.getItem('imgCode_key')!, 10);
+        // }
       })
       .addCase(getRandomAsync.rejected, (state) => {
         state.getRandomChracter = false;

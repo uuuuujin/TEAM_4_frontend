@@ -3,12 +3,6 @@ import React from 'react';
 import { ChatItemContainer, ChatItemName, ChatItemText, ChatItemDate } from './chat-item.style';
 import { ChatMessage } from '../../store/modules/multi/multi.type';
 
-export interface ChatItemProp {
-  name: string;
-  content: string;
-  date: Date;
-}
-
 const formatDate = (date: Date) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();

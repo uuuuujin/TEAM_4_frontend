@@ -26,7 +26,7 @@ export default function Chat(): JSX.Element {
       chatMessageAsync({
         roomId,
         content: chatContent,
-        nickName: curNickName,
+        memberId: curNickName,
       })
     );
     setChatContent('');
@@ -39,9 +39,11 @@ export default function Chat(): JSX.Element {
   return (
     <ChatContainer>
       <ChatItemContainer>
-        {messages.map(({ nickName, content, date }) => (
-          <ChatItem nickName={nickName} content={content} date={date} />
-        ))}
+        {messages
+          .map(({ id, nickName, content, date }) => (
+            <ChatItem key={id} id={id} nickName={nickName} content={content} date={date} />
+          ))
+          .reverse()}
       </ChatItemContainer>
       <ChatForm onSubmit={submitHandler}>
         <ChatInput maxLength={60} value={chatContent} onChange={changeInputHandler} />

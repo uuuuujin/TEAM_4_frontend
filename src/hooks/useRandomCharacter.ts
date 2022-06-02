@@ -12,6 +12,8 @@ export default function useRandomCharacter() {
     async function fetchCharacter() {
       await dispatch(getRandomAsync());
     }
-    fetchCharacter();
+    if (!getRandomCompleted) {
+      fetchCharacter();
+    }
   }, [dispatch, getRandomCompleted]);
 }

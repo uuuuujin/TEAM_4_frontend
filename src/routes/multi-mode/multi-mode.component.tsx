@@ -9,6 +9,7 @@ import {
   selectMembers,
 } from '../../store/modules/multi/multi.select';
 import { selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
+import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import {
   TimerContainer,
@@ -26,7 +27,7 @@ import Button from '../../components/button/button.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
 import ToastHook from '../../hooks/toast.hook';
 import CopyMsg from '../../components/copy-message/copy-message.component';
-import StateBar from '../../components/state-bar/state-bar.component';
+import Chat from '../../components/chat/chat.component';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -41,6 +42,8 @@ export default function MultiMode(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectImgCodeAll);
 
+  useRandomCharacter();
+
   useEffect(() => {
     if (roomIdParam === 'createRoom') {
       dispatch(createRoomAsync('didtjdgns852@gmail.com'));
@@ -54,7 +57,7 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomIdParam]);
 
   useEffect(() => {
-    if (roomId !== '') {
+    if (roomId !== '' && nickName !== '') {
       dispatch(
         enterRoomAsync({
           roomId,
@@ -80,16 +83,10 @@ export default function MultiMode(): JSX.Element {
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
-      <ChracterPosition positionNum={1}>
-        <Character nickname={nickName} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCodeAll}.png`} />
-      </ChracterPosition>
       {members.map((item, index) => {
         return (
-          <ChracterPosition key={item.nickname} positionNum={index + 2}>
-            <Character
-              nickname={item.nickname}
-              characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${item.all}.png`}
-            />
+          <ChracterPosition key={item.Nick} positionNum={index + 1}>
+            <Character nickname={item.Nick} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${item.all}.png`} />
           </ChracterPosition>
         );
       })}
@@ -101,6 +98,7 @@ export default function MultiMode(): JSX.Element {
       <LinkContainer>
         <MultiLink setToastState={setToastState}>{`http://localhost:3000/multi/${roomId}`}</MultiLink>
       </LinkContainer>
+      <Chat />
       {toastState && (
         <CopyMsgContainer>
           <CopyMsg />

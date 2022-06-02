@@ -44,10 +44,10 @@ export const enterRoomAsync = createAsyncThunk(
 
 export const chatMessageAsync = createAsyncThunk(
   'multi/chat',
-  async ({ roomId, nickName, content }: { roomId: string; nickName: string; content: string }) => {
+  async ({ roomId, memberId, content }: { roomId: string; memberId: string; content: string }) => {
     const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}/chats`, {
       content,
-      nickName,
+      memberId,
     });
     return response.data;
   }
@@ -73,6 +73,9 @@ export const mutliSlice = createSlice({
     addChatMessage: (state, action: PayloadAction<ChatMessage>) => {
       state.messages.push(action.payload);
     },
+    addNewMember: (state, action: PayloadAction<Member>) => {
+      state.members.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,10 +92,13 @@ export const mutliSlice = createSlice({
         state.isConnecting = true;
       })
       .addCase(enterRoomAsync.fulfilled, (state, action) => {
-        state.members = action.payload.memberList;
+        state.members = action.payload.playerList;
         state.id = action.payload.room.id;
         state.isEntered = true;
-      });
+      })
+      .addCase(chatMessageAsync.pending, () => {})
+      .addCase(chatMessageAsync.fulfilled, () => {})
+      .addCase(chatMessageAsync.rejected, () => {});
   },
 });
 
