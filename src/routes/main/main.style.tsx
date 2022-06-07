@@ -8,6 +8,10 @@ export const LogoContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+export const LogoImg = styled.img`
+  -webkit-user-drag: none;
+`;
+
 export const TimerContainer = styled.div`
   position: absolute;
   top: 51%;
@@ -25,8 +29,8 @@ export const ImgText = styled.span`
   transform: translate(-38%, -50%);
 `;
 
-export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
-  background-image: url(${({ hoverImg }) => hoverImg});
+export const ButtonWrap = styled.div<{ normalImg: string; hoverImg: string; activeImg: string }>`
+  background-image: url(${({ normalImg }) => normalImg});
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
@@ -37,8 +41,15 @@ export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
   position: relative;
   cursor: pointer;
 
+  &:hover {
+    background-image: url(${({ hoverImg }) => hoverImg});
+    ${ImgText} {
+      display: none;
+    }
+  }
+
   &:active {
-    background-image: url(${({ clickImg }) => clickImg});
+    background-image: url(${({ activeImg }) => activeImg});
     ${ImgText} {
       display: none;
     }

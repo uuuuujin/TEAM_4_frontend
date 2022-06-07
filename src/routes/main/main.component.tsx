@@ -6,17 +6,27 @@ import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi
 import SingleModeSelectModal from '../../components/single-mode-select-modal/single-mode-select-modal.component';
 // import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
 import PodongLogo from '../../assets/images/logo.png';
+import SingleModeButtonImg from '../../assets/images/single_mode_button.png';
 import SingleModeButtonHoverImg from '../../assets/images/single_mode_button_hover.png';
-import SingleModeButtonClickImg from '../../assets/images/single_mode_button_click.png';
+import SingleModeButtonActiveImg from '../../assets/images/single_mode_button_active.png';
+import MultiModeButtonImg from '../../assets/images/multi_mode_button.png';
 import MultiModeButtonHoverImg from '../../assets/images/multi_mode_button_hover.png';
-import MultiModeButtonClickImg from '../../assets/images/multi_mode_button_click.png';
+import MultiModeButtonActiveImg from '../../assets/images/multi_mode_button_active.png';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { getRandomAsync } from '../../store/modules/main/main.slice';
 import { selectGetRandomChracter } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
-import { TimerContainer, CharacterContainer, ButtonContainer, LogoContainer, ButtonWrap, ImgText } from './main.style';
+import {
+  TimerContainer,
+  LogoImg,
+  CharacterContainer,
+  ButtonContainer,
+  LogoContainer,
+  ButtonWrap,
+  ImgText,
+} from './main.style';
 
 export default function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -46,7 +56,7 @@ export default function Main(): JSX.Element {
   return (
     <div className="App">
       <LogoContainer>
-        <img src={PodongLogo} alt="포동포동 로고" />
+        <LogoImg src={PodongLogo} alt="포동포동 로고" />
       </LogoContainer>
       <TimerContainer>
         <PomodoroTimer />
@@ -58,15 +68,17 @@ export default function Main(): JSX.Element {
       </CharacterContainer>
       <ButtonContainer>
         <ButtonWrap
+          normalImg={SingleModeButtonImg}
           hoverImg={SingleModeButtonHoverImg}
-          clickImg={SingleModeButtonClickImg}
+          activeImg={SingleModeButtonActiveImg}
           onClick={handleSingleModalClick}
         >
           <ImgText>싱글모드</ImgText>
         </ButtonWrap>
         <ButtonWrap
+          normalImg={MultiModeButtonImg}
           hoverImg={MultiModeButtonHoverImg}
-          clickImg={MultiModeButtonClickImg}
+          activeImg={MultiModeButtonActiveImg}
           onClick={handleMultiModalClick}
         >
           <ImgText>멀티모드</ImgText>
