@@ -5,19 +5,23 @@ export const MultiModeSelectModalContainer = styled.div`
 `;
 
 export const MultiModeSelectModalTitle = styled.div`
+  margin-top: 44px;
   text-align: center;
   font-size: 42px;
   font-weight: bold;
   font-family: 'neodgm';
 `;
 
-export const ImgButton = styled.button`
+export const ModeSelectImageWrap = styled.button`
   border: none;
+  cursor: pointer;
+  padding: 0;
 `;
 
-export const Image = styled.img`
+export const ModeSelectImage = styled.img`
   width: 264px;
-  height: 292px;
+  height: 284px;
+  -webkit-user-drag: none;
 `;
 
 export const MultiModeSelectModalContent = styled.div`
@@ -31,6 +35,7 @@ export const MultiModeSelectModalContent = styled.div`
 
 export const MultiModeSelectModalButtonContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 24px;
+  padding: 0 55px;
 `;

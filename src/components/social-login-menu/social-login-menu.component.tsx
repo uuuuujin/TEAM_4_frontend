@@ -7,8 +7,8 @@ export default function SocialLoginMenu(): JSX.Element {
   return (
     <SocialLoginMenuContainer>
       <SocialLoginButton socialType={SOCIAL_TYPE_CLASSES.google} />
-      <SocialLoginButton socialType={SOCIAL_TYPE_CLASSES.instagram} />
-      <SocialLoginButton socialType={SOCIAL_TYPE_CLASSES.instagram} />
+      <SocialLoginButton socialType={SOCIAL_TYPE_CLASSES.kakao} />
+      <SocialLoginButton socialType={SOCIAL_TYPE_CLASSES.kakao} />
     </SocialLoginMenuContainer>
   );
 }

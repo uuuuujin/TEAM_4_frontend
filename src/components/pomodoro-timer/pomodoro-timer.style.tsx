@@ -22,8 +22,8 @@ export const TimerTextContainer = styled.div`
 `;
 
 export const TimerText = styled.div`
-  color: #f9ffba;
-  font-size: 6.5rem;
+  color: #70ff64;
+  font-size: 6.25vw;
   width: 7vh;
   text-align: center;
 `;

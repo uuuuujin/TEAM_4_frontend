@@ -9,10 +9,22 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 @font-face {
   font-family: "neodgm";
   src: url('../src/assets/fonts/neodgm.ttf') format('truetype'),
   url('../src/assets/fonts/neodgm.woff') format('woff')
+}
+
+@font-face {
+  font-family: "NotoSans-medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../src/assets/fonts/NotoSansKR-Medium.otf") format('truetype')
 }
