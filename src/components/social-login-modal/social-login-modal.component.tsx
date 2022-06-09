@@ -14,7 +14,7 @@ export default function SocialLoginModal(): JSX.Element {
       title="로그인"
       contentWidth={380}
     >
-      <SocialLoginMenu />
+      <SocialLoginMenu isMyPomo={false} />
     </Modal>
   );
 }

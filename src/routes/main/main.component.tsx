@@ -22,10 +22,12 @@ import {
   TimerContainer,
   LogoImg,
   CharacterContainer,
-  ButtonContainer,
+  ModeSelectButtonContainer,
   LogoContainer,
-  ButtonWrap,
-  ImgText,
+  ModeSelectButton,
+  ModeSelectButtonText,
+  PomoGuideButtonContainer,
+  PomoGuideButtonText,
 } from './main.style';
 
 export default function Main(): JSX.Element {
@@ -66,24 +68,27 @@ export default function Main(): JSX.Element {
           <Character nickname={nickname} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCode}.png`} />
         )}
       </CharacterContainer>
-      <ButtonContainer>
-        <ButtonWrap
+      <ModeSelectButtonContainer>
+        <ModeSelectButton
           normalImg={SingleModeButtonImg}
           hoverImg={SingleModeButtonHoverImg}
           activeImg={SingleModeButtonActiveImg}
           onClick={handleSingleModalClick}
         >
-          <ImgText>싱글모드</ImgText>
-        </ButtonWrap>
-        <ButtonWrap
+          <ModeSelectButtonText>싱글모드</ModeSelectButtonText>
+        </ModeSelectButton>
+        <ModeSelectButton
           normalImg={MultiModeButtonImg}
           hoverImg={MultiModeButtonHoverImg}
           activeImg={MultiModeButtonActiveImg}
           onClick={handleMultiModalClick}
         >
-          <ImgText>멀티모드</ImgText>
-        </ButtonWrap>
-      </ButtonContainer>
+          <ModeSelectButtonText>멀티모드</ModeSelectButtonText>
+        </ModeSelectButton>
+      </ModeSelectButtonContainer>
+      <PomoGuideButtonContainer>
+        <PomoGuideButtonText>뽀모도로란?</PomoGuideButtonText>
+      </PomoGuideButtonContainer>
       <SingleModeSelectModal />
       <MultiModeSelectModal />
     </div>
