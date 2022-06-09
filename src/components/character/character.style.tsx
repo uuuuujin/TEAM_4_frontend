@@ -33,6 +33,7 @@ export const ShelfImgWrap = styled.div`
 
 export const ShelfImg = styled.img`
   -webkit-user-drag: none;
+  width: 178px;
 `;
 
 export const CharacterImgWrap = styled.div`

@@ -56,6 +56,8 @@ export const ProfileModalName = styled.div`
 
 export const ProfileModalNameEdit = styled.img`
   -webkit-user-drag: none;
+  width: 40px;
+  height: 40px;
 `;
 
 export const ProfileModalEmail = styled.div`
