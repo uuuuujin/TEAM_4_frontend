@@ -31,13 +31,13 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="프로필 정보"
+      title="내 뽀모"
       contentWidth={440}
       backgroundColor="#D5D1FF"
+      titleColor="#025a00"
       footer={!user ? <SocialLoginMenu isMyPomo /> : '로그아웃 버튼'}
     >
       <ProfileModalContainer>
-        <ProfileModalTitle>내 뽀모</ProfileModalTitle>
         <ProfileModalBgImg>
           <ProfileModalCharacterImg alt="profile" src={characterImgSrc} />
         </ProfileModalBgImg>

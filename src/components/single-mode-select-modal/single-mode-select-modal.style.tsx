@@ -4,14 +4,6 @@ export const SingleModeSelectModalContainer = styled.div`
   padding: 24px 0;
 `;
 
-export const SingleModeSelectModalTitle = styled.div`
-  margin-top: 44px;
-  text-align: center;
-  font-size: 42px;
-  font-weight: bold;
-  font-family: 'neodgm';
-`;
-
 export const ModeSelectImageWrap = styled.button`
   border: none;
   cursor: pointer;
@@ -27,7 +19,7 @@ export const ModeSelectImage = styled.img`
 export const SingleModeSelectModalContent = styled.div`
   white-space: pre-wrap;
   text-align: center;
-  margin: 40px 0;
+  margin-bottom: 57px;
   color: grey;
   font-size: 24px;
   font-family: 'neodgm';

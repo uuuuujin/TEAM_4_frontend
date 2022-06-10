@@ -3,7 +3,6 @@ import React from 'react';
 import Modal from '../modal/modal.component';
 import {
   SingleModeSelectModalContainer,
-  SingleModeSelectModalTitle,
   SingleModeSelectModalContent,
   SingleModeSelectModalButtonContainer,
   ModeSelectImageWrap,
@@ -23,7 +22,7 @@ export default function SingleModeSelectModal(): JSX.Element {
 
   return (
     <Modal
-      title=""
+      title="싱글모드"
       isOpen={isSingleModeSelectModalOpen}
       onClose={() => {
         dispatch(modalAction.radioSingleModeSelectModal());
@@ -32,7 +31,6 @@ export default function SingleModeSelectModal(): JSX.Element {
       backgroundColor="#FFD7E7"
     >
       <SingleModeSelectModalContainer>
-        <SingleModeSelectModalTitle>싱글모드</SingleModeSelectModalTitle>
         <SingleModeSelectModalContent>{'홀로 강하게 키운다!\n오늘의 내가 갈 길은?'}</SingleModeSelectModalContent>
         <SingleModeSelectModalButtonContainer>
           <ModeSelectImageWrap>

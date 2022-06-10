@@ -4,7 +4,6 @@ import Modal from '../modal/modal.component';
 import ModeSelectButton from '../mode-select-button/mode-select-button.component';
 import {
   MultiModeSelectModalContainer,
-  MultiModeSelectModalTitle,
   MultiModeSelectModalContent,
   MultiModeSelectModalButtonContainer,
   ModeSelectImageWrap,
@@ -24,7 +23,7 @@ export default function MultiModeSelectModal(): JSX.Element {
 
   return (
     <Modal
-      title=""
+      title="멀티모드"
       isOpen={isMultiModeSelectModalOpen}
       onClose={() => {
         dispatch(modalAction.radioMultiModeSelectModal());
@@ -33,7 +32,6 @@ export default function MultiModeSelectModal(): JSX.Element {
       backgroundColor="#FBFFD1"
     >
       <MultiModeSelectModalContainer>
-        <MultiModeSelectModalTitle>멀티모드</MultiModeSelectModalTitle>
         <MultiModeSelectModalContent>함께해야 제 맛 같이 한번 해볼까?</MultiModeSelectModalContent>
         <MultiModeSelectModalButtonContainer>
           <ModeSelectImageWrap>

@@ -29,20 +29,18 @@ export const ModalContent = styled.div<{ width: number; backgroundColor: string 
 `;
 
 export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 25px;
+  margin-top: 68px;
 `;
 
 export const ModalFooter = styled.div`
   padding: 0 32px;
-  // border-top: 1px solid #eee;
 `;
 
-export const ModalTitle = styled.div`
-  margin: 0;
-  font-weight: bold;
-  border-bottom: 1px solid #eee;
+export const ModalTitle = styled.div<{ titleColor: string }>`
+  text-align: center;
+  font-size: 36px;
+  font-family: 'neodgm';
+  color: ${({ titleColor }) => titleColor};
 `;
 
 export const ModalBody = styled.div`
