@@ -13,12 +13,12 @@ describe('modal', () => {
     render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Modal isOpen onClose={() => {}} title="모달 테스트">
+          <Modal isOpen onClose={() => {}} title="모달 테스트" data-testid="modalTest">
             <div>content</div>
           </Modal>
         </Provider>
       </ThemeProvider>
     );
-    expect(screen.getByText('모달 테스트')).toBeInTheDocument();
+    expect(screen.getByTestId('modalTest')).toBeInTheDocument();
   });
 });
