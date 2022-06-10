@@ -6,17 +6,17 @@ export const CharacterContainer = styled.div`
   display: inline-block;
 `;
 
-export const InvertedTriangleIcon = styled.img`
+export const TriangleIcon = styled.img`
   width: 30px;
-  cursor: pointer;
+  -webkit-user-drag: none;
 `;
 
 export const Nickname = styled.p`
+  font-family: 'NotoSans-medium';
   margin: 0;
-  -webkit-text-stroke: 0.8px #000;
+  -webkit-text-stroke: 1px #151313;
   color: #fff;
   font-size: 20px;
-  font-weight: 500;
 `;
 
 export const CharacterWrap = styled.div`
@@ -24,11 +24,16 @@ export const CharacterWrap = styled.div`
   height: 218px;
 `;
 
-export const ShelfImg = styled.div`
+export const ShelfImgWrap = styled.div`
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
+`;
+
+export const ShelfImg = styled.img`
+  -webkit-user-drag: none;
+  width: 178px;
 `;
 
 export const CharacterImgWrap = styled.div`
@@ -41,4 +46,6 @@ export const CharacterImgWrap = styled.div`
 export const CharacterImg = styled.img`
   width: 150px;
   height: 150px;
+  cursor: pointer;
+  -webkit-user-drag: none;
 `;

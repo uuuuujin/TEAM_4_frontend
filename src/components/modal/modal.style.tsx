@@ -21,33 +21,46 @@ export const ModalContainer = styled.div`
   }
 `;
 
-export const ModalContent = styled.div<{ width: number }>`
+export const ModalContent = styled.div<{ width: number; backgroundColor: string }>`
   width: ${({ width }) => `${width}px`};
-  background-color: #fff;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 20px;
+  position: relative;
 `;
 
 export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  margin-top: 68px;
 `;
 
 export const ModalFooter = styled.div`
-  padding: 10px;
-  border-top: 1px solid #eee;
+  padding: 0 32px;
 `;
 
-export const ModalTitle = styled.div`
-  margin: 0;
-  font-weight: bold;
-  border-bottom: 1px solid #eee;
+export const ModalTitle = styled.div<{ titleColor: string }>`
+  text-align: center;
+  font-size: 36px;
+  font-family: 'neodgm';
+  color: ${({ titleColor }) => titleColor};
 `;
 
 export const ModalBody = styled.div`
+  margin-top: 
   padding: 10px;
 `;
 
-export const CloseButton = styled.div`
-  background-color: #fff;
-  width: 1em;
+export const CloseButton = styled.div<{ normalImg: string; hoverImg: string }>`
+  background-image: url(${({ normalImg }) => normalImg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+
+  &:hover {
+    background-image: url(${({ hoverImg }) => hoverImg});
+  }
 `;

@@ -10,6 +10,9 @@ import {
   CloseButton,
 } from './modal.style';
 
+import CloseBtnImg from '../../assets/images/close.png';
+import CloseHoverBtnImg from '../../assets/images/close_hover.png';
+
 export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
@@ -17,6 +20,8 @@ export interface ModalProp {
   contentWidth?: number;
   children: JSX.Element | string;
   footer?: JSX.Element | string;
+  backgroundColor?: string;
+  titleColor?: string;
 }
 
 export default function Modal({
@@ -25,15 +30,15 @@ export default function Modal({
   title,
   children,
   footer,
+  titleColor = '#000',
+  backgroundColor = '#fff',
   contentWidth = 500,
 }: ModalProp): JSX.Element {
   return (
     <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
-      <ModalContent width={contentWidth} onClick={(e) => e.stopPropagation()}>
-        <ModalHeader>
-          {title ? <ModalTitle>{title}</ModalTitle> : <div />}
-          <CloseButton onClick={onClose}>&#x2715;</CloseButton>
-        </ModalHeader>
+      <ModalContent width={contentWidth} backgroundColor={backgroundColor} onClick={(e) => e.stopPropagation()}>
+        <ModalHeader>{title ? <ModalTitle titleColor={titleColor}>{title}</ModalTitle> : <div />}</ModalHeader>
+        <CloseButton normalImg={CloseBtnImg} hoverImg={CloseHoverBtnImg} onClick={onClose} />
         <ModalBody>{children}</ModalBody>
 
         {footer && <ModalFooter>{footer}</ModalFooter>}

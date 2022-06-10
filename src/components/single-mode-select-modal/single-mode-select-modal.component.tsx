@@ -3,14 +3,14 @@ import React from 'react';
 import Modal from '../modal/modal.component';
 import {
   SingleModeSelectModalContainer,
-  SingleModeSelectModalTitle,
   SingleModeSelectModalContent,
   SingleModeSelectModalButtonContainer,
-  ImgButton,
-  Image,
+  ModeSelectImageWrap,
+  ModeSelectImage,
 } from './single-mode-select-modal.style';
-import MutliFriendButton from '../../assets/images/multi_mode_friend_button.png';
-import MutliRandomButton from '../../assets/images/multi_mode_random_button.png';
+
+import SingleNormalImg from '../../assets/images/single_normal.png';
+import SingleHardImg from '../../assets/images/single_hard.png';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { selectIsSingleModeSelectModalOpen } from '../../store/modules/modal/modal.select';
@@ -22,23 +22,23 @@ export default function SingleModeSelectModal(): JSX.Element {
 
   return (
     <Modal
-      title=""
+      title="싱글모드"
       isOpen={isSingleModeSelectModalOpen}
       onClose={() => {
         dispatch(modalAction.radioSingleModeSelectModal());
       }}
-      contentWidth={600}
+      contentWidth={664}
+      backgroundColor="#FFD7E7"
     >
       <SingleModeSelectModalContainer>
-        <SingleModeSelectModalTitle>싱글모드</SingleModeSelectModalTitle>
         <SingleModeSelectModalContent>{'홀로 강하게 키운다!\n오늘의 내가 갈 길은?'}</SingleModeSelectModalContent>
         <SingleModeSelectModalButtonContainer>
-          <ImgButton>
-            <Image alt="일반뽀모" src={MutliRandomButton} />
-          </ImgButton>
-          <ImgButton>
-            <Image alt="열정뽀모" src={MutliFriendButton} />
-          </ImgButton>
+          <ModeSelectImageWrap>
+            <ModeSelectImage alt="일반뽀모" src={SingleNormalImg} />
+          </ModeSelectImageWrap>
+          <ModeSelectImageWrap>
+            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} />
+          </ModeSelectImageWrap>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>
     </Modal>

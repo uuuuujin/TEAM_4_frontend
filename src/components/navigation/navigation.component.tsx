@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavigationContainer, LogoContainer, NavBoxContainer, NavBox, LogoImg, NavImg } from './navigation.style';
-// import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavBoxContainer,
+  NavBox,
+  LogoImg,
+  NavImg,
+  GuideScreenContainer,
+  GuideScreen,
+} from './navigation.style';
 import PodongLogo from '../../assets/images/logo.png';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
-import MyPageImg from '../../assets/images/mypage.png';
-import GuideImg from '../../assets/images/guide.png';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { selectIsGuideModalOpen } from '../../store/modules/modal/modal.select';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 
 export default function Navigation(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [currentUser, setCurrentUser] = useState(false);
   const [isMypageOpen, setIsMypageOpen] = useState(false);
+
+  const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
 
   const loginHandler = () => {
     setCurrentUser(!currentUser);
@@ -20,6 +34,10 @@ export default function Navigation(): JSX.Element {
     setIsMypageOpen(!isMypageOpen);
   };
 
+  const handleGuideModalClick = () => {
+    dispatch(modalAction.radioGuideModal());
+  };
+
   return (
     <>
       <NavigationContainer>
@@ -27,20 +45,25 @@ export default function Navigation(): JSX.Element {
           <LogoImg src={PodongLogo} alt="로고이미지" />
         </LogoContainer>
         <NavBoxContainer>
-          {currentUser ? (
-            <NavBox onClick={toggleIsMypageOpen}>
-              <NavImg src={MyPageImg} alt="마이페이지" />
-            </NavBox>
-          ) : (
-            <NavBox onClick={loginHandler}>
-              <NavImg src={MyPageImg} alt="마이페이지" />
-            </NavBox>
-          )}
           <NavBox>
-            <NavImg src={GuideImg} alt="가이드" />
+            {currentUser ? (
+              <NavImg content="mypage" onClick={toggleIsMypageOpen} />
+            ) : (
+              <NavImg content="mypage" onClick={loginHandler} />
+            )}
+          </NavBox>
+
+          <NavBox>
+            <NavImg content="info" onClick={handleGuideModalClick} />
           </NavBox>
         </NavBoxContainer>
+
         {isMypageOpen && <MypageDropdown />}
+        {isGuideModalOpen && (
+          <GuideScreenContainer>
+            <GuideScreen onClick={handleGuideModalClick} />
+          </GuideScreenContainer>
+        )}
       </NavigationContainer>
       <div>
         <Outlet />

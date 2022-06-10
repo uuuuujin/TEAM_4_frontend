@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GoogleLoginLogo from '../../assets/icons/google_login_logo.svg';
-import InstagramLoginLogo from '../../assets/images/instargram_login_logo.png';
+import KakaoLoginLogo from '../../assets/icons/kakao_login_logo.svg';
 import { SocialLoginButtonContainer, SocialLoginButtonLogo, SocialLoginButtonText } from './social-login-button.style';
 
 interface SocialLoginButtonProp extends React.ComponentPropsWithRef<'button'> {
@@ -18,7 +18,7 @@ export interface SocialLoginButtonTheme {
 
 export const SOCIAL_TYPE_CLASSES = {
   google: 'google',
-  instagram: 'instagram',
+  kakao: 'kakao',
 };
 
 const getButtonTheme = (socialType: string): SocialLoginButtonTheme =>
@@ -30,12 +30,12 @@ const getButtonTheme = (socialType: string): SocialLoginButtonTheme =>
       text: 'Google',
       textColor: 'rgb(0, 0, 0, 0.54)',
     },
-    [SOCIAL_TYPE_CLASSES.instagram]: {
-      backgroundColor: '#fff',
-      logoSrc: InstagramLoginLogo,
+    [SOCIAL_TYPE_CLASSES.kakao]: {
+      backgroundColor: '#FEE500',
+      logoSrc: KakaoLoginLogo,
       logoSize: '18px',
-      text: 'Instargram',
-      textColor: 'rgb(0, 0, 0, 0.54)',
+      text: 'Kakao',
+      textColor: 'rgb(0, 0, 0, 1)',
     },
   }[socialType]);
 

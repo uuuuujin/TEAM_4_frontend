@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 import ProfileModal from '../profile-modal/profile-modal.component';
 import {
   CharacterContainer,
-  InvertedTriangleIcon,
+  TriangleIcon,
   Nickname,
   CharacterWrap,
+  ShelfImgWrap,
   ShelfImg,
   CharacterImgWrap,
   CharacterImg,
 } from './character.style';
 import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
-import Shelf from '../../assets/images/shelf.png';
+import ShelfDayImg from '../../assets/images/shelf_day.png';
 
 interface CharacterType {
   nickname: string;
@@ -27,13 +28,13 @@ export default function Character({ nickname, characterImgSrc }: CharacterType):
 
   return (
     <CharacterContainer>
-      <InvertedTriangleIcon src={InvertedTriangle} alt="역삼각형 아이콘" onClick={handlerModal} />
+      <TriangleIcon src={InvertedTriangle} alt="역삼각형 아이콘" />
       <Nickname>{nickname}</Nickname>
       <CharacterWrap>
-        <ShelfImg>
-          <img src={Shelf} alt="캐릭터 받침대" />
-        </ShelfImg>
-        <CharacterImgWrap>
+        <ShelfImgWrap>
+          <ShelfImg src={ShelfDayImg} alt="캐릭터 받침대" />
+        </ShelfImgWrap>
+        <CharacterImgWrap onClick={handlerModal}>
           <CharacterImg src={characterImgSrc} alt="캐릭터 이미지" />
         </CharacterImgWrap>
       </CharacterWrap>

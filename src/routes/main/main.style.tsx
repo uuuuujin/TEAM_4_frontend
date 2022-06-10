@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 import { BaseButton } from '../../components/button/button.style';
 
+import PomoGuideBtnImg from '../../assets/images/pomoguide_button.png';
+import PomoGuideBtnHoverImg from '../../assets/images/pomoguide_button_hover.png';
+import PomoGuideBtnActiveImg from '../../assets/images/pomoguide_button_active.png';
+
 export const LogoContainer = styled.div`
   position: absolute;
   top: 18%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const LogoImg = styled.img`
+  -webkit-user-drag: none;
 `;
 
 export const TimerContainer = styled.div`
@@ -15,7 +23,15 @@ export const TimerContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export const ImgText = styled.span`
+export const ModeSelectButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  bottom: 13%;
+  left: 50%;
+  transform: translate(-50%, 0);
+`;
+
+export const ModeSelectButtonText = styled.span`
   font-family: 'neodgm';
   font-size: 24px;
   color: #fff;
@@ -25,8 +41,8 @@ export const ImgText = styled.span`
   transform: translate(-38%, -50%);
 `;
 
-export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
-  background-image: url(${({ hoverImg }) => hoverImg});
+export const ModeSelectButton = styled.div<{ normalImg: string; hoverImg: string; activeImg: string }>`
+  background-image: url(${({ normalImg }) => normalImg});
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
@@ -37,9 +53,16 @@ export const ButtonWrap = styled.div<{ hoverImg: string; clickImg: string }>`
   position: relative;
   cursor: pointer;
 
+  &:hover {
+    background-image: url(${({ hoverImg }) => hoverImg});
+    ${ModeSelectButtonText} {
+      display: none;
+    }
+  }
+
   &:active {
-    background-image: url(${({ clickImg }) => clickImg});
-    ${ImgText} {
+    background-image: url(${({ activeImg }) => activeImg});
+    ${ModeSelectButtonText} {
       display: none;
     }
   }
@@ -51,11 +74,37 @@ export const CharacterContainer = styled.div`
   left: calc(50% + 17vw);
 `;
 
-export const ButtonContainer = styled.div`
+export const PomoGuideButtonText = styled.span`
+  font-family: 'NotoSans-medium';
   position: absolute;
-  display: flex;
-  top: 80%;
-  bottom: 13%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-54%, -55%);
+`;
+
+export const PomoGuideButtonContainer = styled.div`
+  background-image: url(${PomoGuideBtnImg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 166px;
+  height: 42px;
+  position: absolute;
+  bottom: 5%;
   left: 50%;
   transform: translate(-50%, 0);
+  cursor: pointer;
+
+  &:hover {
+    background-image: url(${PomoGuideBtnHoverImg});
+    ${PomoGuideButtonText} {
+      display: none;
+    }
+  }
+
+  &:active {
+    background-image: url(${PomoGuideBtnActiveImg});
+    ${PomoGuideButtonText} {
+      display: none;
+    }
+  }
 `;
