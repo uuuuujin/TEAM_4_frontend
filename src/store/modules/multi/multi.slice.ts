@@ -73,8 +73,8 @@ export const mutliSlice = createSlice({
     addChatMessage: (state, action: PayloadAction<ChatMessage>) => {
       state.messages.push(action.payload);
     },
-    addNewMember: (state, action: PayloadAction<Member>) => {
-      state.members.push(action.payload);
+    updateMember: (state, action: PayloadAction<Member[]>) => {
+      state.members = action.payload;
     },
   },
   extraReducers: (builder) => {

@@ -43,7 +43,7 @@ export default function MultiModeSelectModal(): JSX.Element {
           <ModeSelectImageWrap>
             <ModeSelectImage alt="withRandomButton" src={MutliRandomButton} />
           </ModeSelectImageWrap>
-          <ModeSelectImageWrap>
+          <ModeSelectImageWrap onClick={handleFriendClick}>
             <ModeSelectImage alt="withFriendButton" src={MutliFriendButton} />
           </ModeSelectImageWrap>
         </MultiModeSelectModalButtonContainer>

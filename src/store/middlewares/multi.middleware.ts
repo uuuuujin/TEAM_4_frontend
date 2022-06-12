@@ -10,23 +10,25 @@ export const multiMiddleware: Middleware = (store) => {
   return (next) => (action) => {
     if (multiAction.startConnectSocket.match(action)) {
       const multiStore = store.getState().multi;
+      const mainStore = store.getState().main;
       socket = io(`${process.env.REACT_APP_API_URL}/room-FRIENDS`);
       socket.on('connect', () => {
         console.log('socket connect');
         socket.emit('enter', {
-          id: multiStore.id,
+          nickname: mainStore.nickname,
+          logined: false,
           roomid: multiStore.roomId,
         });
       });
 
       socket.on('join', (arg) => {
-        const member: Member = {
+        const newMember: Member = {
           id: arg.id,
           Nick: arg.Nick,
           all: arg.all,
           logined: arg.logined,
         };
-        dispatch(multiAction.addNewMember(member));
+        dispatch(multiAction.updateMember([...multiStore.members, newMember]));
       });
 
       socket.on('message', (arg) => {
@@ -42,6 +44,14 @@ export const multiMiddleware: Middleware = (store) => {
 
       socket.on('ConnectedUsers', () => {
         dispatch(multiAction.connectionSuccessed());
+      });
+
+      socket.on('leave', ({ data }) => {
+        const { nick, logined } = data;
+        const newMembers: Member[] = multiStore.members.filter(
+          (member: Member) => !(member.Nick === nick && member.logined === logined)
+        );
+        dispatch(multiAction.updateMember(newMembers));
       });
 
       socket.on('disconnect', () => {
