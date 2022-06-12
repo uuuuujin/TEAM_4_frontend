@@ -17,9 +17,14 @@ import ShelfDayImg from '../../assets/images/shelf_day.png';
 interface CharacterType {
   nickname: string;
   characterImgSrc: string;
+  triangleImgSrc?: string;
 }
 
-export default function Character({ nickname, characterImgSrc }: CharacterType): JSX.Element {
+export default function Character({
+  nickname,
+  characterImgSrc,
+  triangleImgSrc = InvertedTriangle,
+}: CharacterType): JSX.Element {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handlerModal = () => {
@@ -28,7 +33,7 @@ export default function Character({ nickname, characterImgSrc }: CharacterType):
 
   return (
     <CharacterContainer>
-      <TriangleIcon src={InvertedTriangle} alt="역삼각형 아이콘" />
+      <TriangleIcon src={triangleImgSrc} alt="역삼각형 아이콘" />
       <Nickname>{nickname}</Nickname>
       <CharacterWrap>
         <ShelfImgWrap>

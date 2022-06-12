@@ -4,17 +4,19 @@ import axios from 'axios';
 export interface MainState {
   getRandomChracter: boolean;
   nickname: string;
-  all: number;
+  characterImageCode: number;
+  triangleImageCode: number;
 }
 
 const initialState: MainState = {
   getRandomChracter: false,
   nickname: '',
-  all: 0,
+  characterImageCode: 0,
+  triangleImageCode: 0,
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
-  const response = await axios.get(`http://${process.env.REACT_APP_API_URL}/user/random`);
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/random`);
   return response.data;
 });
 
@@ -27,7 +29,8 @@ export const mainSlice = createSlice({
       .addCase(getRandomAsync.fulfilled, (state, action) => {
         state.getRandomChracter = true;
         state.nickname = action.payload.Nick;
-        state.all = action.payload.code.all;
+        state.characterImageCode = action.payload.code.all;
+        state.triangleImageCode = action.payload.icons.arrow;
         // if (!window.localStorage.getItem('nickname_key')) {
         //   window.localStorage.setItem('nickname_key', action.payload.Nick);
         //   window.localStorage.setItem('imgCode_key', action.payload.code.all);

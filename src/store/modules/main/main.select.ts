@@ -8,4 +8,6 @@ export const selectGetRandomChracter = createSelector([selectMainReducer], (main
 
 export const selectNickname = createSelector([selectMainReducer], (main) => main.nickname);
 
-export const selectImgCodeAll = createSelector([selectMainReducer], (main) => main.all);
+export const selectCharacterImgCode = createSelector([selectMainReducer], (main) => main.characterImageCode);
+
+export const selectTriangleImgCode = createSelector([selectMainReducer], (main) => main.triangleImageCode);

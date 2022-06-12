@@ -17,7 +17,12 @@ import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { getRandomAsync } from '../../store/modules/main/main.slice';
-import { selectGetRandomChracter, selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
+import {
+  selectGetRandomChracter,
+  selectNickname,
+  selectCharacterImgCode,
+  selectTriangleImgCode,
+} from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
 import {
@@ -38,7 +43,8 @@ export default function Main(): JSX.Element {
   const getRandomCompleted = useAppSelector(selectGetRandomChracter);
 
   const nickName = useAppSelector(selectNickname);
-  const imgCodeAll = useAppSelector(selectImgCodeAll);
+  const characterImgCode = useAppSelector(selectCharacterImgCode);
+  const triangleImgCode = useAppSelector(selectTriangleImgCode);
 
   useRandomCharacter();
 
@@ -62,7 +68,8 @@ export default function Main(): JSX.Element {
         {getRandomCompleted && (
           <Character
             nickname={nickName}
-            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${imgCodeAll}_01.png`}
+            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`}
+            triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/0${triangleImgCode}.png`}
           />
         )}
       </CharacterContainer>
