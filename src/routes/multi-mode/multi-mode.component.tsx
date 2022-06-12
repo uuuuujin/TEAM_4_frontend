@@ -8,7 +8,7 @@ import {
   selectIsConnected,
   selectMembers,
 } from '../../store/modules/multi/multi.select';
-import { selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
+import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import {
@@ -40,7 +40,7 @@ export default function MultiMode(): JSX.Element {
   const members = useAppSelector(selectMembers);
 
   const nickName = useAppSelector(selectNickname);
-  const imgCodeAll = useAppSelector(selectImgCodeAll);
+  const imgCodeAll = useAppSelector(selectCharacterImgCode);
 
   useRandomCharacter();
 

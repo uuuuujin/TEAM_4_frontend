@@ -41,7 +41,7 @@ export default function SingleModeSelectModal(): JSX.Element {
             <ModeSelectImage alt="일반뽀모" src={SingleNormalImg} onClick={handleModal} />
           </ModeSelectImageWrap>
           <ModeSelectImageWrap to="/single">
-            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} />
+            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} onClick={handleModal} />
           </ModeSelectImageWrap>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>

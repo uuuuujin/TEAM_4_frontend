@@ -7,7 +7,7 @@ export const CharacterContainer = styled.div`
 `;
 
 export const TriangleIcon = styled.img`
-  width: 30px;
+  width: 25px;
   -webkit-user-drag: none;
 `;
 
