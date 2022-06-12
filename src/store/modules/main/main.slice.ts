@@ -14,7 +14,7 @@ const initialState: MainState = {
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
-  const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/random`);
+  const response = await axios.get(`http://${process.env.REACT_APP_API_URL}/user/random`);
   return response.data;
 });
 

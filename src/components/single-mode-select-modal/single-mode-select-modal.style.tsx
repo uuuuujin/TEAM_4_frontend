@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const SingleModeSelectModalContainer = styled.div`
   padding: 24px 0;
 `;
 
-export const ModeSelectImageWrap = styled.button`
-  border: none;
+export const ModeSelectImageWrap = styled(Link)`
   cursor: pointer;
-  padding: 0;
 `;
 
 export const ModeSelectImage = styled.img`
