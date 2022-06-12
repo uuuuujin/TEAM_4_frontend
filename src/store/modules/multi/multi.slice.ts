@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Member, ChatMessage } from './multi.type';
+import { Member, ChatMessage, PomodoroTimerTypes } from './multi.type';
 
 export interface MultiState {
   isEntered: boolean;
@@ -10,6 +10,7 @@ export interface MultiState {
   roomId: string;
   members: Member[];
   messages: ChatMessage[];
+  pomoTimerType: PomodoroTimerTypes;
 }
 
 const initialState: MultiState = {
@@ -20,6 +21,7 @@ const initialState: MultiState = {
   roomId: '',
   members: [],
   messages: [],
+  pomoTimerType: PomodoroTimerTypes.stop,
 };
 
 export const createRoomAsync = createAsyncThunk('multi/createRoom', async (email: string) => {
@@ -31,9 +33,10 @@ export const createRoomAsync = createAsyncThunk('multi/createRoom', async (email
 
 export const enterRoomAsync = createAsyncThunk(
   'multi/enterRoom',
-  async ({ roomId, nickname }: { roomId: string; nickname: string }) => {
+  async ({ roomId, nickname, imgCodeAll }: { roomId: string; nickname: string; imgCodeAll: string }) => {
     const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}`, {
       nick: nickname,
+      imgCode: imgCodeAll,
     });
     return response.data;
   }
@@ -41,7 +44,7 @@ export const enterRoomAsync = createAsyncThunk(
 
 export const chatMessageAsync = createAsyncThunk(
   'multi/chat',
-  async ({ roomId, memberId, content }: { roomId: string; memberId: number; content: string }) => {
+  async ({ roomId, memberId, content }: { roomId: string; memberId: string; content: string }) => {
     const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}/chats`, {
       content,
       memberId,
@@ -70,6 +73,9 @@ export const mutliSlice = createSlice({
     addChatMessage: (state, action: PayloadAction<ChatMessage>) => {
       state.messages.push(action.payload);
     },
+    updateMember: (state, action: PayloadAction<Member[]>) => {
+      state.members = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -86,10 +92,13 @@ export const mutliSlice = createSlice({
         state.isConnecting = true;
       })
       .addCase(enterRoomAsync.fulfilled, (state, action) => {
-        state.members = action.payload.memberList;
+        state.members = action.payload.playerList;
         state.id = action.payload.room.id;
         state.isEntered = true;
-      });
+      })
+      .addCase(chatMessageAsync.pending, () => {})
+      .addCase(chatMessageAsync.fulfilled, () => {})
+      .addCase(chatMessageAsync.rejected, () => {});
   },
 });
 

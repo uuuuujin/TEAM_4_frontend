@@ -13,9 +13,11 @@ import MultiModeButtonImg from '../../assets/images/multi_mode_button.png';
 import MultiModeButtonHoverImg from '../../assets/images/multi_mode_button_hover.png';
 import MultiModeButtonActiveImg from '../../assets/images/multi_mode_button_active.png';
 
+import useRandomCharacter from '../../hooks/useRandomCharacter';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { getRandomAsync } from '../../store/modules/main/main.slice';
-import { selectGetRandomChracter } from '../../store/modules/main/main.select';
+import { selectGetRandomChracter, selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
 import {
@@ -35,17 +37,10 @@ export default function Main(): JSX.Element {
 
   const getRandomCompleted = useAppSelector(selectGetRandomChracter);
 
-  const [nickname, setNickname] = useState('');
-  const [imgCode, setImgCode] = useState('');
+  const nickName = useAppSelector(selectNickname);
+  const imgCodeAll = useAppSelector(selectImgCodeAll);
 
-  useEffect(() => {
-    async function fetchCharacter() {
-      await dispatch(getRandomAsync());
-      setNickname(window.localStorage.getItem(`${process.env.REACT_APP_NICKNAME_KEY}`) || '');
-      setImgCode(window.localStorage.getItem(`${process.env.REACT_APP_IMGCODE_KEY}`) || '');
-    }
-    fetchCharacter();
-  }, [dispatch, getRandomCompleted]);
+  useRandomCharacter();
 
   const handleMultiModalClick = () => {
     dispatch(modalAction.radioMultiModeSelectModal());
@@ -65,7 +60,7 @@ export default function Main(): JSX.Element {
       </TimerContainer>
       <CharacterContainer>
         {getRandomCompleted && (
-          <Character nickname={nickname} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCode}.png`} />
+          <Character nickname={nickName} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCodeAll}.png`} />
         )}
       </CharacterContainer>
       <ModeSelectButtonContainer>

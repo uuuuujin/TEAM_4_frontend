@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { createRoomAsync, enterRoomAsync, chatMessageAsync, multiAction } from '../../store/modules/multi/multi.slice';
-import { selectIsEntered, selectRoomId, selectIsConnected } from '../../store/modules/multi/multi.select';
+import {
+  selectIsEntered,
+  selectRoomId,
+  selectIsConnected,
+  selectMembers,
+} from '../../store/modules/multi/multi.select';
+import { selectNickname, selectImgCodeAll } from '../../store/modules/main/main.select';
+import useRandomCharacter from '../../hooks/useRandomCharacter';
+
 import {
   TimerContainer,
   ChracterPosition,
@@ -19,7 +27,7 @@ import Button from '../../components/button/button.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
 import ToastHook from '../../hooks/toast.hook';
 import CopyMsg from '../../components/copy-message/copy-message.component';
-import StateBar from '../../components/state-bar/state-bar.component';
+import Chat from '../../components/chat/chat.component';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,6 +37,12 @@ export default function MultiMode(): JSX.Element {
   const isEntered = useAppSelector(selectIsEntered);
   const roomId = useAppSelector(selectRoomId);
   const isConnected = useAppSelector(selectIsConnected);
+  const members = useAppSelector(selectMembers);
+
+  const nickName = useAppSelector(selectNickname);
+  const imgCodeAll = useAppSelector(selectImgCodeAll);
+
+  useRandomCharacter();
 
   useEffect(() => {
     if (roomIdParam === 'createRoom') {
@@ -43,42 +57,22 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomIdParam]);
 
   useEffect(() => {
-    if (roomId !== '') {
+    if (roomId !== '' && nickName !== '') {
       dispatch(
         enterRoomAsync({
           roomId,
-          nickname: '용감한 도마뱀',
+          nickname: nickName,
+          imgCodeAll: String(imgCodeAll),
         })
       );
     }
-  }, [dispatch, roomId]);
+  }, [dispatch, roomId, imgCodeAll, nickName]);
 
   useEffect(() => {
     if (isEntered) {
       dispatch(multiAction.startConnectSocket());
     }
   }, [dispatch, isEntered]);
-
-  useEffect(() => {
-    if (isConnected) {
-      dispatch(
-        chatMessageAsync({
-          roomId,
-          memberId: 126,
-          content: '하아',
-        })
-      );
-    }
-  }, [dispatch, isConnected, roomId]);
-
-  const users = [
-    { nickname: '유진', characterImg: catImg },
-    { nickname: '성훈', characterImg: catImg },
-    { nickname: '은우', characterImg: catImg },
-    { nickname: '현석', characterImg: catImg },
-    { nickname: '보민', characterImg: catImg },
-    { nickname: '유천', characterImg: catImg },
-  ];
 
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
@@ -89,10 +83,10 @@ export default function MultiMode(): JSX.Element {
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
-      {users.map((item, index) => {
+      {members.map((item, index) => {
         return (
-          <ChracterPosition positionNum={index + 1}>
-            <Character nickname={item.nickname} characterImgSrc={item.characterImg} />
+          <ChracterPosition key={item.Nick} positionNum={index + 1}>
+            <Character nickname={item.Nick} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${item.all}.png`} />
           </ChracterPosition>
         );
       })}
@@ -102,8 +96,9 @@ export default function MultiMode(): JSX.Element {
 
       <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>
       <LinkContainer>
-        <MultiLink setToastState={setToastState}>http://podongpodong.com/mode/friends/psa-hjjr-mwk</MultiLink>
+        <MultiLink setToastState={setToastState}>{`http://localhost:3000/multi/${roomId}`}</MultiLink>
       </LinkContainer>
+      <Chat />
       {toastState && (
         <CopyMsgContainer>
           <CopyMsg />

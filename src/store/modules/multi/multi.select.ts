@@ -9,3 +9,9 @@ export const selectIsEntered = createSelector([selectMultiReducer], (multi) => m
 export const selectRoomId = createSelector([selectMultiReducer], (multi) => multi.roomId);
 
 export const selectIsConnected = createSelector([selectMultiReducer], (multi) => multi.isConnected);
+
+export const selectMembers = createSelector([selectMultiReducer], (multi) => multi.members);
+
+export const selectMessages = createSelector([selectMultiReducer], (multi) => multi.messages);
+
+export const selectPomodoroTimerType = createSelector([selectMultiReducer], (multi) => multi.pomoTimerType);

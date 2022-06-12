@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-import { PomodoroTimerTypes } from '../components/pomodoro-timer/pomodoro-timer.component';
+import { PomodoroTimerTypes } from '../store/modules/multi/multi.type';
 
 interface UseTimerIntervalCallback {
   (limit: number): boolean;
@@ -8,6 +8,7 @@ interface UseTimerIntervalCallback {
 
 export const getPomoLimitCount = (type: PomodoroTimerTypes) =>
   ({
+    [PomodoroTimerTypes.stop]: 0,
     [PomodoroTimerTypes.long_pomo]: 3000,
     [PomodoroTimerTypes.short_pomo]: 1500,
     [PomodoroTimerTypes.long_break]: 600,

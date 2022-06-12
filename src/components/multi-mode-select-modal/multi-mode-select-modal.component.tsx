@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import Modal from '../modal/modal.component';
 import ModeSelectButton from '../mode-select-button/mode-select-button.component';
@@ -19,7 +20,12 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 
 export default function MultiModeSelectModal(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isMultiModeSelectModalOpen = useAppSelector(selectIsMultiModeSelectModalOpen);
+
+  const handleFriendClick = () => {
+    navigate('/multi/createRoom');
+  };
 
   return (
     <Modal
@@ -37,7 +43,7 @@ export default function MultiModeSelectModal(): JSX.Element {
           <ModeSelectImageWrap>
             <ModeSelectImage alt="withRandomButton" src={MutliRandomButton} />
           </ModeSelectImageWrap>
-          <ModeSelectImageWrap>
+          <ModeSelectImageWrap onClick={handleFriendClick}>
             <ModeSelectImage alt="withFriendButton" src={MutliFriendButton} />
           </ModeSelectImageWrap>
         </MultiModeSelectModalButtonContainer>
