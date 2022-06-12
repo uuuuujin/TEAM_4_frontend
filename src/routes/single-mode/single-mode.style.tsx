@@ -4,15 +4,15 @@ export const TimerContainer = styled.div`
   // width: 550px;
   // margin: 0 auto;
   position: absolute;
-  top: 52%;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  top: 45%;
-  left: calc(50% + 250px);
+  top: 41%;
+  left: calc(50% + 17vw);
 `;
 
 export const StateBarContainer = styled.div`

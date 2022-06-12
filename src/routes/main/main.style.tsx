@@ -70,7 +70,7 @@ export const ModeSelectButton = styled.div<{ normalImg: string; hoverImg: string
 
 export const CharacterContainer = styled.div`
   position: absolute;
-  top: 43%;
+  top: 41%;
   left: calc(50% + 17vw);
 `;
 

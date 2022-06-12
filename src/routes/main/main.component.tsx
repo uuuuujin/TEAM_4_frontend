@@ -60,7 +60,10 @@ export default function Main(): JSX.Element {
       </TimerContainer>
       <CharacterContainer>
         {getRandomCompleted && (
-          <Character nickname={nickName} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${imgCodeAll}.png`} />
+          <Character
+            nickname={nickName}
+            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${imgCodeAll}_01.png`}
+          />
         )}
       </CharacterContainer>
       <ModeSelectButtonContainer>

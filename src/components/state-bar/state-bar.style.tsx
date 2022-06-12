@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const StateBarContainer = styled.span`
-  padding: 1em 3em;
-  border: 2px solid #f43f59;
-  border-radius: 5px;
+  padding: 20px 55px;
+  border: 3px solid #000;
+  border-radius: 10px;
   display: inline-block;
-  background-color: #ffcad5;
+  background-color: #ffd500;
   letter-spacing: 0.2rem;
+  font-weight: 600;
+  font-size: 20px;
 `;

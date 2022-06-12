@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CharacterContainer = styled.div`
-  width: 150px;
+  width: 220x;
   text-align: center;
   display: inline-block;
 `;
@@ -21,6 +21,7 @@ export const Nickname = styled.p`
 
 export const CharacterWrap = styled.div`
   position: relative;
+  margin-top: 5px;
   height: 218px;
 `;
 
