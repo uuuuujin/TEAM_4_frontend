@@ -39,7 +39,7 @@ export const ShelfImg = styled.img`
 
 export const CharacterImgWrap = styled.div`
   position: absolute;
-  top: 50%;
+  top: 51%;
   left: 50%;
   transform: translate(-50%, -74%);
 `;
