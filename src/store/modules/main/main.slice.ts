@@ -10,9 +10,9 @@ export interface MainState {
 
 const initialState: MainState = {
   getRandomChracter: false,
-  nickname: '',
-  characterImageCode: 0,
-  triangleImageCode: 0,
+  nickname: '포동포동한 아기고양이',
+  characterImageCode: 1,
+  triangleImageCode: 1,
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
