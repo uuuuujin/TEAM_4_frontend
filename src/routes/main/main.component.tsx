@@ -65,11 +65,17 @@ export default function Main(): JSX.Element {
         <PomodoroTimer />
       </TimerContainer>
       <CharacterContainer>
-        {getRandomCompleted && (
+        {getRandomCompleted ? (
           <Character
             nickname={nickName}
             characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`}
             triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/0${triangleImgCode}.png`}
+          />
+        ) : (
+          <Character
+            nickname="포동포동 아기고양이"
+            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/01_01.png`}
+            triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/01.png`}
           />
         )}
       </CharacterContainer>
