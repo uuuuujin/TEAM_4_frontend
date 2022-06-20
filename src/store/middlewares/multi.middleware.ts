@@ -1,7 +1,9 @@
 import { Middleware } from 'redux';
 import { io, Socket } from 'socket.io-client';
 import { multiAction } from '../modules/multi/multi.slice';
+import { timerAction } from '../modules/timer/timer.slice';
 import { ChatMessage, Member } from '../modules/multi/multi.type';
+import { PomodoroTimerTypes } from '../modules/timer/timer.type';
 
 export const multiMiddleware: Middleware = (store) => {
   let socket: Socket;
@@ -42,7 +44,7 @@ export const multiMiddleware: Middleware = (store) => {
         dispatch(multiAction.addChatMessage(chat));
       });
 
-      socket.on('ConnectedUsers', () => {
+      socket.on('ConnectedUsers', (arg) => {
         dispatch(multiAction.connectionSuccessed());
       });
 
@@ -54,10 +56,20 @@ export const multiMiddleware: Middleware = (store) => {
         dispatch(multiAction.updateMember(newMembers));
       });
 
+      socket.on('start', () => {
+        dispatch(timerAction.updateTimerTypes(PomodoroTimerTypes.short_pomo));
+      });
+
       socket.on('disconnect', () => {
         dispatch(multiAction.connectionFinished());
       });
     }
+
+    if (timerAction.startMultiTimer.match(action)) {
+      console.log('b');
+      socket.emit('start');
+    }
+
     return next(action);
   };
 };

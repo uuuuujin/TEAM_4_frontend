@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PomodoroTimerContainer, TimerText, TimerTextContainer, TimerColon } from './pomodoro-timer.style';
 
 import useTimerInterval from '../../hooks/useTimerInterval.hook';
-import { selectPomodoroTimerType } from '../../store/modules/multi/multi.select';
+import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
 import { useAppSelector } from '../../hooks/index.hook';
 
 const formatCount = (timerCount: number): number[] => [

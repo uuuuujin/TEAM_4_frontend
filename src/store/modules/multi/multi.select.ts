@@ -13,5 +13,3 @@ export const selectIsConnected = createSelector([selectMultiReducer], (multi) =>
 export const selectMembers = createSelector([selectMultiReducer], (multi) => multi.members);
 
 export const selectMessages = createSelector([selectMultiReducer], (multi) => multi.messages);
-
-export const selectPomodoroTimerType = createSelector([selectMultiReducer], (multi) => multi.pomoTimerType);
