@@ -45,8 +45,8 @@ export default function MultiMode(): JSX.Element {
   useRandomCharacter();
 
   useEffect(() => {
-    if (roomIdParam === 'createRoom') {
-      dispatch(createRoomAsync('didtjdgns852@gmail.com'));
+    if (roomIdParam === 'createRoom' && nickName !== '') {
+      dispatch(createRoomAsync(nickName));
     } else if (roomIdParam) {
       dispatch(
         multiAction.updateRoomId({
@@ -54,7 +54,7 @@ export default function MultiMode(): JSX.Element {
         })
       );
     }
-  }, [dispatch, roomIdParam]);
+  }, [dispatch, roomIdParam, nickName]);
 
   useEffect(() => {
     if (roomId !== '' && nickName !== '') {

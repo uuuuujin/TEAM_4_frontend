@@ -24,9 +24,9 @@ const initialState: MultiState = {
   pomoTimerType: PomodoroTimerTypes.stop,
 };
 
-export const createRoomAsync = createAsyncThunk('multi/createRoom', async (email: string) => {
+export const createRoomAsync = createAsyncThunk('multi/createRoom', async (nickName: string) => {
   const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends`, {
-    host: email,
+    nick: nickName,
   });
   return response.data;
 });
