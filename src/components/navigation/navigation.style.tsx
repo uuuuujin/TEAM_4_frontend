@@ -13,6 +13,8 @@ export const NavigationContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  top: 0;
 `;
 
 export const LogoContainer = styled(Link)`
@@ -85,7 +87,7 @@ export const GuideScreenContainer = styled.div`
 `;
 
 export const GuideScreen = styled.div`
-  background-image: url(${GuideImg});
+  background-image: url(${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png);
   background-size: cover;
   background-repeat: no-repeat;
 

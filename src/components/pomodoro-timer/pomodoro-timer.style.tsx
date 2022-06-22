@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import TimerImage from '../../assets/images/timer-background.png';
 
 export const PomodoroTimerContainer = styled.div`
-  background-image: url(${TimerImage});
+  background-image: url(${process.env.REACT_APP_IMG_URL}/timer/watch_day.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,14 +16,14 @@ export const PomodoroTimerContainer = styled.div`
 export const TimerTextContainer = styled.div`
   display: flex;
   position: absolute;
-  top: 52%;
+  top: 53%;
   transform: translate(0, -60%);
 `;
 
 export const TimerText = styled.div`
   color: #70ff64;
   font-size: 6.25vw;
-  width: 7vh;
+  width: 3.8vw;
   text-align: center;
 `;
 

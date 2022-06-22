@@ -41,10 +41,10 @@ export default function MultiModeSelectModal(): JSX.Element {
         <MultiModeSelectModalContent>함께해야 제 맛 같이 한번 해볼까?</MultiModeSelectModalContent>
         <MultiModeSelectModalButtonContainer>
           <ModeSelectImageWrap>
-            <ModeSelectImage alt="withRandomButton" src={MutliRandomButton} />
+            <ModeSelectImage alt="withRandomButton" src={`${process.env.REACT_APP_IMG_URL}/modal/multi_random.png`} />
           </ModeSelectImageWrap>
           <ModeSelectImageWrap onClick={handleFriendClick}>
-            <ModeSelectImage alt="withFriendButton" src={MutliFriendButton} />
+            <ModeSelectImage alt="withFriendButton" src={`${process.env.REACT_APP_IMG_URL}/modal/multi_friend.png`} />
           </ModeSelectImageWrap>
         </MultiModeSelectModalButtonContainer>
       </MultiModeSelectModalContainer>

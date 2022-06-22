@@ -38,10 +38,18 @@ export default function SingleModeSelectModal(): JSX.Element {
         <SingleModeSelectModalContent>{'홀로 강하게 키운다!\n오늘의 내가 갈 길은?'}</SingleModeSelectModalContent>
         <SingleModeSelectModalButtonContainer>
           <ModeSelectImageWrap to="/single">
-            <ModeSelectImage alt="일반뽀모" src={SingleNormalImg} onClick={handleModal} />
+            <ModeSelectImage
+              alt="일반뽀모"
+              src={`${process.env.REACT_APP_IMG_URL}/modal/single_normal.png`}
+              onClick={handleModal}
+            />
           </ModeSelectImageWrap>
           <ModeSelectImageWrap to="/single">
-            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} onClick={handleModal} />
+            <ModeSelectImage
+              alt="열정뽀모"
+              src={`${process.env.REACT_APP_IMG_URL}/modal/single_hard.png`}
+              onClick={handleModal}
+            />
           </ModeSelectImageWrap>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>

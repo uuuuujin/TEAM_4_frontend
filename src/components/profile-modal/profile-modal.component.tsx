@@ -8,13 +8,10 @@ import {
   ProfileModalNameContainer,
   ProfileModalName,
   ProfileModalEmail,
-  ProfileModalTitle,
   ProfileModalCharacterImg,
   ProfileModalNameEdit,
 } from './profile-modal.style';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
-import EditActiveIcon from '../../assets/images/edit_active_icon.png';
-import EditDisabledIcon from '../../assets/images/edit_disabled_icon.png';
 
 interface ModalProp {
   isOpen: boolean;
@@ -24,7 +21,6 @@ interface ModalProp {
 }
 
 export default function ProfileModal({ isOpen, onClose, nickname, characterImgSrc }: ModalProp): JSX.Element {
-  // const [isOpen, setIsOpen] = useState(true);
   const [user] = useState(false);
 
   return (
@@ -44,7 +40,13 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
         <ProfileModalContentContainer>
           <ProfileModalNameContainer>
             <ProfileModalName>{nickname}</ProfileModalName>
-            <ProfileModalNameEdit src={!user ? EditDisabledIcon : EditActiveIcon} />
+            <ProfileModalNameEdit
+              src={
+                !user
+                  ? `${process.env.REACT_APP_IMG_URL}/modal/edit_disabled_icon.png`
+                  : `${process.env.REACT_APP_IMG_URL}/modal/edit_active_icon.png`
+              }
+            />
           </ProfileModalNameContainer>
           <ProfileModalEmail>캐릭터 명을 수정하시려면 로그인을 해주세요</ProfileModalEmail>
         </ProfileModalContentContainer>

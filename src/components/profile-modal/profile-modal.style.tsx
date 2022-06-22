@@ -15,7 +15,7 @@ export const ProfileModalTitle = styled.div`
 `;
 
 export const ProfileModalBgImg = styled.div`
-  background-image: url(${CharacterBgImage});
+  background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_pop.png);
   background-size: cover;
   width: 372px;
   height: 280px;
@@ -52,6 +52,8 @@ export const ProfileModalNameContainer = styled.div`
 export const ProfileModalName = styled.div`
   font-size: 1.5em;
   width: 100%;
+  font-family: 'IBMPlexMono';
+  font-weight: 400;
 `;
 
 export const ProfileModalNameEdit = styled.img`
@@ -63,4 +65,5 @@ export const ProfileModalNameEdit = styled.img`
 export const ProfileModalEmail = styled.div`
   font-size: 0.75em;
   color: #696969;
+  font-family: 'IBMPlexMono';
 `;

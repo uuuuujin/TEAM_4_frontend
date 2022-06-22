@@ -11,7 +11,6 @@ import {
   GuideScreenContainer,
   GuideScreen,
 } from './navigation.style';
-import PodongLogo from '../../assets/images/logo.png';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
@@ -42,7 +41,7 @@ export default function Navigation(): JSX.Element {
     <>
       <NavigationContainer>
         <LogoContainer to="/">
-          <LogoImg src={PodongLogo} alt="로고이미지" />
+          <LogoImg src={`${process.env.REACT_APP_IMG_URL}/logo.png`} alt="로고이미지" />
         </LogoContainer>
         <NavBoxContainer>
           <NavBox>

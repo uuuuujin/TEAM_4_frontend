@@ -12,7 +12,6 @@ import {
   CharacterImg,
 } from './character.style';
 import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
-import ShelfDayImg from '../../assets/images/shelf_day.png';
 
 interface CharacterType {
   nickname: string;
@@ -37,7 +36,7 @@ export default function Character({
       <Nickname>{nickname}</Nickname>
       <CharacterWrap>
         <ShelfImgWrap>
-          <ShelfImg src={ShelfDayImg} alt="캐릭터 받침대" />
+          <ShelfImg src={`${process.env.REACT_APP_IMG_URL}/character/shelf_day.png`} alt="캐릭터 받침대" />
         </ShelfImgWrap>
         <CharacterImgWrap onClick={handlerModal}>
           <CharacterImg src={characterImgSrc} alt="캐릭터 이미지" />
