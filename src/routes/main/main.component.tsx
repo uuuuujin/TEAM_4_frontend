@@ -53,6 +53,12 @@ export default function Main(): JSX.Element {
     dispatch(modalAction.radioSingleModeSelectModal());
   };
 
+  const [characterMoving, setCharacterMoving] = useState(false);
+
+  useEffect(() => {
+    setInterval(() => setCharacterMoving((v) => !v), 1000);
+  }, []);
+
   return (
     <Container className="App">
       {/* <LogoContainer>
@@ -65,7 +71,11 @@ export default function Main(): JSX.Element {
         {getRandomCompleted ? (
           <Character
             nickname={nickName}
-            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`}
+            characterImgSrc={
+              characterMoving
+                ? `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`
+                : `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_02.png`
+            }
             triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/0${triangleImgCode}.png`}
           />
         ) : (

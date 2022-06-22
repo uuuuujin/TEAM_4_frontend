@@ -12,7 +12,6 @@ import {
   CharacterImg,
 } from './character.style';
 import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
-import ShelfDayImg from '../../assets/images/shelf_day.png';
 
 interface CharacterType {
   nickname: string;
