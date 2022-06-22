@@ -3,6 +3,7 @@ import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.compon
 import Character from '../../components/character/character.component';
 import StateBar from '../../components/state-bar/state-bar.component';
 import {
+  Container,
   StateBarContainer,
   CharacterContainer,
   TimerContainer,
@@ -11,8 +12,6 @@ import {
 } from './single-mode.style';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectNickname, selectCharacterImgCode, selectTriangleImgCode } from '../../store/modules/main/main.select';
-import CheckOnImage from '../../assets/images/pomo_check_on.png';
-import CheckOffImage from '../../assets/images/pomo_check_off.png';
 
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
@@ -26,15 +25,15 @@ export default function SingleMode(): JSX.Element {
   const [pomoCount, setPomoCount] = useState<number>(1);
 
   return (
-    <div>
+    <Container>
       <div>
         <TimerContainer>
           <PomodoroTimer />
           <PomoCheckContainer>
-            <PomoCheckImage src={CheckOffImage} alt="pomo_check_off" />
-            <PomoCheckImage src={CheckOffImage} alt="pomo_check_off" />
-            <PomoCheckImage src={CheckOffImage} alt="pomo_check_off" />
-            <PomoCheckImage src={CheckOffImage} alt="pomo_check_off" />
+            <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_on.png`} alt="pomo_check_off" />
+            <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_off.png`} alt="pomo_check_off" />
+            <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_off.png`} alt="pomo_check_off" />
+            <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_off.png`} alt="pomo_check_off" />
           </PomoCheckContainer>
         </TimerContainer>
         <CharacterContainer>
@@ -49,6 +48,6 @@ export default function SingleMode(): JSX.Element {
       <StateBarContainer>
         <StateBar>내 새끼 밥주는 중...!</StateBar>
       </StateBarContainer>
-    </div>
+    </Container>
   );
 }

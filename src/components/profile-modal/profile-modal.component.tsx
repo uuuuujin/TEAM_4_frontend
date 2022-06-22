@@ -44,7 +44,13 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
         <ProfileModalContentContainer>
           <ProfileModalNameContainer>
             <ProfileModalName>{nickname}</ProfileModalName>
-            <ProfileModalNameEdit src={!user ? EditDisabledIcon : EditActiveIcon} />
+            <ProfileModalNameEdit
+              src={
+                !user
+                  ? `${process.env.REACT_APP_IMG_URL}/modal/edit_disabled_icon.png`
+                  : `${process.env.REACT_APP_IMG_URL}/modal/edit_active_icon.png`
+              }
+            />
           </ProfileModalNameContainer>
           <ProfileModalEmail>캐릭터 명을 수정하시려면 로그인을 해주세요</ProfileModalEmail>
         </ProfileModalContentContainer>

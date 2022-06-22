@@ -12,7 +12,7 @@ export const TriangleIcon = styled.img`
 `;
 
 export const Nickname = styled.p`
-  font-family: 'NotoSans-medium';
+  font-family: 'NotoSans-Bold';
   margin: 0;
   -webkit-text-stroke: 1px #151313;
   color: #fff;

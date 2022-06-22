@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  height: 100vh;
+  background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_tree_day.png),
+    url(${process.env.REACT_APP_IMG_URL}/background/background_land_day.png),
+    url(${process.env.REACT_APP_IMG_URL}/background/background_sky_day.png);
+  background-size: cover, cover, cover;
+  background-position: bottom, bottom, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+`;
+
 export const TimerContainer = styled.div`
   position: absolute;
   top: 52%;

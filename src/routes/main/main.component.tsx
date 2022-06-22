@@ -4,8 +4,6 @@ import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi-mode-select-modal.component';
 import SingleModeSelectModal from '../../components/single-mode-select-modal/single-mode-select-modal.component';
-// import { ReactComponent as PodongLogo } from '../../assets/icons/logo_pixel_ver 1.svg';
-import PodongLogo from '../../assets/images/logo.png';
 import SingleModeButtonImg from '../../assets/images/single_mode_button.png';
 import SingleModeButtonHoverImg from '../../assets/images/single_mode_button_hover.png';
 import SingleModeButtonActiveImg from '../../assets/images/single_mode_button_active.png';
@@ -14,9 +12,7 @@ import MultiModeButtonHoverImg from '../../assets/images/multi_mode_button_hover
 import MultiModeButtonActiveImg from '../../assets/images/multi_mode_button_active.png';
 
 import useRandomCharacter from '../../hooks/useRandomCharacter';
-
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { getRandomAsync } from '../../store/modules/main/main.slice';
 import {
   selectGetRandomChracter,
   selectNickname,
@@ -26,6 +22,7 @@ import {
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
 import {
+  Container,
   TimerContainer,
   LogoImg,
   CharacterContainer,
@@ -57,10 +54,10 @@ export default function Main(): JSX.Element {
   };
 
   return (
-    <div className="App">
-      <LogoContainer>
-        <LogoImg src={PodongLogo} alt="포동포동 로고" />
-      </LogoContainer>
+    <Container className="App">
+      {/* <LogoContainer>
+        <LogoImg src={`${process.env.REACT_APP_IMG_URL}/logo.png`} alt="포동포동 로고" />
+      </LogoContainer> */}
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
@@ -102,6 +99,6 @@ export default function Main(): JSX.Element {
       </PomoGuideButtonContainer>
       <SingleModeSelectModal />
       <MultiModeSelectModal />
-    </div>
+    </Container>
   );
 }

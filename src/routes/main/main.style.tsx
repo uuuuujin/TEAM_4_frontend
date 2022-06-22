@@ -5,20 +5,33 @@ import PomoGuideBtnImg from '../../assets/images/pomoguide_button.png';
 import PomoGuideBtnHoverImg from '../../assets/images/pomoguide_button_hover.png';
 import PomoGuideBtnActiveImg from '../../assets/images/pomoguide_button_active.png';
 
+export const Container = styled.div`
+  height: 100vh;
+  background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_tree_day.png),
+    url(${process.env.REACT_APP_IMG_URL}/background/background_land_day.png),
+    url(${process.env.REACT_APP_IMG_URL}/background/background_sky_day.png);
+  background-size: cover, cover, cover;
+  background-position: bottom, bottom, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+`;
+
 export const LogoContainer = styled.div`
   position: absolute;
   top: 18%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 30vw;
 `;
 
 export const LogoImg = styled.img`
   -webkit-user-drag: none;
+  width: 100%;
 `;
 
 export const TimerContainer = styled.div`
   position: absolute;
-  top: 51%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

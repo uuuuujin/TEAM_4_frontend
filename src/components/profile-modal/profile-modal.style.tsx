@@ -15,7 +15,7 @@ export const ProfileModalTitle = styled.div`
 `;
 
 export const ProfileModalBgImg = styled.div`
-  background-image: url(${CharacterBgImage});
+  background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_pop.png);
   background-size: cover;
   width: 372px;
   height: 280px;

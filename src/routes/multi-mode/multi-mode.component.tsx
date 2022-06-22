@@ -12,6 +12,7 @@ import { selectNickname, selectCharacterImgCode } from '../../store/modules/main
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import {
+  Container,
   TimerContainer,
   ChracterPosition,
   ButtonContainer,
@@ -78,7 +79,7 @@ export default function MultiMode(): JSX.Element {
   ToastHook(toastState, setToastState);
 
   return (
-    <div>
+    <Container>
       {!isConnected && <Outlet />}
       <TimerContainer>
         <PomodoroTimer />
@@ -109,6 +110,6 @@ export default function MultiMode(): JSX.Element {
       {/* <StateBarContainer>
         <StateBar>집중하는 중...</StateBar>
       </StateBarContainer> */}
-    </div>
+    </Container>
   );
 }
