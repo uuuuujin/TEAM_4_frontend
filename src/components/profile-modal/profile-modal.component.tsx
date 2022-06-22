@@ -8,13 +8,10 @@ import {
   ProfileModalNameContainer,
   ProfileModalName,
   ProfileModalEmail,
-  ProfileModalTitle,
   ProfileModalCharacterImg,
   ProfileModalNameEdit,
 } from './profile-modal.style';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
-import EditActiveIcon from '../../assets/images/edit_active_icon.png';
-import EditDisabledIcon from '../../assets/images/edit_disabled_icon.png';
 
 interface ModalProp {
   isOpen: boolean;
@@ -24,7 +21,6 @@ interface ModalProp {
 }
 
 export default function ProfileModal({ isOpen, onClose, nickname, characterImgSrc }: ModalProp): JSX.Element {
-  // const [isOpen, setIsOpen] = useState(true);
   const [user] = useState(false);
 
   return (

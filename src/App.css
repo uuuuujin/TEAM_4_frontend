@@ -23,8 +23,6 @@ body {
 }
 
 @font-face {
-  font-family: "NotoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../src/assets/fonts/NotoSansKR-Bold.otf") format('truetype')
+  font-family: "IBMPlexMono";
+  src: url("../src/assets/fonts/IBMPlexMono-Thin.ttf") format('truetype')
 }

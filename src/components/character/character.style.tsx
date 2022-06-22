@@ -12,11 +12,12 @@ export const TriangleIcon = styled.img`
 `;
 
 export const Nickname = styled.p`
-  font-family: 'NotoSans-Bold';
+  font-family: 'IBMPlexMono';
   margin: 0;
   -webkit-text-stroke: 1px #151313;
   color: #fff;
   font-size: 20px;
+  font-weight: 700;
 `;
 
 export const CharacterWrap = styled.div`

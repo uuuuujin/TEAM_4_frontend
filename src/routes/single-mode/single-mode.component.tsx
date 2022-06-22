@@ -46,7 +46,7 @@ export default function SingleMode(): JSX.Element {
       </div>
 
       <StateBarContainer>
-        <StateBar>내 새끼 밥주는 중...!</StateBar>
+        <StateBar>내 새끼 밥주는 중...</StateBar>
       </StateBarContainer>
     </Container>
   );
