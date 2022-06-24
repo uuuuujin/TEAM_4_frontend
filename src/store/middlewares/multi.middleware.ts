@@ -57,7 +57,29 @@ export const multiMiddleware: Middleware = (store) => {
       });
 
       socket.on('start', () => {
-        dispatch(timerAction.updateTimerTypes(PomodoroTimerTypes.short_pomo));
+        dispatch(
+          timerAction.updateTimerTypes({
+            pomo: PomodoroTimerTypes.short_pomo,
+            cycle: 1,
+          })
+        );
+      });
+
+      socket.on('change', (arg) => {
+        const { mode, cycle } = arg;
+        let pomo: PomodoroTimerTypes;
+
+        if (mode === 'break') {
+          pomo = PomodoroTimerTypes.short_break;
+        } else {
+          pomo = PomodoroTimerTypes.short_pomo;
+        }
+        dispatch(
+          timerAction.updateTimerTypes({
+            pomo,
+            cycle,
+          })
+        );
       });
 
       socket.on('disconnect', () => {
@@ -66,8 +88,15 @@ export const multiMiddleware: Middleware = (store) => {
     }
 
     if (timerAction.startMultiTimer.match(action)) {
-      console.log('b');
       socket.emit('start');
+    }
+
+    if (timerAction.changeMultiTimer.match(action)) {
+      const timerStore = store.getState().timer;
+      socket.emit('change', {
+        mode: timerStore.pomoTimerType,
+        cycle: timerStore.cycle,
+      });
     }
 
     return next(action);

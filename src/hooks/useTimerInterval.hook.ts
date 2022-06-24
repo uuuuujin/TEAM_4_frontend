@@ -3,16 +3,15 @@ import { useRef, useEffect } from 'react';
 import { PomodoroTimerTypes } from '../store/modules/timer/timer.type';
 
 interface UseTimerIntervalCallback {
-  (limit: number): boolean;
+  (): boolean;
 }
 
 export const getPomoLimitCount = (type: PomodoroTimerTypes) =>
   ({
-    [PomodoroTimerTypes.stop]: 0,
     [PomodoroTimerTypes.long_pomo]: 3000,
-    [PomodoroTimerTypes.short_pomo]: 1500,
+    [PomodoroTimerTypes.short_pomo]: 5,
     [PomodoroTimerTypes.long_break]: 600,
-    [PomodoroTimerTypes.short_break]: 300,
+    [PomodoroTimerTypes.short_break]: 3,
   }[type]);
 
 export default function useTimerInterval(callback: UseTimerIntervalCallback, type: PomodoroTimerTypes) {
@@ -24,8 +23,8 @@ export default function useTimerInterval(callback: UseTimerIntervalCallback, typ
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const isFullCount = savedCallback.current(getPomoLimitCount(type));
-      if (isFullCount) {
+      const finish = savedCallback.current();
+      if (finish) {
         clearInterval(timer);
       }
     }, 1000);
