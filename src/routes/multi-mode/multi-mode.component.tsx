@@ -29,6 +29,7 @@ import MultiLink from '../../components/multi-link/multi-link.component';
 import ToastHook from '../../hooks/toast.hook';
 import CopyMsg from '../../components/copy-message/copy-message.component';
 import Chat from '../../components/chat/chat.component';
+import { timerAction } from '../../store/modules/timer/timer.slice';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -75,6 +76,11 @@ export default function MultiMode(): JSX.Element {
     }
   }, [dispatch, isEntered]);
 
+  const startButtonHandler = () => {
+    console.log('a');
+    dispatch(timerAction.startMultiTimer());
+  };
+
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
 
@@ -92,7 +98,7 @@ export default function MultiMode(): JSX.Element {
         );
       })}
       <ButtonContainer>
-        <Button>시작하기</Button>
+        <Button onClick={startButtonHandler}>시작하기</Button>
       </ButtonContainer>
 
       <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>

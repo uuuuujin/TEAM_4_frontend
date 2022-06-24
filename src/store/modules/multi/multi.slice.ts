@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Member, ChatMessage, PomodoroTimerTypes } from './multi.type';
+import { Member, ChatMessage } from './multi.type';
 
 export interface MultiState {
   isEntered: boolean;
@@ -10,7 +10,6 @@ export interface MultiState {
   roomId: string;
   members: Member[];
   messages: ChatMessage[];
-  pomoTimerType: PomodoroTimerTypes;
 }
 
 const initialState: MultiState = {
@@ -21,7 +20,6 @@ const initialState: MultiState = {
   roomId: '',
   members: [],
   messages: [],
-  pomoTimerType: PomodoroTimerTypes.stop,
 };
 
 export const createRoomAsync = createAsyncThunk('multi/createRoom', async (nickName: string) => {
