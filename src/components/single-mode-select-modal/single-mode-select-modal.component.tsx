@@ -15,12 +15,20 @@ import SingleHardImg from '../../assets/images/single_hard.png';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { selectIsSingleModeSelectModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { timerAction } from '../../store/modules/timer/timer.slice';
+import { PomodoroTimerTypes } from '../../store/modules/timer/timer.type';
 
 export default function SingleModeSelectModal(): JSX.Element {
   const dispatch = useAppDispatch();
   const isSingleModeSelectModalOpen = useAppSelector(selectIsSingleModeSelectModalOpen);
 
-  const handleModal = () => {
+  const handleEasyModal = () => {
+    dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.short_pomo));
+    dispatch(modalAction.radioSingleModeSelectModal());
+  };
+
+  const handleHardModal = () => {
+    dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.long_pomo));
     dispatch(modalAction.radioSingleModeSelectModal());
   };
 
@@ -41,15 +49,19 @@ export default function SingleModeSelectModal(): JSX.Element {
             <ModeSelectImage
               alt="일반뽀모"
               src={`${process.env.REACT_APP_IMG_URL}/modal/single_normal.png`}
-              onClick={handleModal}
+              onClick={handleEasyModal}
             />
           </ModeSelectImageWrap>
           <ModeSelectImageWrap to="/single">
             <ModeSelectImage
               alt="열정뽀모"
               src={`${process.env.REACT_APP_IMG_URL}/modal/single_hard.png`}
-              onClick={handleModal}
+              onClick={handleHardModal}
             />
+            <ModeSelectImage alt="일반뽀모" src={SingleNormalImg} onClick={handleEasyModal} />
+          </ModeSelectImageWrap>
+          <ModeSelectImageWrap to="/single">
+            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} onClick={handleHardModal} />
           </ModeSelectImageWrap>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>
