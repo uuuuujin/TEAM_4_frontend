@@ -11,7 +11,7 @@ export interface TimerState {
 
 const initialState: TimerState = {
   pomoTimerType: PomodoroTimerTypes.short_pomo,
-  cycle: 0,
+  cycle: 1,
   start: false,
   finish: false,
   mode: 'single',

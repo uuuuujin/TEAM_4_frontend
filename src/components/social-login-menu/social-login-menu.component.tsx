@@ -20,9 +20,17 @@ export default function SocialLoginMenu({ isMyPomo }: SocialLoginMenuProp): JSX.
     <SocialLoginMenuContainer>
       {isMyPomo ? (
         <>
-          <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_naver_mypomo.png`} alt="네이버로 로그인" />
-          <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_kakao_mypomo.png`} alt="카카오로 로그인" />
-          <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_google_mypomo.png`} alt="구글로 로그인" />
+          <a href={`${process.env.REACT_APP_API_URL}/oauth/naver`}>
+            <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_naver_mypomo.png`} alt="네이버로 로그인" />
+          </a>
+
+          <a href={`${process.env.REACT_APP_API_URL}/oauth/kakao`}>
+            <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_kakao_mypomo.png`} alt="카카오로 로그인" />
+          </a>
+
+          <a href={`${process.env.REACT_APP_API_URL}/oauth/google`}>
+            <LoginButton src={`${process.env.REACT_APP_IMG_URL}/login/login_google_mypomo.png`} alt="구글로 로그인" />
+          </a>
         </>
       ) : (
         <>
@@ -31,16 +39,21 @@ export default function SocialLoginMenu({ isMyPomo }: SocialLoginMenuProp): JSX.
             src={`${process.env.REACT_APP_IMG_URL}/login/login_naver_mypage.png`}
             alt="네이버로 로그인"
           />
-          <LoginButton
-            className="mypage"
-            src={`${process.env.REACT_APP_IMG_URL}/login/login_kakao_mypage.png`}
-            alt="카카오로 로그인"
-          />
-          <LoginButton
-            className="mypage"
-            src={`${process.env.REACT_APP_IMG_URL}/login/login_google_mypage.png`}
-            alt="구글로 로그인"
-          />
+          <a href={`${process.env.REACT_APP_API_URL}/oauth/kakao`}>
+            <LoginButton
+              className="mypage"
+              src={`${process.env.REACT_APP_IMG_URL}/login/login_kakao_mypage.png`}
+              alt="카카오로 로그인"
+            />
+          </a>
+
+          <a href={`${process.env.REACT_APP_API_URL}/oauth/google`}>
+            <LoginButton
+              className="mypage"
+              src={`${process.env.REACT_APP_IMG_URL}/login/login_google_mypage.png`}
+              alt="구글로 로그인"
+            />
+          </a>
         </>
       )}
     </SocialLoginMenuContainer>
