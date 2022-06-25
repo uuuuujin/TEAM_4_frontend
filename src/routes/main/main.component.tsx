@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
@@ -56,7 +56,8 @@ export default function Main(): JSX.Element {
   const [characterMoving, setCharacterMoving] = useState(false);
 
   useEffect(() => {
-    setInterval(() => setCharacterMoving((v) => !v), 1000);
+    const timer = setInterval(() => setCharacterMoving((v) => !v), 500);
+    return () => clearInterval(timer);
   }, []);
 
   return (

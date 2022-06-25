@@ -58,10 +58,6 @@ export default function SingleModeSelectModal(): JSX.Element {
               src={`${process.env.REACT_APP_IMG_URL}/modal/single_hard.png`}
               onClick={handleHardModal}
             />
-            <ModeSelectImage alt="일반뽀모" src={SingleNormalImg} onClick={handleEasyModal} />
-          </ModeSelectImageWrap>
-          <ModeSelectImageWrap to="/single">
-            <ModeSelectImage alt="열정뽀모" src={SingleHardImg} onClick={handleHardModal} />
           </ModeSelectImageWrap>
         </SingleModeSelectModalButtonContainer>
       </SingleModeSelectModalContainer>

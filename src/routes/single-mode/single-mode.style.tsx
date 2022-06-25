@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ pomoState: string }>`
   height: 100vh;
   background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_tree_day.png),
     url(${process.env.REACT_APP_IMG_URL}/background/background_land_day.png),
