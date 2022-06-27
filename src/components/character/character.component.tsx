@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 
 import ProfileModal from '../profile-modal/profile-modal.component';
 import {
@@ -12,19 +13,23 @@ import {
   CharacterImg,
 } from './character.style';
 import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
+import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
+import { selectTriangleImgCode } from '../../store/modules/main/main.select';
 
 interface CharacterType {
   nickname: string;
   characterImgSrc: string;
-  triangleImgSrc?: string;
+  // triangleImgSrc?: string;
 }
 
 export default function Character({
   nickname,
   characterImgSrc,
-  triangleImgSrc = InvertedTriangle,
-}: CharacterType): JSX.Element {
+}: // triangleImgSrc = InvertedTriangle,
+CharacterType): JSX.Element {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const pomoTimerType = useAppSelector(selectPomodoroTimerType);
+  const triangleImgCode = useAppSelector(selectTriangleImgCode);
 
   const handlerModal = () => {
     setModalOpen(true);
@@ -32,11 +37,21 @@ export default function Character({
 
   return (
     <CharacterContainer>
-      <TriangleIcon src={triangleImgSrc} alt="역삼각형 아이콘" />
+      <TriangleIcon
+        src={`${process.env.REACT_APP_IMG_URL}/icons/arrow/0${triangleImgCode}.png`}
+        alt="역삼각형 아이콘"
+      />
       <Nickname>{nickname}</Nickname>
       <CharacterWrap>
         <ShelfImgWrap>
-          <ShelfImg src={`${process.env.REACT_APP_IMG_URL}/character/shelf_day.png`} alt="캐릭터 받침대" />
+          <ShelfImg
+            src={
+              pomoTimerType === 'break' || pomoTimerType === 'long_break'
+                ? `${process.env.REACT_APP_IMG_URL}/character/shelf_night.png`
+                : `${process.env.REACT_APP_IMG_URL}/character/shelf_day.png`
+            }
+            alt="캐릭터 받침대"
+          />
         </ShelfImgWrap>
         <CharacterImgWrap onClick={handlerModal}>
           <CharacterImg src={characterImgSrc} alt="캐릭터 이미지" />

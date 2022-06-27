@@ -2,9 +2,19 @@ import styled from 'styled-components';
 
 export const Container = styled.div<{ pomoState: string }>`
   height: 100vh;
-  background-image: url(${process.env.REACT_APP_IMG_URL}/background/background_tree_day.png),
+  background-image: ${({ pomoState }) =>
+    pomoState === 'break' || pomoState === 'long_break'
+      ? `
+      url(${process.env.REACT_APP_IMG_URL}/background/background_tree_night.png),
+      url(${process.env.REACT_APP_IMG_URL}/background/background_land_night.png),
+      url(${process.env.REACT_APP_IMG_URL}/background/background_sky_night.png)
+    `
+      : `
+    url(${process.env.REACT_APP_IMG_URL}/background/background_tree_day.png),
     url(${process.env.REACT_APP_IMG_URL}/background/background_land_day.png),
     url(${process.env.REACT_APP_IMG_URL}/background/background_sky_day.png);
+    `};
+
   background-size: cover, cover, cover;
   background-position: bottom, bottom, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
