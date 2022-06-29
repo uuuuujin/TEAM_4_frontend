@@ -11,3 +11,5 @@ export const selectTimerStart = createSelector([selectTimerReducer], (timer) => 
 export const selectTimerCycle = createSelector([selectTimerReducer], (timer) => timer.cycle);
 
 export const selectTimerMode = createSelector([selectTimerReducer], (timer) => timer.mode);
+
+export const selectTimerFinish = createSelector([selectTimerReducer], (timer) => timer.finish);
