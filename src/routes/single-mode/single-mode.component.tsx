@@ -1,29 +1,42 @@
 import React, { useState, useEffect, useMemo } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
+import { selectPomodoroTimerType, selectTimerCycle } from '../../store/modules/timer/timer.select';
+import useRandomCharacter from '../../hooks/useRandomCharacter';
+
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import Character from '../../components/character/character.component';
 import StateBar from '../../components/state-bar/state-bar.component';
-import { Container, StateBarContainer, CharacterContainer, TimerContainer } from './single-mode.style';
-import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { selectNickname, selectCharacterImgCode, selectTriangleImgCode } from '../../store/modules/main/main.select';
-import { selectPomodoroTimerType, selectTimerCycle } from '../../store/modules/timer/timer.select';
-
-import useRandomCharacter from '../../hooks/useRandomCharacter';
-
 import CheckPomoCycle from '../../components/pomo-counting/pomo-counting.component';
+import ResultModal from '../../components/result-modal/result.component';
+import { Container, StateBarContainer, CharacterContainer, TimerContainer } from './single-mode.style';
 
 export default function SingleMode(): JSX.Element {
+  const dispatch = useAppDispatch();
   useRandomCharacter();
 
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
+  const pomoCycle = useAppSelector(selectTimerCycle);
 
   const [characterMoving, setCharacterMoving] = useState(false);
 
+  const arr = ['a', 'b'];
+
   useEffect(() => {
-    const timer = setInterval(() => setCharacterMoving((v) => !v), 500);
-    return () => clearInterval(timer);
+    const characterMovingTimer = setInterval(() => setCharacterMoving((v) => !v), 500);
+
+    return () => clearInterval(characterMovingTimer);
   }, []);
+
+  useEffect(() => {
+    if (pomoCycle === 4) {
+      dispatch(modalAction.radioResultModal());
+    }
+  }, [pomoCycle, dispatch]);
 
   const stateMessage = () => {
     if (pomoTimerType === 'break') {
@@ -60,6 +73,8 @@ export default function SingleMode(): JSX.Element {
       <StateBarContainer>
         <StateBar>{stateMessage()}</StateBar>
       </StateBarContainer>
+
+      <ResultModal characterImage={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${imgCodeAll}_01.png`} />
     </Container>
   );
 }

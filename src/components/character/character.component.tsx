@@ -12,21 +12,15 @@ import {
   CharacterImgWrap,
   CharacterImg,
 } from './character.style';
-import InvertedTriangle from '../../assets/icons/caret-down-solid.svg';
 import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
 import { selectTriangleImgCode } from '../../store/modules/main/main.select';
 
 interface CharacterType {
   nickname: string;
   characterImgSrc: string;
-  // triangleImgSrc?: string;
 }
 
-export default function Character({
-  nickname,
-  characterImgSrc,
-}: // triangleImgSrc = InvertedTriangle,
-CharacterType): JSX.Element {
+export default function Character({ nickname, characterImgSrc }: CharacterType): JSX.Element {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
   const triangleImgCode = useAppSelector(selectTriangleImgCode);

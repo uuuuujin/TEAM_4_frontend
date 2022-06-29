@@ -33,6 +33,9 @@ export const modalSlice = createSlice({
     radioGuideModal: (state) => {
       state.isGuideModalOpen = !state.isGuideModalOpen;
     },
+    radioResultModal: (state) => {
+      state.isResultModalOpen = !state.isResultModalOpen;
+    },
   },
 });
 
