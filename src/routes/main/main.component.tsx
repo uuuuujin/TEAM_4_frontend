@@ -13,12 +13,7 @@ import MultiModeButtonActiveImg from '../../assets/images/multi_mode_button_acti
 
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import {
-  selectGetRandomChracter,
-  selectNickname,
-  selectCharacterImgCode,
-  selectTriangleImgCode,
-} from '../../store/modules/main/main.select';
+import { selectGetRandomChracter, selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
 import {
@@ -41,7 +36,6 @@ export default function Main(): JSX.Element {
 
   const nickName = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
-  const triangleImgCode = useAppSelector(selectTriangleImgCode);
 
   useRandomCharacter();
 
@@ -69,7 +63,7 @@ export default function Main(): JSX.Element {
         <PomodoroTimer />
       </TimerContainer>
       <CharacterContainer>
-        {getRandomCompleted ? (
+        {getRandomCompleted && (
           <Character
             nickname={nickName}
             characterImgSrc={
@@ -77,13 +71,6 @@ export default function Main(): JSX.Element {
                 ? `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`
                 : `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_02.png`
             }
-            triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/0${triangleImgCode}.png`}
-          />
-        ) : (
-          <Character
-            nickname="포동포동 아기고양이"
-            characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/01_01.png`}
-            triangleImgSrc={`${process.env.REACT_APP_IMG_URL}/icons/arrow/01.png`}
           />
         )}
       </CharacterContainer>
