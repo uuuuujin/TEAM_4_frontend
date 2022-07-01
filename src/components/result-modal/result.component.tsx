@@ -34,23 +34,21 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
   const isTimerMode = useAppSelector(selectTimerMode);
 
   const downloadImage = (imageUrl: string) => {
-    console.log('링크: ', imageUrl);
     fetch(imageUrl, {
       method: 'GET',
-      headers: {},
     })
       .then((response) => {
         response.arrayBuffer().then((buffer) => {
           const url = window.URL.createObjectURL(new Blob([buffer]));
           const link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', 'image.png');
+          link.setAttribute('download', 'podongpodong_character.png');
           document.body.appendChild(link);
           link.click();
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.log('이미지 다운로드 실패', err);
       });
   };
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
-import { selectPomodoroTimerType, selectTimerCycle } from '../../store/modules/timer/timer.select';
+import { selectPomodoroTimerType, selectTimerCycle, selectTimerFinish } from '../../store/modules/timer/timer.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
 
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
@@ -21,10 +21,9 @@ export default function SingleMode(): JSX.Element {
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
   const pomoCycle = useAppSelector(selectTimerCycle);
+  const isFinished = useAppSelector(selectTimerFinish);
 
   const [characterMoving, setCharacterMoving] = useState(false);
-
-  const arr = ['a', 'b'];
 
   useEffect(() => {
     const characterMovingTimer = setInterval(() => setCharacterMoving((v) => !v), 500);
@@ -33,10 +32,10 @@ export default function SingleMode(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (pomoCycle === 4) {
+    if (pomoCycle === 4 && isFinished === true) {
       dispatch(modalAction.radioResultModal());
     }
-  }, [pomoCycle, dispatch]);
+  }, [pomoCycle, isFinished, dispatch]);
 
   const stateMessage = () => {
     if (pomoTimerType === 'break') {
