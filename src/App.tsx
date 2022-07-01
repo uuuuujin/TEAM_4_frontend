@@ -5,6 +5,7 @@ import SingleMode from './routes/single-mode/single-mode.component';
 import MultiMode from './routes/multi-mode/multi-mode.component';
 import Navigation from './components/navigation/navigation.component';
 import LoadingScreen from './components/loading-screen/loading-screen.component';
+import KakaoLogin from './routes/login/kakao/kakaoLogin.component';
 import './App.css';
 
 export default function App(): JSX.Element {
@@ -16,6 +17,7 @@ export default function App(): JSX.Element {
         <Route path="/multi" element={<MultiMode />}>
           <Route path=":roomIdParam" element={<LoadingScreen />} />
         </Route>
+        <Route path="/oauth" element={<KakaoLogin />} />
       </Route>
     </Routes>
   );

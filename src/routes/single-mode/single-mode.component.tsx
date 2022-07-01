@@ -25,8 +25,6 @@ export default function SingleMode(): JSX.Element {
 
   const [characterMoving, setCharacterMoving] = useState(false);
 
-  const arr = ['a', 'b'];
-
   useEffect(() => {
     const characterMovingTimer = setInterval(() => setCharacterMoving((v) => !v), 500);
 

@@ -9,4 +9,15 @@ export const StateBarContainer = styled.span`
   font-family: 'IBMPlexMono';
   font-weight: 600;
   font-size: 20px;
+
+  animation: fadein 1s;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
