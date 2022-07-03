@@ -7,7 +7,7 @@ import LogoutActiveImg from '../../assets/images/logout_active_button.png';
 export const MypageDropdownContainer = styled.div`
   position: absolute;
   width: 300px;
-  height: 319px;
+  min-height: 224px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -19,11 +19,6 @@ export const MypageDropdownContainer = styled.div`
   right: 40px;
   z-index: 5;
   align-items: center;
-
-  &.socialLogin {
-    height: 224px;
-    padding: 0 20px;
-  }
 `;
 
 export const MypageProfileImg = styled.div`

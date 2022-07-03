@@ -44,7 +44,6 @@ export const ProfileModalNameContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 0 0 0.7em 0;
   align-items: center;
   border-bottom: 1px solid #aeacac;
 `;
@@ -56,14 +55,26 @@ export const ProfileModalName = styled.div`
   font-weight: 400;
 `;
 
-export const ProfileModalNameEdit = styled.img`
+export const ProfileModalNameEdit = styled.img<{ isLoggedIn: boolean }>`
   -webkit-user-drag: none;
   width: 40px;
   height: 40px;
+
+  cursor: ${({ isLoggedIn }) => (isLoggedIn ? 'pointer' : 'not-allowed')};
 `;
 
-export const ProfileModalEmail = styled.div`
+export const ProfileModalLogInMessage = styled.div`
   font-size: 0.75em;
   color: #696969;
   font-family: 'IBMPlexMono';
+`;
+
+export const ProfileModalEmail = styled.div`
+  font-family: 'IBMPlexMono';
+  color: #696969;
+  margin: 20px 0 40px 0;
+`;
+
+export const SocialLoginMenuContainer = styled.div`
+  margin: 20px 0 40px 0;
 `;

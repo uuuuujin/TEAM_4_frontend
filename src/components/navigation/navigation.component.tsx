@@ -20,14 +20,9 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 export default function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [currentUser, setCurrentUser] = useState(false);
   const [isMypageOpen, setIsMypageOpen] = useState(false);
 
   const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
-
-  const loginHandler = () => {
-    setCurrentUser(!currentUser);
-  };
 
   const toggleIsMypageOpen = () => {
     setIsMypageOpen(!isMypageOpen);
@@ -45,13 +40,8 @@ export default function Navigation(): JSX.Element {
         </LogoContainer>
         <NavBoxContainer>
           <NavBox>
-            {currentUser ? (
-              <NavImg content="mypage" onClick={toggleIsMypageOpen} />
-            ) : (
-              <NavImg content="mypage" onClick={loginHandler} />
-            )}
+            <NavImg content="mypage" onClick={toggleIsMypageOpen} />
           </NavBox>
-
           <NavBox>
             <NavImg content="info" onClick={handleGuideModalClick} />
           </NavBox>

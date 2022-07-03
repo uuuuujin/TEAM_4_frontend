@@ -6,7 +6,10 @@ export const SocialLoginMenuContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 180px;
-  padding: 20px 0;
+
+  + div {
+    padding-top: 20px;
+  }
 `;
 
 export const LoginButton = styled.img`
