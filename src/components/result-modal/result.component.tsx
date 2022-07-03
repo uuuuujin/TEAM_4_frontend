@@ -34,9 +34,7 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
   const isTimerMode = useAppSelector(selectTimerMode);
 
   const downloadImage = (imageUrl: string) => {
-    fetch(imageUrl, {
-      method: 'GET',
-    })
+    fetch(imageUrl)
       .then((response) => {
         response.arrayBuffer().then((buffer) => {
           const url = window.URL.createObjectURL(new Blob([buffer]));

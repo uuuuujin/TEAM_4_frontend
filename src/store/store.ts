@@ -6,6 +6,7 @@ import multiReducer from './modules/multi/multi.slice';
 import mainReducer from './modules/main/main.slice';
 import modalReducer from './modules/modal/modal.slice';
 import TimerReducer from './modules/timer/timer.slice';
+import UserReducer from './modules/user/user.slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     main: mainReducer,
     modal: modalReducer,
     timer: TimerReducer,
+    user: UserReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logger, multiMiddleware]),
 });

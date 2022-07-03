@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-import Button, { ButtonTypeClasses } from '../button/button.component';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 import {
   MypageDropdownContainer,
@@ -9,18 +7,26 @@ import {
   MypageProfileEmail,
   LogoutButtonContainer,
 } from './mypage-dropdown.style';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
+import { userAction } from '../../store/modules/user/user.slice';
 
 export default function MypageDropdown(): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const handleLogout = () => {
+    dispatch(userAction.logout());
+  };
 
   return (
-    <MypageDropdownContainer className={!isLoggedIn ? 'socialLogin' : ''}>
+    <MypageDropdownContainer>
       {isLoggedIn ? (
         <>
           <MypageProfileImg />
           <MypageProfileName>양성훈</MypageProfileName>
           <MypageProfileEmail>didtjdgns852@gmail.com</MypageProfileEmail>
-          <LogoutButtonContainer />
+          <LogoutButtonContainer onClick={handleLogout} />
         </>
       ) : (
         <SocialLoginMenu isMyPomo={false} />

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import Modal from '../modal/modal.component';
 import {
   ProfileModalContainer,
@@ -7,11 +6,15 @@ import {
   ProfileModalContentContainer,
   ProfileModalNameContainer,
   ProfileModalName,
-  ProfileModalEmail,
+  ProfileModalLogInMessage,
   ProfileModalCharacterImg,
   ProfileModalNameEdit,
+  ProfileModalEmail,
+  SocialLoginMenuContainer,
 } from './profile-modal.style';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 
 interface ModalProp {
   isOpen: boolean;
@@ -21,7 +24,7 @@ interface ModalProp {
 }
 
 export default function ProfileModal({ isOpen, onClose, nickname, characterImgSrc }: ModalProp): JSX.Element {
-  const [user] = useState(false);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <Modal
@@ -31,7 +34,15 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
       contentWidth={440}
       backgroundColor="#D5D1FF"
       titleColor="#025a00"
-      footer={!user ? <SocialLoginMenu isMyPomo /> : '로그아웃 버튼'}
+      footer={
+        isLoggedIn ? (
+          <ProfileModalEmail>abcde@naver.com</ProfileModalEmail>
+        ) : (
+          <SocialLoginMenuContainer>
+            <SocialLoginMenu isMyPomo />
+          </SocialLoginMenuContainer>
+        )
+      }
     >
       <ProfileModalContainer>
         <ProfileModalBgImg>
@@ -42,13 +53,16 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
             <ProfileModalName>{nickname}</ProfileModalName>
             <ProfileModalNameEdit
               src={
-                !user
+                !isLoggedIn
                   ? `${process.env.REACT_APP_IMG_URL}/modal/edit_disabled_icon.png`
                   : `${process.env.REACT_APP_IMG_URL}/modal/edit_active_icon.png`
               }
+              isLoggedIn={isLoggedIn}
             />
           </ProfileModalNameContainer>
-          <ProfileModalEmail>캐릭터 명을 수정하시려면 로그인을 해주세요</ProfileModalEmail>
+          {!isLoggedIn && (
+            <ProfileModalLogInMessage>캐릭터 명을 수정하시려면 로그인을 해주세요</ProfileModalLogInMessage>
+          )}
         </ProfileModalContentContainer>
       </ProfileModalContainer>
     </Modal>
