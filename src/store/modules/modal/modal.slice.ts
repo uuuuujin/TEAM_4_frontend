@@ -24,17 +24,20 @@ export const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    radioMultiModeSelectModal: (state) => {
-      state.isMultiModeSelectModalOpen = !state.isMultiModeSelectModalOpen;
+    radioExplainModal: (state) => {
+      state.isExplainModalOpen = !state.isExplainModalOpen;
     },
     radioSingleModeSelectModal: (state) => {
       state.isSingleModeSelectModalOpen = !state.isSingleModeSelectModalOpen;
     },
-    radioGuideModal: (state) => {
-      state.isGuideModalOpen = !state.isGuideModalOpen;
+    radioMultiModeSelectModal: (state) => {
+      state.isMultiModeSelectModalOpen = !state.isMultiModeSelectModalOpen;
     },
     radioResultModal: (state) => {
       state.isResultModalOpen = !state.isResultModalOpen;
+    },
+    radioGuideModal: (state) => {
+      state.isGuideModalOpen = !state.isGuideModalOpen;
     },
   },
 });

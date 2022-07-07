@@ -4,6 +4,7 @@ import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import MultiModeSelectModal from '../../components/multi-mode-select-modal/multi-mode-select-modal.component';
 import SingleModeSelectModal from '../../components/single-mode-select-modal/single-mode-select-modal.component';
+import ExplainModal from '../../components/explain-modal/explain-modal.component';
 import SingleModeButtonImg from '../../assets/images/single_mode_button.png';
 import SingleModeButtonHoverImg from '../../assets/images/single_mode_button_hover.png';
 import SingleModeButtonActiveImg from '../../assets/images/single_mode_button_active.png';
@@ -45,6 +46,10 @@ export default function Main(): JSX.Element {
 
   const handleSingleModalClick = () => {
     dispatch(modalAction.radioSingleModeSelectModal());
+  };
+
+  const handleExplainModalClick = () => {
+    dispatch(modalAction.radioExplainModal());
   };
 
   const [characterMoving, setCharacterMoving] = useState(false);
@@ -92,11 +97,12 @@ export default function Main(): JSX.Element {
           <ModeSelectButtonText>멀티모드</ModeSelectButtonText>
         </ModeSelectButton>
       </ModeSelectButtonContainer>
-      <PomoGuideButtonContainer>
+      <PomoGuideButtonContainer onClick={handleExplainModalClick}>
         <PomoGuideButtonText>뽀모도로란?</PomoGuideButtonText>
       </PomoGuideButtonContainer>
       <SingleModeSelectModal />
       <MultiModeSelectModal />
+      <ExplainModal />
     </Container>
   );
 }

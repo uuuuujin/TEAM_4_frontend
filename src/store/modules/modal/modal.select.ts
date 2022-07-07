@@ -17,3 +17,5 @@ export const selectIsSingleModeSelectModalOpen = createSelector(
 export const selectIsGuideModalOpen = createSelector([selectModalReducer], (modal) => modal.isGuideModalOpen);
 
 export const selectIsResultModalOpen = createSelector([selectModalReducer], (modal) => modal.isResultModalOpen);
+
+export const selectIsExplainModalOpen = createSelector([selectModalReducer], (modal) => modal.isExplainModalOpen);

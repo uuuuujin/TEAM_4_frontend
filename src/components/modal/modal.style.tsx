@@ -44,8 +44,7 @@ export const ModalTitle = styled.div<{ titleColor: string }>`
 `;
 
 export const ModalBody = styled.div`
-  margin-top: 
-  padding: 10px;
+  // padding: 10px;
 `;
 
 export const CloseButton = styled.div<{ normalImg: string; hoverImg: string }>`
