@@ -33,6 +33,10 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
   const isResultModalOpen = useAppSelector(selectIsResultModalOpen);
   const isTimerMode = useAppSelector(selectTimerMode);
 
+  const closeModal = () => {
+    dispatch(modalAction.radioResultModal());
+  };
+
   const downloadImage = (imageUrl: string) => {
     fetch(imageUrl)
       .then((response) => {
@@ -53,9 +57,7 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
   return (
     <Modal
       isOpen={isResultModalOpen}
-      onClose={() => {
-        dispatch(modalAction.radioResultModal());
-      }}
+      onClose={closeModal}
       contentWidth={440}
       title="뽀모합체!"
       backgroundColor="#E0FFD1"

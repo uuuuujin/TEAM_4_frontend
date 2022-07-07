@@ -1,58 +1,128 @@
 import React, { useState } from 'react';
+import Lottie from 'lottie-react';
 import Modal from '../modal/modal.component';
-import Button from '../button/button.component';
-import { ImgContainer, ButtonContainer, DescriptionImg } from './explain-modal.style';
+import {
+  ButtonContainer,
+  DescriptionImgContainer,
+  DescriptionImg,
+  LottieImage,
+  DescriptionContainer,
+  PageMoveButton,
+} from './explain-modal.style';
+import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
+import { selectIsExplainModalOpen } from '../../store/modules/modal/modal.select';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+
+import PrevButtonImg from '../../assets/images/previous_button.png';
+import PrevButtonActiveImg from '../../assets/images/previous_button_active.png';
+import NextButtonImg from '../../assets/images/next_button.png';
+import NextButtonActiveImg from '../../assets/images/next_button_active.png';
+import explainAnimation from '../../assets/images/explain_animation.json';
 
 interface ContentType {
-  title: string;
   imgSrc: string;
-  description: string;
+  description: JSX.Element;
 }
 
-interface ModalProp {
-  isOpen: boolean;
-}
+export default function ExplainModal(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-export default function ExplainModal({ isOpen }: ModalProp): JSX.Element {
-  const content: ContentType[] = [
-    {
-      title: '뽀모도로',
-      imgSrc: '',
-      description:
-        '뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명 뽀모도로 설명',
-    },
-    {
-      title: '싱글모드',
-      imgSrc: '',
-      description:
-        '싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명 싱글모드 설명',
-    },
-    {
-      title: '멀티모드',
-      imgSrc: '',
-      description:
-        '멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명 멀티모드 설명',
-    },
-  ];
-
+  const isExplainModalOpen = useAppSelector(selectIsExplainModalOpen);
   const [page, setPage] = useState<number>(0);
   const nextPage = () => setPage((num) => num + 1);
   const previousPage = () => setPage((num) => num - 1);
+  const closeModal = () => {
+    dispatch(modalAction.radioExplainModal());
+    setPage(0);
+  };
+
+  const content: ContentType[] = [
+    {
+      imgSrc: `${process.env.REACT_APP_IMG_URL}/modal/explain_pomodoro.png`,
+      description: (
+        <DescriptionContainer>
+          <p>뽀모도로는 집중력 향상을 바라는 여러분을 위해,</p>
+          <p>1980년대 후반 프란체스코 시릴로가 제안한 시간 관리 방법론이동!</p>
+          <p>
+            <span>25분 동안 무언가에 집중하고 5분 동안 쉬는 것을 4번 반복</span>
+            하고,
+          </p>
+          <p>그 뒤에 30분간 쉬도록 시간을 배분한동!</p>
+          <p>
+            이 때, <span>[ 25분 집중하는 것 ]을 가리켜 &apos;1뽀모&apos;</span> 라고 한동!
+          </p>
+        </DescriptionContainer>
+      ),
+    },
+    {
+      imgSrc: '',
+      description: (
+        <DescriptionContainer>
+          <p>우리 뽀모도로는 이렇게 할 수 있동!</p>
+          <p>
+            <span>1. 싱글모드 혹은 멀티모드를 선택</span>
+          </p>
+          <p>
+            <span>2. 25분간 할 일에 집중</span>
+          </p>
+          <p>
+            <span>3. 5분간 휴식</span>
+          </p>
+          <p>
+            <span>4. 집중과 휴식을 4회 반복</span>
+          </p>
+        </DescriptionContainer>
+      ),
+    },
+    {
+      imgSrc: `${process.env.REACT_APP_IMG_URL}/modal/explain_character.png`,
+      description: (
+        <DescriptionContainer>
+          <p>뽀모를 마치면 나만의 캐릭터를 얻을 수 있동!</p>
+          <p>친구들과 함께해서 더 다양한 뽀모를 얻어보동!</p>
+          <p className="fightingMsg">
+            <span>그럼 모두들 화이팅이동!</span>
+          </p>
+        </DescriptionContainer>
+      ),
+    },
+  ];
 
   return (
-    <Modal isOpen={isOpen} onClose={() => {}} title={content[page].title} contentWidth={500}>
+    <Modal
+      isOpen={isExplainModalOpen}
+      onClose={closeModal}
+      title="뽀모도로란?"
+      contentWidth={580}
+      backgroundColor="#D9FDFF"
+    >
       <div>
-        <ImgContainer>
-          <DescriptionImg src={content[page].imgSrc} alt={`${content[page].title}설명 이미지가 들어가는 자리`} />
-        </ImgContainer>
-        <p>{content[page].description}</p>
+        <DescriptionImgContainer>
+          {page !== 1 ? (
+            <DescriptionImg bgImage={content[page].imgSrc} />
+          ) : (
+            <LottieImage animationData={explainAnimation} loop />
+          )}
+        </DescriptionImgContainer>
+        {content[page].description}
         <ButtonContainer>
-          <Button disabled={page === 0} onClick={previousPage}>
+          <PageMoveButton
+            normalImg={PrevButtonImg}
+            activeImg={PrevButtonActiveImg}
+            buttonType="prev"
+            clickDisabled={page === 0}
+            onClick={previousPage}
+          >
             이전
-          </Button>
-          <Button disabled={page === 2} onClick={nextPage}>
+          </PageMoveButton>
+          <PageMoveButton
+            normalImg={NextButtonImg}
+            activeImg={NextButtonActiveImg}
+            clickDisabled={page === 2}
+            onClick={nextPage}
+          >
             다음
-          </Button>
+          </PageMoveButton>
         </ButtonContainer>
       </div>
     </Modal>
