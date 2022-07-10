@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-
 import {
   NavigationContainer,
   LogoContainer,
@@ -10,12 +9,15 @@ import {
   NavImg,
   GuideScreenContainer,
   GuideScreen,
+  ExitModalContainer,
 } from './navigation.style';
 import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
+import ExitModal from '../exit-modal/exit-modal.component';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { selectIsGuideModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { selectIsGuideModalOpen } from '../../store/modules/modal/modal.select';
+import { selectTimerStart } from '../../store/modules/timer/timer.select';
 
 export default function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,6 +25,7 @@ export default function Navigation(): JSX.Element {
   const [isMypageOpen, setIsMypageOpen] = useState(false);
 
   const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
+  const isTimerStarted = useAppSelector(selectTimerStart);
 
   const toggleIsMypageOpen = () => {
     setIsMypageOpen(!isMypageOpen);
@@ -32,11 +35,18 @@ export default function Navigation(): JSX.Element {
     dispatch(modalAction.radioGuideModal());
   };
 
+  const handleExitModalClick = () => {
+    if (isTimerStarted) dispatch(modalAction.radioExitModal());
+  };
+
   return (
     <>
       <NavigationContainer>
-        <LogoContainer to="/">
-          <LogoImg src={`${process.env.REACT_APP_IMG_URL}/logo.png`} alt="로고이미지" />
+        <LogoContainer>
+          <LogoImg src={`${process.env.REACT_APP_IMG_URL}/logo.png`} alt="로고이미지" onClick={handleExitModalClick} />
+          <ExitModalContainer>
+            <ExitModal />
+          </ExitModalContainer>
         </LogoContainer>
         <NavBoxContainer>
           <NavBox>
@@ -48,11 +58,9 @@ export default function Navigation(): JSX.Element {
         </NavBoxContainer>
 
         {isMypageOpen && <MypageDropdown />}
-        {isGuideModalOpen && (
-          <GuideScreenContainer>
-            <GuideScreen onClick={handleGuideModalClick} />
-          </GuideScreenContainer>
-        )}
+        <GuideScreenContainer className={isGuideModalOpen ? 'show' : ''}>
+          <GuideScreen onClick={handleGuideModalClick} />
+        </GuideScreenContainer>
       </NavigationContainer>
       <div>
         <Outlet />

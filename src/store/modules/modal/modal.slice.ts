@@ -8,6 +8,7 @@ export interface ModalState {
   isResultModalOpen: boolean;
   isSocialLoginModalOpen: boolean;
   isGuideModalOpen: boolean;
+  isExitModalOpen: boolean;
 }
 
 const initialState: ModalState = {
@@ -18,6 +19,7 @@ const initialState: ModalState = {
   isResultModalOpen: false,
   isSocialLoginModalOpen: false,
   isGuideModalOpen: false,
+  isExitModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -38,6 +40,9 @@ export const modalSlice = createSlice({
     },
     radioGuideModal: (state) => {
       state.isGuideModalOpen = !state.isGuideModalOpen;
+    },
+    radioExitModal: (state) => {
+      state.isExitModalOpen = !state.isExitModalOpen;
     },
   },
 });

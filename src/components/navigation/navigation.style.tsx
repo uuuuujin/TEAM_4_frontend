@@ -17,17 +17,19 @@ export const NavigationContainer = styled.div`
   top: 0;
 `;
 
-export const LogoContainer = styled(Link)`
+export const LogoContainer = styled.div`
   height: 100%;
   width: 10vw;
   display: flex;
   align-items: center;
   margin: 1vw 0 0 2vw;
+  position: relatvie;
 `;
 
 export const LogoImg = styled.img`
   width: 100%;
   -webkit-user-drag: none;
+  cursor: pointer;
 `;
 
 export const NavBoxContainer = styled.div`
@@ -79,20 +81,35 @@ export const GuideScreenContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
+  opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
   z-index: 5;
-  pointer-events: visible;
+
+  &.show {
+    opacity: 1;
+    pointer-events: visible;
+  }
 `;
 
-export const GuideScreen = styled.div`
-  background-image: url(${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+// export const GuideScreen = styled.div`
+//   background-image: url(${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png);
+//   background-size: cover;
+//   background-repeat: no-repeat;
 
-  position: relative;
+//   position: relative;
+//   cursor: pointer;
+//   width: 92vw;
+//   height: 85vh;
+// `;
+
+export const GuideScreen = styled.img`
   cursor: pointer;
   width: 92vw;
-  height: 85vh;
+`;
+
+export const ExitModalContainer = styled.div`
+  position: absolute;
+  top: 110px;
+  left: 40px;
 `;

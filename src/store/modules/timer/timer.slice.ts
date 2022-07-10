@@ -40,6 +40,11 @@ export const timerSlice = createSlice({
       state.finish = true;
       state.start = false;
     },
+    resetTimer: (state) => {
+      state.start = false;
+      state.finish = true;
+      state.cycle = 1;
+    },
   },
 });
 
