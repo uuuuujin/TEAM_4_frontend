@@ -9,9 +9,6 @@ import {
   ModeSelectImage,
 } from './single-mode-select-modal.style';
 
-import SingleNormalImg from '../../assets/images/single_normal.png';
-import SingleHardImg from '../../assets/images/single_hard.png';
-
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { selectIsSingleModeSelectModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { timerAction } from '../../store/modules/timer/timer.slice';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import { selectPomodoroTimerType, selectTimerCycle, selectTimerFinish } from '../../store/modules/timer/timer.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
+import { PomodoroTimerTypes } from '../../store/modules/timer/timer.type';
 
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import Character from '../../components/character/character.component';
@@ -36,6 +38,21 @@ export default function SingleMode(): JSX.Element {
   const handleResultModal = () => {
     dispatch(modalAction.radioResultModal());
   };
+
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+      dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.short_pomo));
+    })();
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     const characterMovingTimer = setInterval(() => setCharacterMoving((v) => !v), 500);

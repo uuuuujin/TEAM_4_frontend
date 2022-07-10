@@ -16,13 +16,15 @@ export const DescriptionImg = styled.div<{ bgImage: string }>`
 `;
 
 export const LottieImage = styled(Lottie)`
-  width: 512px;
-  height: 278px;
+  width: 516px;
+  height: 280px;
   border: 2px solid #000;
+  box-sizing: border-box;
 `;
 
 export const DescriptionContainer = styled.div`
   text-align: center;
+  height: 120px;
 
   p {
     margin: 0;
