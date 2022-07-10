@@ -93,7 +93,10 @@ export default function MultiMode(): JSX.Element {
       {members.map((item, index) => {
         return (
           <ChracterPosition key={item.Nick} positionNum={index + 1}>
-            <Character nickname={item.Nick} characterImgSrc={`${process.env.REACT_APP_IMG_URL}/all/${item.all}.png`} />
+            <Character
+              nickname={item.Nick}
+              characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${item.all}_01.png`}
+            />
           </ChracterPosition>
         );
       })}
