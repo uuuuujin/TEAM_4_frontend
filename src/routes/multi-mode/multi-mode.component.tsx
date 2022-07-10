@@ -109,7 +109,7 @@ export default function MultiMode(): JSX.Element {
 
       <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>
       <LinkContainer>
-        <MultiLink setToastState={setToastState}>{`http://localhost:3000/multi/${roomId}`}</MultiLink>
+        <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
       </LinkContainer>
       <Chat />
       {toastState && (
