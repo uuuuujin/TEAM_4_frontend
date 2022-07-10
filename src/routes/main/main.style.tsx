@@ -88,7 +88,7 @@ export const CharacterContainer = styled.div`
 `;
 
 export const PomoGuideButtonText = styled.span`
-  font-family: 'NotoSans-medium';
+  font-family: 'IBMPlexMono';
   position: absolute;
   top: 50%;
   left: 50%;
