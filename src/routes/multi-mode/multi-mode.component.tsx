@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { createRoomAsync, enterRoomAsync, chatMessageAsync, multiAction } from '../../store/modules/multi/multi.slice';
+import { createRoomAsync, enterRoomAsync, multiAction } from '../../store/modules/multi/multi.slice';
 import {
   selectIsEntered,
   selectRoomId,
@@ -19,10 +19,8 @@ import {
   LinkContainer,
   GuidanceText,
   CopyMsgContainer,
-  StateBarContainer,
 } from './multi-mode.style';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
-import catImg from '../../assets/images/character_cat_150px.png';
 import Character from '../../components/character/character.component';
 import Button from '../../components/button/button.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
@@ -48,8 +46,12 @@ export default function MultiMode(): JSX.Element {
 
   useEffect(() => {
     if (roomIdParam === 'createRoom' && nickName !== '') {
+      console.log('nickname');
+      console.log(nickName);
+      console.log('createRoomAsync');
       dispatch(createRoomAsync(nickName));
     } else if (roomIdParam) {
+      console.log('multiActionUpdateRoomId');
       dispatch(
         multiAction.updateRoomId({
           roomId: roomIdParam,
@@ -59,6 +61,7 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomIdParam, nickName]);
 
   useEffect(() => {
+    console.log('enterRoomAsync');
     if (roomId !== '' && nickName !== '') {
       dispatch(
         enterRoomAsync({
@@ -71,13 +74,13 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomId, imgCodeAll, nickName]);
 
   useEffect(() => {
+    console.log('multiActionStartConnectSocket');
     if (isEntered) {
       dispatch(multiAction.startConnectSocket());
     }
   }, [dispatch, isEntered]);
 
   const startButtonHandler = () => {
-    console.log('a');
     dispatch(timerAction.startMultiTimer());
   };
 

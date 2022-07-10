@@ -17,7 +17,7 @@ export const store = configureStore({
     timer: TimerReducer,
     user: UserReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([logger, multiMiddleware]),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([multiMiddleware]),
 });
 
 export type AppDispatch = typeof store.dispatch;
