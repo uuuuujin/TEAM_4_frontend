@@ -48,6 +48,5 @@ export const CharacterImgWrap = styled.div`
 export const CharacterImg = styled.img`
   width: 150px;
   height: 150px;
-  cursor: pointer;
   -webkit-user-drag: none;
 `;

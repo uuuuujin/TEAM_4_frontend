@@ -44,6 +44,9 @@ export const modalSlice = createSlice({
     radioExitModal: (state) => {
       state.isExitModalOpen = !state.isExitModalOpen;
     },
+    radioProfileModal: (state) => {
+      state.isProfileModalOpen = !state.isProfileModalOpen;
+    },
   },
 });
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
+import { selectTriangleImgCode } from '../../store/modules/main/main.select';
 
-import ProfileModal from '../profile-modal/profile-modal.component';
 import {
   CharacterContainer,
   TriangleIcon,
@@ -12,8 +13,6 @@ import {
   CharacterImgWrap,
   CharacterImg,
 } from './character.style';
-import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
-import { selectTriangleImgCode } from '../../store/modules/main/main.select';
 
 interface CharacterType {
   nickname: string;
@@ -21,13 +20,8 @@ interface CharacterType {
 }
 
 export default function Character({ nickname, characterImgSrc }: CharacterType): JSX.Element {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
   const triangleImgCode = useAppSelector(selectTriangleImgCode);
-
-  const handlerModal = () => {
-    setModalOpen(true);
-  };
 
   return (
     <CharacterContainer>
@@ -47,18 +41,10 @@ export default function Character({ nickname, characterImgSrc }: CharacterType):
             alt="캐릭터 받침대"
           />
         </ShelfImgWrap>
-        <CharacterImgWrap onClick={handlerModal}>
+        <CharacterImgWrap>
           <CharacterImg src={characterImgSrc} alt="캐릭터 이미지" />
         </CharacterImgWrap>
       </CharacterWrap>
-      {modalOpen && (
-        <ProfileModal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          nickname={nickname}
-          characterImgSrc={characterImgSrc}
-        />
-      )}
     </CharacterContainer>
   );
 }

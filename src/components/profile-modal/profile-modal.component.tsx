@@ -1,4 +1,11 @@
 import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { userAction } from '../../store/modules/user/user.slice';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
+import { selectIsProfileModalOpen } from '../../store/modules/modal/modal.select';
+import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
+
 import Modal from '../modal/modal.component';
 import {
   ProfileModalContainer,
@@ -11,32 +18,43 @@ import {
   ProfileModalNameEdit,
   ProfileModalEmail,
   SocialLoginMenuContainer,
+  LogoutButtonContainer,
+  LogoutButton,
 } from './profile-modal.style';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
-import { selectIsLoggedIn } from '../../store/modules/user/user.select';
-import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 
-interface ModalProp {
-  isOpen: boolean;
-  onClose: () => void;
-  nickname: string;
-  characterImgSrc: string;
-}
-
-export default function ProfileModal({ isOpen, onClose, nickname, characterImgSrc }: ModalProp): JSX.Element {
+export default function ProfileModal(): JSX.Element {
+  const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isProfileModalOpen = useAppSelector(selectIsProfileModalOpen);
+
+  const nickname = useAppSelector(selectNickname);
+  const characterImgCode = useAppSelector(selectCharacterImgCode);
+
+  const handleProfileModal = () => {
+    dispatch(modalAction.radioProfileModal());
+  };
+
+  const handleLogout = () => {
+    dispatch(userAction.logout());
+  };
 
   return (
     <Modal
-      isOpen={isOpen}
-      onClose={onClose}
+      isOpen={isProfileModalOpen}
+      onClose={handleProfileModal}
       title="내 뽀모"
       contentWidth={440}
       backgroundColor="#D5D1FF"
       titleColor="#025a00"
       footer={
         isLoggedIn ? (
-          <ProfileModalEmail>abcde@naver.com</ProfileModalEmail>
+          <>
+            <ProfileModalEmail>abcde@naver.com</ProfileModalEmail>
+            <LogoutButtonContainer>
+              <LogoutButton onClick={handleLogout} />
+            </LogoutButtonContainer>
+          </>
         ) : (
           <SocialLoginMenuContainer>
             <SocialLoginMenu isMyPomo />
@@ -46,7 +64,10 @@ export default function ProfileModal({ isOpen, onClose, nickname, characterImgSr
     >
       <ProfileModalContainer>
         <ProfileModalBgImg>
-          <ProfileModalCharacterImg alt="profile" src={characterImgSrc} />
+          <ProfileModalCharacterImg
+            alt="profile"
+            src={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`}
+          />
         </ProfileModalBgImg>
         <ProfileModalContentContainer>
           <ProfileModalNameContainer>

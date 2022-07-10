@@ -11,8 +11,8 @@ import {
   GuideScreen,
   ExitModalContainer,
 } from './navigation.style';
-import MypageDropdown from '../mypage-dropdown/mypage-dropdown.component';
 import ExitModal from '../exit-modal/exit-modal.component';
+import ProfileModal from '../profile-modal/profile-modal.component';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -22,13 +22,11 @@ import { selectTimerStart } from '../../store/modules/timer/timer.select';
 export default function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [isMypageOpen, setIsMypageOpen] = useState(false);
-
   const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
   const isTimerStarted = useAppSelector(selectTimerStart);
 
-  const toggleIsMypageOpen = () => {
-    setIsMypageOpen(!isMypageOpen);
+  const handleProfileModal = () => {
+    dispatch(modalAction.radioProfileModal());
   };
 
   const handleGuideModalClick = () => {
@@ -50,20 +48,21 @@ export default function Navigation(): JSX.Element {
         </LogoContainer>
         <NavBoxContainer>
           <NavBox>
-            <NavImg content="mypage" onClick={toggleIsMypageOpen} />
+            <NavImg content="mypage" onClick={handleProfileModal} />
           </NavBox>
           <NavBox>
             <NavImg content="info" onClick={handleGuideModalClick} />
           </NavBox>
         </NavBoxContainer>
 
-        {isMypageOpen && <MypageDropdown />}
         <GuideScreenContainer className={isGuideModalOpen ? 'show' : ''}>
           <GuideScreen
             src={`${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png`}
             onClick={handleGuideModalClick}
           />
         </GuideScreenContainer>
+
+        <ProfileModal />
       </NavigationContainer>
       <div>
         <Outlet />
