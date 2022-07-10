@@ -96,6 +96,7 @@ export const mutliSlice = createSlice({
       })
       .addCase(enterRoomAsync.rejected, () => {
         window.location.href = '/';
+        // eslint-disable-next-line no-alert
         alert('방이 다 찼습니다');
       })
       .addCase(chatMessageAsync.pending, () => {})
