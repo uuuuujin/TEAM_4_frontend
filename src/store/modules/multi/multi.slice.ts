@@ -94,6 +94,10 @@ export const mutliSlice = createSlice({
         state.id = action.payload.room.id;
         state.isEntered = true;
       })
+      .addCase(enterRoomAsync.rejected, () => {
+        window.location.href = '/';
+        alert('방이 다 찼습니다');
+      })
       .addCase(chatMessageAsync.pending, () => {})
       .addCase(chatMessageAsync.fulfilled, () => {})
       .addCase(chatMessageAsync.rejected, () => {});
