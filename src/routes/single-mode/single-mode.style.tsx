@@ -21,10 +21,8 @@ export const Container = styled.div<{ pomoState: string }>`
 `;
 
 export const TimerContainer = styled.div`
-  // width: 550px;
-  // margin: 0 auto;
   position: absolute;
-  top: 52%;
+  bottom: -7%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
@@ -55,4 +53,34 @@ export const PomoCheckContainer = styled.div`
 export const PomoCheckImage = styled.img`
   width: 24px;
   height: 24px;
+`;
+
+export const PomoCompleteButton = styled.div<{ normalImg: string; hoverImg?: string; activeImg?: string }>`
+  background-image: url(${({ normalImg }) => normalImg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  width: 284px;
+  height: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'neodgm';
+  font-size: 24px;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  // &:hover {
+  //   background-image: url(${({ hoverImg }) => hoverImg});
+  // }
+
+  // &:active {
+  //   background-image: url(${({ activeImg }) => activeImg});
+  // }
 `;
