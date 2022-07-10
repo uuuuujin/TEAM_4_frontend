@@ -10,7 +10,7 @@ export interface MainState {
 
 const initialState: MainState = {
   getRandomChracter: false,
-  nickname: '포동포동한 아기고양이',
+  nickname: '',
   characterImageCode: 1,
   triangleImageCode: 1,
 };
