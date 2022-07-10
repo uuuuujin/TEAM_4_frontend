@@ -31,7 +31,7 @@ export const LogoImg = styled.img`
 
 export const TimerContainer = styled.div`
   position: absolute;
-  top: 52%;
+  bottom: -7%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

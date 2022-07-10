@@ -11,7 +11,15 @@ import Character from '../../components/character/character.component';
 import StateBar from '../../components/state-bar/state-bar.component';
 import CheckPomoCycle from '../../components/pomo-counting/pomo-counting.component';
 import ResultModal from '../../components/result-modal/result.component';
-import { Container, StateBarContainer, CharacterContainer, TimerContainer } from './single-mode.style';
+import {
+  Container,
+  StateBarContainer,
+  CharacterContainer,
+  TimerContainer,
+  PomoCompleteButton,
+} from './single-mode.style';
+
+import PomoCompleteButtonImg from '../../assets/images/pomo_complete_button.png';
 
 export default function SingleMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,6 +32,10 @@ export default function SingleMode(): JSX.Element {
   const isFinished = useAppSelector(selectTimerFinish);
 
   const [characterMoving, setCharacterMoving] = useState(false);
+
+  const handleResultModal = () => {
+    dispatch(modalAction.radioResultModal());
+  };
 
   useEffect(() => {
     const characterMovingTimer = setInterval(() => setCharacterMoving((v) => !v), 500);
@@ -68,6 +80,12 @@ export default function SingleMode(): JSX.Element {
           <Character nickname={nickName} characterImgSrc={characterState()} />
         </CharacterContainer>
       </div>
+
+      {pomoCycle === 4 && isFinished === true && (
+        <PomoCompleteButton normalImg={PomoCompleteButtonImg} onClick={handleResultModal}>
+          뽀모 완성!
+        </PomoCompleteButton>
+      )}
 
       <StateBarContainer>
         <StateBar>{stateMessage()}</StateBar>
