@@ -59,7 +59,10 @@ export default function Navigation(): JSX.Element {
 
         {isMypageOpen && <MypageDropdown />}
         <GuideScreenContainer className={isGuideModalOpen ? 'show' : ''}>
-          <GuideScreen onClick={handleGuideModalClick} />
+          <GuideScreen
+            src={`${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png`}
+            onClick={handleGuideModalClick}
+          />
         </GuideScreenContainer>
       </NavigationContainer>
       <div>
