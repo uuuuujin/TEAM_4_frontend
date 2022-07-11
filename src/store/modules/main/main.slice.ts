@@ -19,11 +19,20 @@ export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => 
   const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/random`);
   return response.data;
 });
+export type CharacterProps = { Nick: string; code: { all: number }; icons: { arrow: number } };
 
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
-  reducers: {},
+  reducers: {
+    updateCharacter: (state, action: PayloadAction<CharacterProps>) => {
+      console.log(action.payload);
+      state.getRandomChracter = true;
+      state.nickname = action.payload.Nick;
+      state.characterImageCode = action.payload.code.all;
+      state.triangleImageCode = action.payload.icons.arrow;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getRandomAsync.fulfilled, (state, action) => {
@@ -47,6 +56,6 @@ export const mainSlice = createSlice({
   },
 });
 
-// export const mainAction = mainSlice.actions;
+export const mainAction = mainSlice.actions;
 
 export default mainSlice.reducer;

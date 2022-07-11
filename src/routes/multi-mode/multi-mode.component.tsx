@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { createRoomAsync, enterRoomAsync, multiAction } from '../../store/modules/multi/multi.slice';
@@ -10,7 +11,6 @@ import {
 } from '../../store/modules/multi/multi.select';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
-
 import {
   Container,
   TimerContainer,
@@ -28,10 +28,11 @@ import ToastHook from '../../hooks/toast.hook';
 import CopyMsg from '../../components/copy-message/copy-message.component';
 import Chat from '../../components/chat/chat.component';
 import { timerAction } from '../../store/modules/timer/timer.slice';
+import { mainAction } from '../../store/modules/main/main.slice';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
-
+  const init = useRef<boolean>(false);
   const { roomIdParam } = useParams();
 
   const isEntered = useAppSelector(selectIsEntered);
@@ -42,16 +43,32 @@ export default function MultiMode(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
 
-  useRandomCharacter();
+  if (nickName === '' && !init.current) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    console.log(init.current);
+    init.current = true;
+    axios.get(`${process.env.REACT_APP_API_URL}/user/random`).then((res) => {
+      console.log(res.data);
+      // console.log('fetching');
+      mainAction.updateCharacter(res.data);
+    });
+  }
 
   useEffect(() => {
-    if (roomIdParam === 'createRoom' && nickName !== '') {
-      console.log('nickname');
-      console.log(nickName);
+    if (nickName === '') {
+      return;
+    }
+    if (roomIdParam === 'createRoom') {
       console.log('createRoomAsync');
       dispatch(createRoomAsync(nickName));
-    } else if (roomIdParam) {
-      console.log('multiActionUpdateRoomId');
+    }
+  }, [dispatch, roomIdParam, nickName]);
+
+  useEffect(() => {
+    if (nickName === '') {
+      return;
+    }
+    if (roomIdParam && roomIdParam !== 'createRoom') {
       dispatch(
         multiAction.updateRoomId({
           roomId: roomIdParam,
@@ -61,8 +78,11 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomIdParam, nickName]);
 
   useEffect(() => {
-    console.log('enterRoomAsync');
-    if (roomId !== '' && nickName !== '') {
+    if (nickName === '') {
+      return;
+    }
+    if (roomId !== '') {
+      console.log('enterRoomAsync');
       dispatch(
         enterRoomAsync({
           roomId,
@@ -74,11 +94,14 @@ export default function MultiMode(): JSX.Element {
   }, [dispatch, roomId, imgCodeAll, nickName]);
 
   useEffect(() => {
-    console.log('multiActionStartConnectSocket');
+    if (nickName === '') {
+      return;
+    }
     if (isEntered) {
+      console.log('multiActionStartConnectSocket');
       dispatch(multiAction.startConnectSocket());
     }
-  }, [dispatch, isEntered]);
+  }, [dispatch, isEntered, nickName]);
 
   const startButtonHandler = () => {
     dispatch(timerAction.startMultiTimer());
