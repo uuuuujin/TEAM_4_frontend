@@ -43,16 +43,17 @@ export default function MultiMode(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
 
-  if (nickName === '' && !init.current) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    console.log(init.current);
-    init.current = true;
-    axios.get(`${process.env.REACT_APP_API_URL}/user/random`).then((res) => {
-      console.log(res.data);
-      // console.log('fetching');
-      mainAction.updateCharacter(res.data);
-    });
-  }
+  useEffect(() => {
+    async function getNickname() {
+      if (nickName === '') {
+        axios.get(`${process.env.REACT_APP_API_URL}/user/random`).then((res) => {
+          mainAction.updateCharacter(res.data);
+        });
+      }
+    }
+    getNickname();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (nickName === '') {
@@ -112,6 +113,7 @@ export default function MultiMode(): JSX.Element {
 
   return (
     <Container>
+      {nickName === '' && <div>hello</div>}
       {!isConnected && <Outlet />}
       <TimerContainer>
         <PomodoroTimer />
