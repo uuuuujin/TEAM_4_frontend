@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { userAction } from '../../store/modules/user/user.slice';
-import { selectIsLoggedIn } from '../../store/modules/user/user.select';
+import { mainAction } from '../../store/modules/main/main.slice';
 import { selectIsProfileModalOpen } from '../../store/modules/modal/modal.select';
-import { selectNickname, selectCharacterImgCode, selectEmail } from '../../store/modules/main/main.select';
+import {
+  selectNickname,
+  selectCharacterImgCode,
+  selectEmail,
+  selectIsLoggedIn,
+} from '../../store/modules/main/main.select';
 
 import Modal from '../modal/modal.component';
 import {
@@ -37,7 +41,7 @@ export default function ProfileModal(): JSX.Element {
   };
 
   const handleLogout = () => {
-    dispatch(userAction.logout());
+    dispatch(mainAction.logOut());
   };
 
   return (

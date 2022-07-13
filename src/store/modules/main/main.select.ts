@@ -13,3 +13,5 @@ export const selectCharacterImgCode = createSelector([selectMainReducer], (main)
 export const selectTriangleImgCode = createSelector([selectMainReducer], (main) => main.triangleImageCode);
 
 export const selectEmail = createSelector([selectMainReducer], (main) => main.email);
+
+export const selectIsLoggedIn = createSelector([selectMainReducer], (main) => main.isLoggedIn);

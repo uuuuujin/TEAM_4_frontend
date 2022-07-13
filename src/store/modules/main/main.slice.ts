@@ -4,15 +4,21 @@ import axios from 'axios';
 export interface MainState {
   getRandomChracter: boolean;
   nickname: string;
+  email: string;
   characterImageCode: number;
   triangleImageCode: number;
+  isLoggedIn: boolean;
+  token: string;
 }
 
 const initialState: MainState = {
   getRandomChracter: false,
   nickname: '',
+  email: '',
   characterImageCode: 1,
   triangleImageCode: 1,
+  isLoggedIn: false,
+  token: '',
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
@@ -23,23 +29,29 @@ export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => 
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
-  reducers: {},
+  reducers: {
+    setEmail: (state, action) => {
+      state.email = action.payload;
+    },
+    logIn: (state, action) => {
+      state.token = action.payload;
+      state.isLoggedIn = true;
+    },
+    logOut: (state) => {
+      state.isLoggedIn = false;
+      state.token = '';
+      state.email = '';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getRandomAsync.fulfilled, (state, action) => {
         state.getRandomChracter = true;
-        state.nickname = action.payload.Nick;
         state.characterImageCode = action.payload.code.all;
         state.triangleImageCode = action.payload.icons.arrow;
-        // if (!window.localStorage.getItem('nickname_key')) {
-        //   window.localStorage.setItem('nickname_key', action.payload.Nick);
-        //   window.localStorage.setItem('imgCode_key', action.payload.code.all);
-        //   state.nickname = action.payload.Nick;
-        //   state.all = action.payload.code.all;
-        // } else {
-        //   state.nickname = window.localStorage.getItem('nickname_key')!;
-        //   state.all = parseInt(window.localStorage.getItem('imgCode_key')!, 10);
-        // }
+        if (!state.isLoggedIn) {
+          state.nickname = action.payload.Nick;
+        }
       })
       .addCase(getRandomAsync.rejected, (state) => {
         state.getRandomChracter = false;
@@ -47,6 +59,6 @@ export const mainSlice = createSlice({
   },
 });
 
-// export const mainAction = mainSlice.actions;
+export const mainAction = mainSlice.actions;
 
 export default mainSlice.reducer;
