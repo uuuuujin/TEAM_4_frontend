@@ -26,7 +26,6 @@ export const mainSlice = createSlice({
   initialState,
   reducers: {
     updateCharacter: (state, action: PayloadAction<CharacterProps>) => {
-      console.log(action.payload);
       state.getRandomChracter = true;
       state.nickname = action.payload.Nick;
       state.characterImageCode = action.payload.code.all;

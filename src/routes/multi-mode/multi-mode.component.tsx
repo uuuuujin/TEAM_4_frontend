@@ -1,27 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { io, Socket } from 'socket.io-client';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { createRoomAsync, enterRoomAsync, multiAction } from '../../store/modules/multi/multi.slice';
-import {
-  selectIsEntered,
-  selectRoomId,
-  selectIsConnected,
-  selectMembers,
-} from '../../store/modules/multi/multi.select';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
-import useRandomCharacter from '../../hooks/useRandomCharacter';
 import {
   Container,
   TimerContainer,
-  ChracterPosition,
   ButtonContainer,
   LinkContainer,
   GuidanceText,
   CopyMsgContainer,
 } from './multi-mode.style';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
-import Character from '../../components/character/character.component';
 import Button from '../../components/button/button.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
 import ToastHook from '../../hooks/toast.hook';
@@ -32,77 +23,57 @@ import { mainAction } from '../../store/modules/main/main.slice';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
-  const init = useRef<boolean>(false);
   const { roomIdParam } = useParams();
 
-  const isEntered = useAppSelector(selectIsEntered);
-  const roomId = useAppSelector(selectRoomId);
-  const isConnected = useAppSelector(selectIsConnected);
-  const members = useAppSelector(selectMembers);
-
+  const socketClient = useRef<any>();
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
 
-  useEffect(() => {
-    async function getNickname() {
-      if (nickName === '') {
-        axios.get(`${process.env.REACT_APP_API_URL}/user/random`).then((res) => {
-          mainAction.updateCharacter(res.data);
+  const [roomId, setRoomId] = useState<string>('');
+  const getNickname = useCallback(async () => {
+    if (nickName === '') {
+      try {
+        await axios.get(`${process.env.REACT_APP_API_URL}/user/random`).then((res) => {
+          dispatch(mainAction.updateCharacter(res.data));
         });
+      } catch (e) {
+        // eslint-disable-next-line no-alert
+        alert('server error');
       }
     }
+  }, [dispatch, nickName]);
+
+  const createRoom = useCallback(async () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/mode/friends`).then((res) => {
+      setRoomId(res.data);
+      // eslint-disable-next-line no-restricted-globals
+      history.pushState({}, '', `${res.data}`);
+    });
+  }, [setRoomId]);
+
+  useEffect(() => {
     getNickname();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // create room,
   useEffect(() => {
     if (nickName === '') {
       return;
     }
     if (roomIdParam === 'createRoom') {
-      console.log('createRoomAsync');
-      dispatch(createRoomAsync(nickName));
+      createRoom();
     }
-  }, [dispatch, roomIdParam, nickName]);
+  }, [nickName, roomIdParam, createRoom]);
 
   useEffect(() => {
-    if (nickName === '') {
-      return;
-    }
     if (roomIdParam && roomIdParam !== 'createRoom') {
-      dispatch(
-        multiAction.updateRoomId({
-          roomId: roomIdParam,
-        })
-      );
+      // socket connection
+      console.log('socket connection');
+      console.log(roomIdParam);
+      socketClient.current = io(`${process.env.REACT_APP_API_URL}/${roomIdParam}`);
     }
-  }, [dispatch, roomIdParam, nickName]);
-
-  useEffect(() => {
-    if (nickName === '') {
-      return;
-    }
-    if (roomId !== '') {
-      console.log('enterRoomAsync');
-      dispatch(
-        enterRoomAsync({
-          roomId,
-          nickname: nickName,
-          imgCodeAll: String(imgCodeAll),
-        })
-      );
-    }
-  }, [dispatch, roomId, imgCodeAll, nickName]);
-
-  useEffect(() => {
-    if (nickName === '') {
-      return;
-    }
-    if (isEntered) {
-      console.log('multiActionStartConnectSocket');
-      dispatch(multiAction.startConnectSocket());
-    }
-  }, [dispatch, isEntered, nickName]);
+  }, [roomIdParam]);
 
   const startButtonHandler = () => {
     dispatch(timerAction.startMultiTimer());
@@ -114,11 +85,11 @@ export default function MultiMode(): JSX.Element {
   return (
     <Container>
       {nickName === '' && <div>hello</div>}
-      {!isConnected && <Outlet />}
+      <Outlet />
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
-      {members.map((item, index) => {
+      {/* {members.map((item, index) => {
         return (
           <ChracterPosition key={item.Nick} positionNum={index + 1}>
             <Character
@@ -127,7 +98,7 @@ export default function MultiMode(): JSX.Element {
             />
           </ChracterPosition>
         );
-      })}
+      })} */}
       <ButtonContainer>
         <Button onClick={startButtonHandler}>시작하기</Button>
       </ButtonContainer>
