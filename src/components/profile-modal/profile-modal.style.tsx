@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import CharacterBgImage from '../../assets/images/background_pop.png';
+import LogoutImg from '../../assets/images/logout_button.png';
+import LogoutHoverImg from '../../assets/images/logout_hover_button.png';
+import LogoutActiveImg from '../../assets/images/logout_active_button.png';
 
 export const ProfileModalContainer = styled.div`
   padding: 0 32px;
@@ -53,6 +55,7 @@ export const ProfileModalName = styled.div`
   width: 100%;
   font-family: 'IBMPlexMono';
   font-weight: 400;
+  text-align: center;
 `;
 
 export const ProfileModalNameEdit = styled.img<{ isLoggedIn: boolean }>`
@@ -73,8 +76,31 @@ export const ProfileModalEmail = styled.div`
   font-family: 'IBMPlexMono';
   color: #696969;
   margin: 20px 0 40px 0;
+  text-align: center;
 `;
 
 export const SocialLoginMenuContainer = styled.div`
   margin: 20px 0 40px 0;
+`;
+
+export const LogoutButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 40px;
+`;
+
+export const LogoutButton = styled.div`
+  background-image: url(${LogoutImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 260px;
+  height: 48px;
+
+  &:hover {
+    background-image: url(${LogoutHoverImg});
+  }
+
+  &:active {
+    background-image: url(${LogoutActiveImg});
+  }
 `;

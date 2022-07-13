@@ -21,3 +21,5 @@ export const selectIsResultModalOpen = createSelector([selectModalReducer], (mod
 export const selectIsExplainModalOpen = createSelector([selectModalReducer], (modal) => modal.isExplainModalOpen);
 
 export const selectIsExitModalOpen = createSelector([selectModalReducer], (modal) => modal.isExitModalOpen);
+
+export const selectIsProfileModalOpen = createSelector([selectModalReducer], (modal) => modal.isProfileModalOpen);

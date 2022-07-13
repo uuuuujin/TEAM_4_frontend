@@ -92,17 +92,6 @@ export const GuideScreenContainer = styled.div`
   }
 `;
 
-// export const GuideScreen = styled.div`
-//   background-image: url(${process.env.REACT_APP_IMG_URL}/modal/guide_screen.png);
-//   background-size: cover;
-//   background-repeat: no-repeat;
-
-//   position: relative;
-//   cursor: pointer;
-//   width: 92vw;
-//   height: 85vh;
-// `;
-
 export const GuideScreen = styled.img`
   cursor: pointer;
   width: 92vw;
