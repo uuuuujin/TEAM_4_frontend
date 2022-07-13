@@ -17,13 +17,14 @@ import ProfileModal from '../profile-modal/profile-modal.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectIsGuideModalOpen } from '../../store/modules/modal/modal.select';
-import { selectTimerStart } from '../../store/modules/timer/timer.select';
+import { selectTimerStart, selectTimerFinish } from '../../store/modules/timer/timer.select';
 
 export default function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const isGuideModalOpen = useAppSelector(selectIsGuideModalOpen);
   const isTimerStarted = useAppSelector(selectTimerStart);
+  const isTimerFinished = useAppSelector(selectTimerFinish);
 
   const handleProfileModal = () => {
     dispatch(modalAction.radioProfileModal());
@@ -34,7 +35,7 @@ export default function Navigation(): JSX.Element {
   };
 
   const handleExitModalClick = () => {
-    if (isTimerStarted) dispatch(modalAction.radioExitModal());
+    if (isTimerStarted || isTimerFinished) dispatch(modalAction.radioExitModal());
   };
 
   return (
