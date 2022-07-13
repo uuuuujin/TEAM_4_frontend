@@ -16,6 +16,7 @@ import useRandomCharacter from '../../hooks/useRandomCharacter';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectGetRandomChracter, selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { getRandomAsync } from '../../store/modules/main/main.slice';
 
 import {
   Container,
@@ -38,7 +39,7 @@ export default function Main(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
 
-  useRandomCharacter();
+  // useRandomCharacter();
 
   const handleMultiModalClick = () => {
     dispatch(modalAction.radioMultiModeSelectModal());
@@ -78,6 +79,7 @@ export default function Main(): JSX.Element {
             }
           />
         )}
+        <button onClick={() => dispatch(getRandomAsync())}>으어어</button>
       </CharacterContainer>
       <ModeSelectButtonContainer>
         <ModeSelectButton

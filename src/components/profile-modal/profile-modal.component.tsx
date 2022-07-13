@@ -4,7 +4,7 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 import { userAction } from '../../store/modules/user/user.slice';
 import { selectIsLoggedIn } from '../../store/modules/user/user.select';
 import { selectIsProfileModalOpen } from '../../store/modules/modal/modal.select';
-import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
+import { selectNickname, selectCharacterImgCode, selectEmail } from '../../store/modules/main/main.select';
 
 import Modal from '../modal/modal.component';
 import {
@@ -30,6 +30,7 @@ export default function ProfileModal(): JSX.Element {
 
   const nickname = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
+  const email = useAppSelector(selectEmail);
 
   const handleProfileModal = () => {
     dispatch(modalAction.radioProfileModal());
@@ -50,7 +51,7 @@ export default function ProfileModal(): JSX.Element {
       footer={
         isLoggedIn ? (
           <>
-            <ProfileModalEmail>abcde@naver.com</ProfileModalEmail>
+            <ProfileModalEmail>{email}</ProfileModalEmail>
             <LogoutButtonContainer>
               <LogoutButton onClick={handleLogout} />
             </LogoutButtonContainer>
