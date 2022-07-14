@@ -65,7 +65,7 @@ export const mainSlice = createSlice({
       state.isLoggedIn = false;
       state.token = '';
       state.email = '';
-    };
+    },
     updateCharacter: (state, action: PayloadAction<CharacterProps>) => {
       state.getRandomChracter = true;
       state.nickname = action.payload.Nick;
