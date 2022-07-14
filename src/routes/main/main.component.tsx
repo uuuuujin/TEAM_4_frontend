@@ -16,6 +16,7 @@ import useRandomCharacter from '../../hooks/useRandomCharacter';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectGetRandomChracter, selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { getRandomAsync } from '../../store/modules/main/main.slice';
 
 import {
   Container,
@@ -38,7 +39,7 @@ export default function Main(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
 
-  useRandomCharacter();
+  // useRandomCharacter();
 
   const handleMultiModalClick = () => {
     dispatch(modalAction.radioMultiModeSelectModal());
@@ -68,16 +69,15 @@ export default function Main(): JSX.Element {
         <PomodoroTimer />
       </TimerContainer>
       <CharacterContainer>
-        {getRandomCompleted && (
-          <Character
-            nickname={nickName}
-            characterImgSrc={
-              characterMoving
-                ? `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`
-                : `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_02.png`
-            }
-          />
-        )}
+        <Character
+          nickname={nickName}
+          characterImgSrc={
+            characterMoving
+              ? `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`
+              : `${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_02.png`
+          }
+        />
+        <button onClick={() => dispatch(getRandomAsync())}>으어어</button>
       </CharacterContainer>
       <ModeSelectButtonContainer>
         <ModeSelectButton

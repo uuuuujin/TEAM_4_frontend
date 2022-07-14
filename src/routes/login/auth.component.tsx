@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/index.hook';
-import { userAction } from '../../store/modules/user/user.slice';
+import { mainAction } from '../../store/modules/main/main.slice';
 
 export default function Auth(): JSX.Element {
   const navigate = useNavigate();
@@ -11,11 +11,8 @@ export default function Auth(): JSX.Element {
     const params = new URL(document.URL).searchParams;
     const accessToken = params.get('accessToken');
 
-    if (accessToken) {
-      localStorage.setItem('@token', accessToken);
-      dispatch(userAction.login());
-      navigate('/');
-    }
+    dispatch(mainAction.logIn(accessToken));
+    navigate('/');
   }, [navigate, dispatch]);
 
   return <div />;
