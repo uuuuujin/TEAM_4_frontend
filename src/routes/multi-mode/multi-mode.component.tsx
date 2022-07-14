@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
@@ -47,7 +47,7 @@ export default function MultiMode(): JSX.Element {
     axios.get(`${process.env.REACT_APP_API_URL}/mode/friends`).then((res) => {
       setRoomId(res.data);
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, '', `${res.data}`);
+      window.location.href = `${window.location.origin}/multi/${res.data}`;
     });
   }, [setRoomId]);
 
@@ -69,11 +69,12 @@ export default function MultiMode(): JSX.Element {
   useEffect(() => {
     if (roomIdParam && roomIdParam !== 'createRoom') {
       // socket connection
-      console.log('socket connection');
-      console.log(roomIdParam);
       socketClient.current = io(`${process.env.REACT_APP_API_URL}/${roomIdParam}`);
+      console.log('socket connected');
+      socketClient.current.emit('init', { Nick: nickName, all: imgCodeAll });
     }
-  }, [roomIdParam]);
+    return () => socketClient.current.disconnect();
+  }, [nickName, imgCodeAll, roomIdParam]);
 
   const startButtonHandler = () => {
     dispatch(timerAction.startMultiTimer());
