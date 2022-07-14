@@ -16,8 +16,11 @@ export default function Google(): JSX.Element {
     const sendAccessToken = async (token: string) => {
       const params = { code: token };
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/oauth/google/callback`, { params });
-      dispatch(mainAction.setEmail(response.data.email));
-      dispatch(mainAction.logIn(response.data.accessToken));
+      const data = {
+        accessToken: response.data.accessToken,
+        email: response.data.email,
+      };
+      dispatch(mainAction.logIn(data));
     };
 
     sendAccessToken(googleToken);

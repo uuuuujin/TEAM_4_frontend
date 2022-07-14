@@ -44,7 +44,7 @@ export const ProfileModalContentContainer = styled.div`
 
 export const ProfileModalNameContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   align-items: center;
   border-bottom: 1px solid #aeacac;
@@ -56,6 +56,16 @@ export const ProfileModalName = styled.div`
   font-family: 'IBMPlexMono';
   font-weight: 400;
   text-align: center;
+`;
+
+export const ProfileModalNameInput = styled.input`
+  width: 70%;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 10px;
+  outline: none;
+  background-color: transparent;
+  font-size: 22px;
 `;
 
 export const ProfileModalNameEdit = styled.img<{ isLoggedIn: boolean }>`
@@ -70,6 +80,10 @@ export const ProfileModalLogInMessage = styled.div`
   font-size: 0.75em;
   color: #696969;
   font-family: 'IBMPlexMono';
+`;
+
+export const FooterContainer = styled.div`
+  margin: 20px 0 40px 0;
 `;
 
 export const ProfileModalEmail = styled.div`

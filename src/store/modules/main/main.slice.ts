@@ -4,21 +4,21 @@ import axios from 'axios';
 export interface MainState {
   getRandomChracter: boolean;
   nickname: string;
-  email: string;
   characterImageCode: number;
   triangleImageCode: number;
   isLoggedIn: boolean;
   token: string;
+  email: string;
 }
 
 const initialState: MainState = {
   getRandomChracter: false,
   nickname: '',
-  email: '',
   characterImageCode: 1,
   triangleImageCode: 1,
   isLoggedIn: false,
   token: '',
+  email: '',
 };
 
 export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => {
@@ -26,15 +26,38 @@ export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => 
   return response.data;
 });
 
+export interface UpdateNicknameType {
+  newNickname: string;
+  token: string;
+}
+
+export const updateNicknameAsync = createAsyncThunk(
+  'main/changeNickname',
+  async ({ newNickname, token }: UpdateNicknameType) => {
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_URL}/user/nick`,
+      {
+        Nick: newNickname,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  }
+);
+
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
     logIn: (state, action) => {
-      state.token = action.payload;
+      state.token = action.payload.accessToken;
+      state.email = action.payload.email;
       state.isLoggedIn = true;
     },
     logOut: (state) => {
@@ -55,6 +78,12 @@ export const mainSlice = createSlice({
       })
       .addCase(getRandomAsync.rejected, (state) => {
         state.getRandomChracter = false;
+      })
+      .addCase(updateNicknameAsync.fulfilled, (state, action) => {
+        state.nickname = '오잉';
+      })
+      .addCase(updateNicknameAsync.rejected, (state, action) => {
+        state.nickname = '으어어어';
       });
   },
 });

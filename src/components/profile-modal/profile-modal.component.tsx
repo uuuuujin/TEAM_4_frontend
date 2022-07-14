@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { mainAction } from '../../store/modules/main/main.slice';
+import { mainAction, updateNicknameAsync, UpdateNicknameType } from '../../store/modules/main/main.slice';
 import { selectIsProfileModalOpen } from '../../store/modules/modal/modal.select';
 import {
   selectNickname,
   selectCharacterImgCode,
   selectEmail,
   selectIsLoggedIn,
+  selectToken,
 } from '../../store/modules/main/main.select';
-
 import Modal from '../modal/modal.component';
+import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 import {
   ProfileModalContainer,
   ProfileModalBgImg,
   ProfileModalContentContainer,
   ProfileModalNameContainer,
   ProfileModalName,
+  ProfileModalNameInput,
   ProfileModalLogInMessage,
   ProfileModalCharacterImg,
   ProfileModalNameEdit,
@@ -24,8 +26,8 @@ import {
   SocialLoginMenuContainer,
   LogoutButtonContainer,
   LogoutButton,
+  FooterContainer,
 } from './profile-modal.style';
-import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 
 export default function ProfileModal(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,6 +37,10 @@ export default function ProfileModal(): JSX.Element {
   const nickname = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
   const email = useAppSelector(selectEmail);
+  const accessToken = useAppSelector(selectToken);
+
+  const [isNicknameEditing, setIsNicknameEditing] = useState(false);
+  const [newnewNickname, setNewNickname] = useState(nickname);
 
   const handleProfileModal = () => {
     dispatch(modalAction.radioProfileModal());
@@ -42,6 +48,30 @@ export default function ProfileModal(): JSX.Element {
 
   const handleLogout = () => {
     dispatch(mainAction.logOut());
+  };
+
+  // const updateNickname = ({ newNickname, token }: UpdateNicknameType) => {
+  //   updateNicknameAsync({ newNickname, token });
+  // };
+
+  const handleNicknameChange = ({ newNickname, token }: UpdateNicknameType) => {
+    if (isLoggedIn) setIsNicknameEditing((v) => !v);
+    if (isNicknameEditing) {
+      updateNicknameAsync({ newNickname, token });
+      setNewNickname(newnewNickname);
+      console.log(newNickname, token);
+    }
+  };
+
+  const onChangeNickname = (e: any) => {
+    setNewNickname(e.target.value);
+  };
+
+  const cancelNicknameChange = () => {
+    if (isNicknameEditing) {
+      setIsNicknameEditing(false);
+      setNewNickname(nickname);
+    }
   };
 
   return (
@@ -54,21 +84,21 @@ export default function ProfileModal(): JSX.Element {
       titleColor="#025a00"
       footer={
         isLoggedIn ? (
-          <>
+          <FooterContainer onClick={cancelNicknameChange}>
             <ProfileModalEmail>{email}</ProfileModalEmail>
             <LogoutButtonContainer>
               <LogoutButton onClick={handleLogout} />
             </LogoutButtonContainer>
-          </>
+          </FooterContainer>
         ) : (
-          <SocialLoginMenuContainer>
+          <FooterContainer>
             <SocialLoginMenu isMyPomo />
-          </SocialLoginMenuContainer>
+          </FooterContainer>
         )
       }
     >
       <ProfileModalContainer>
-        <ProfileModalBgImg>
+        <ProfileModalBgImg onClick={cancelNicknameChange}>
           <ProfileModalCharacterImg
             alt="profile"
             src={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${characterImgCode}_01.png`}
@@ -76,7 +106,12 @@ export default function ProfileModal(): JSX.Element {
         </ProfileModalBgImg>
         <ProfileModalContentContainer>
           <ProfileModalNameContainer>
-            <ProfileModalName>{nickname}</ProfileModalName>
+            {isNicknameEditing ? (
+              <ProfileModalNameInput type="text" value={newnewNickname} onChange={onChangeNickname} maxLength={10} />
+            ) : (
+              <ProfileModalName>{newnewNickname}</ProfileModalName>
+            )}
+
             <ProfileModalNameEdit
               src={
                 !isLoggedIn
@@ -84,6 +119,7 @@ export default function ProfileModal(): JSX.Element {
                   : `${process.env.REACT_APP_IMG_URL}/modal/edit_active_icon.png`
               }
               isLoggedIn={isLoggedIn}
+              onClick={() => handleNicknameChange({ newNickname: newnewNickname, token: accessToken })}
             />
           </ProfileModalNameContainer>
           {!isLoggedIn && (
