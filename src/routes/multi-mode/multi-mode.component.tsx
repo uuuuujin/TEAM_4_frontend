@@ -11,6 +11,8 @@ import {
   LinkContainer,
   GuidanceText,
   CopyMsgContainer,
+  StateBarContainer,
+  ChracterPosition,
 } from './multi-mode.style';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import Button from '../../components/button/button.component';
@@ -20,6 +22,8 @@ import CopyMsg from '../../components/copy-message/copy-message.component';
 import Chat from '../../components/chat/chat.component';
 import { timerAction } from '../../store/modules/timer/timer.slice';
 import { mainAction } from '../../store/modules/main/main.slice';
+import StateBar from '../../components/state-bar/state-bar.component';
+import Character from '../../components/character/character.component';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,6 +34,7 @@ export default function MultiMode(): JSX.Element {
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
+  const [members, setMembers] = useState([{ Nick: '테스팅', all: 3 }]);
   console.log(connect);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
@@ -108,7 +113,7 @@ export default function MultiMode(): JSX.Element {
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
-      {/* {members.map((item, index) => {
+      {members.map((item, index) => {
         return (
           <ChracterPosition key={item.Nick} positionNum={index + 1}>
             <Character
@@ -117,7 +122,7 @@ export default function MultiMode(): JSX.Element {
             />
           </ChracterPosition>
         );
-      })} */}
+      })}
       <ButtonContainer>
         <Button onClick={startButtonHandler}>시작하기</Button>
       </ButtonContainer>
@@ -134,9 +139,9 @@ export default function MultiMode(): JSX.Element {
       )}
 
       {/* 이건 상태바 */}
-      {/* <StateBarContainer>
+      <StateBarContainer>
         <StateBar>집중하는 중...</StateBar>
-      </StateBarContainer> */}
+      </StateBarContainer>
     </Container>
   );
 }
