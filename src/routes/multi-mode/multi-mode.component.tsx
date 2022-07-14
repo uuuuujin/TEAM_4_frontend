@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
@@ -25,7 +25,7 @@ export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
   const { roomIdParam } = useParams();
 
-  const socketClient = useRef<any>();
+  const socketClient = useRef<Socket>();
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
 
@@ -51,6 +51,16 @@ export default function MultiMode(): JSX.Element {
     });
   }, [setRoomId]);
 
+  const connectSocket = useCallback(async () => {
+    socketClient.current = io(`${process.env.REACT_APP_API_URL}/${roomIdParam}`);
+    socketClient.current.on('connect', () => {
+      // alert(socketClient.current?.connected);
+    });
+    socketClient.current.on('error', (value) => {
+      alert(value);
+    });
+    await socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
+  }, [imgCodeAll, nickName, roomIdParam]);
   useEffect(() => {
     getNickname();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,14 +77,21 @@ export default function MultiMode(): JSX.Element {
   }, [nickName, roomIdParam, createRoom]);
 
   useEffect(() => {
+    if (nickName === '') {
+      return;
+    }
     if (roomIdParam && roomIdParam !== 'createRoom') {
       // socket connection
-      socketClient.current = io(`${process.env.REACT_APP_API_URL}/${roomIdParam}`);
-      console.log('socket connected');
-      socketClient.current.emit('init', { Nick: nickName, all: imgCodeAll });
+      connectSocket();
+      console.log((socketClient.current as any).connected);
+      // setTimeout(() => {
+      //   if (socketClient.current?.disconnected) {
+      //     console.log(socketClient.current?.disconnect);
+      //     // alert('full room');
+      //   }
+      // }, 100);
     }
-    return () => socketClient.current.disconnect();
-  }, [nickName, imgCodeAll, roomIdParam]);
+  }, [connectSocket, nickName, roomIdParam]);
 
   const startButtonHandler = () => {
     dispatch(timerAction.startMultiTimer());
