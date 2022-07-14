@@ -28,8 +28,9 @@ export default function MultiMode(): JSX.Element {
   const socketClient = useRef<Socket>();
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
-
+  const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
+  console.log(connect);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
       try {
@@ -54,6 +55,7 @@ export default function MultiMode(): JSX.Element {
   const connectSocket = useCallback(async () => {
     socketClient.current = io(`${process.env.REACT_APP_API_URL}/${roomIdParam}`);
     socketClient.current.on('connect', () => {
+      setConnect(true);
       // alert(socketClient.current?.connected);
     });
     socketClient.current.on('error', (value) => {
@@ -83,7 +85,6 @@ export default function MultiMode(): JSX.Element {
     if (roomIdParam && roomIdParam !== 'createRoom') {
       // socket connection
       connectSocket();
-      console.log((socketClient.current as any).connected);
       // setTimeout(() => {
       //   if (socketClient.current?.disconnected) {
       //     console.log(socketClient.current?.disconnect);
@@ -103,7 +104,7 @@ export default function MultiMode(): JSX.Element {
   return (
     <Container>
       {nickName === '' && <div>hello</div>}
-      <Outlet />
+      {!connect && <Outlet />}
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
