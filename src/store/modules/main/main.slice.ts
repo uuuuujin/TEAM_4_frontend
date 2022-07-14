@@ -25,6 +25,7 @@ export const getRandomAsync = createAsyncThunk('main/getCharacter', async () => 
   const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/random`);
   return response.data;
 });
+export type CharacterProps = { Nick: string; code: { all: number }; icons: { arrow: number } };
 
 export interface UpdateNicknameType {
   newNickname: string;
@@ -64,6 +65,12 @@ export const mainSlice = createSlice({
       state.isLoggedIn = false;
       state.token = '';
       state.email = '';
+    };
+    updateCharacter: (state, action: PayloadAction<CharacterProps>) => {
+      state.getRandomChracter = true;
+      state.nickname = action.payload.Nick;
+      state.characterImageCode = action.payload.code.all;
+      state.triangleImageCode = action.payload.icons.arrow;
     },
   },
   extraReducers: (builder) => {

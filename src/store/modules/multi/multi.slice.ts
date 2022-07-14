@@ -29,28 +29,6 @@ export const createRoomAsync = createAsyncThunk('multi/createRoom', async (nickN
   return response.data;
 });
 
-export const enterRoomAsync = createAsyncThunk(
-  'multi/enterRoom',
-  async ({ roomId, nickname, imgCodeAll }: { roomId: string; nickname: string; imgCodeAll: string }) => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}`, {
-      nick: nickname,
-      imgCode: imgCodeAll,
-    });
-    return response.data;
-  }
-);
-
-export const chatMessageAsync = createAsyncThunk(
-  'multi/chat',
-  async ({ roomId, memberId, content }: { roomId: string; memberId: string; content: string }) => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/mode/friends/${roomId}/chats`, {
-      content,
-      memberId,
-    });
-    return response.data;
-  }
-);
-
 export const mutliSlice = createSlice({
   name: 'multi',
   initialState,
@@ -85,23 +63,7 @@ export const mutliSlice = createSlice({
       })
       .addCase(createRoomAsync.rejected, (state) => {
         state.isConnecting = false;
-      })
-      .addCase(enterRoomAsync.pending, (state) => {
-        state.isConnecting = true;
-      })
-      .addCase(enterRoomAsync.fulfilled, (state, action) => {
-        state.members = action.payload.playerList;
-        state.id = action.payload.room.id;
-        state.isEntered = true;
-      })
-      .addCase(enterRoomAsync.rejected, () => {
-        window.location.href = '/';
-        // eslint-disable-next-line no-alert
-        alert('방이 다 찼습니다');
-      })
-      .addCase(chatMessageAsync.pending, () => {})
-      .addCase(chatMessageAsync.fulfilled, () => {})
-      .addCase(chatMessageAsync.rejected, () => {});
+      });
   },
 });
 
