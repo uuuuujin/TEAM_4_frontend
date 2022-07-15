@@ -34,7 +34,7 @@ export default function MultiMode(): JSX.Element {
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
-  const [members, setMembers] = useState([{ Nick: '테스팅', all: 3 }]);
+  const [members, setMembers] = useState<any[]>([]);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
       try {
@@ -66,6 +66,9 @@ export default function MultiMode(): JSX.Element {
       alert(value);
     });
     await socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
+    socketClient.current.on('init', (data) => {
+      setMembers(data);
+    });
   }, [imgCodeAll, nickName, roomIdParam]);
   useEffect(() => {
     getNickname();
