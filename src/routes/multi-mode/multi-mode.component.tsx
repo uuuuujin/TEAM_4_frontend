@@ -35,7 +35,6 @@ export default function MultiMode(): JSX.Element {
   const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState([{ Nick: '테스팅', all: 3 }]);
-  console.log(connect);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
       try {
@@ -63,7 +62,7 @@ export default function MultiMode(): JSX.Element {
       setConnect(true);
       // alert(socketClient.current?.connected);
     });
-    socketClient.current.on('error', (value) => {
+    socketClient.current.on('customError', (value) => {
       alert(value);
     });
     await socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
@@ -90,12 +89,6 @@ export default function MultiMode(): JSX.Element {
     if (roomIdParam && roomIdParam !== 'createRoom') {
       // socket connection
       connectSocket();
-      // setTimeout(() => {
-      //   if (socketClient.current?.disconnected) {
-      //     console.log(socketClient.current?.disconnect);
-      //     // alert('full room');
-      //   }
-      // }, 100);
     }
   }, [connectSocket, nickName, roomIdParam]);
 
@@ -131,7 +124,7 @@ export default function MultiMode(): JSX.Element {
       <LinkContainer>
         <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
       </LinkContainer>
-      <Chat />
+      <Chat socketClient={socketClient.current as Socket} />
       {toastState && (
         <CopyMsgContainer>
           <CopyMsg />
