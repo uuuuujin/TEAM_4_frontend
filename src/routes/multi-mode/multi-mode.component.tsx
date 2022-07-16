@@ -65,8 +65,11 @@ export default function MultiMode(): JSX.Element {
     socketClient.current.on('customError', (value) => {
       alert(value);
     });
-    await socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
+    socketClient.current?.emit('init', { Nick: nickName, all: imgCodeAll });
     socketClient.current.on('init', (data) => {
+      setMembers(data);
+    });
+    socketClient.current?.on('leave', (data) => {
       setMembers(data);
     });
   }, [imgCodeAll, nickName, roomIdParam]);
