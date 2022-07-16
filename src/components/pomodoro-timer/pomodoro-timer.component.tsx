@@ -36,8 +36,10 @@ const calNextPomoType = (currentPomoType: PomodoroTimerTypes) => {
   }
   return PomodoroTimerTypes.short_pomo;
 };
-
-export default function PomodoroTimer(): JSX.Element {
+type Props = {
+  time?: number;
+};
+export default function PomodoroTimer({ time }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const pomoType = useAppSelector(selectPomodoroTimerType);
   const pomoStart = useAppSelector(selectTimerStart);
@@ -79,7 +81,7 @@ export default function PomodoroTimer(): JSX.Element {
 
   useTimerInterval(intervalCallback, pomoType);
 
-  const timerDigits: number[] = formatCount(count);
+  const timerDigits: number[] = time ? formatCount(time) : formatCount(count);
 
   return (
     <PomodoroTimerContainer>

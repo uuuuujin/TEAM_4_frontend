@@ -117,7 +117,7 @@ export default function MultiMode(): JSX.Element {
       {nickName === '' && <div>hello</div>}
       {!connect && <Outlet />}
       <TimerContainer>
-        <PomodoroTimer />
+        <PomodoroTimer time={time} />
       </TimerContainer>
       {members.map((item, index) => {
         return (
