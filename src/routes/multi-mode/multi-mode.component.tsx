@@ -28,13 +28,14 @@ import Character from '../../components/character/character.component';
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
   const { roomIdParam } = useParams();
-
+  const [time, setTime] = useState<number>(0);
   const socketClient = useRef<Socket>();
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState<any[]>([]);
+  console.log(time);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
       try {
@@ -72,6 +73,12 @@ export default function MultiMode(): JSX.Element {
     socketClient.current?.on('leave', (data) => {
       setMembers(data);
     });
+    socketClient.current?.on('start', () => {
+      console.log('starting');
+      socketClient.current?.on('time', () => {
+        setTime((prev) => prev + 1);
+      });
+    });
   }, [imgCodeAll, nickName, roomIdParam]);
   useEffect(() => {
     getNickname();
@@ -99,7 +106,7 @@ export default function MultiMode(): JSX.Element {
   }, [connectSocket, nickName, roomIdParam]);
 
   const startButtonHandler = () => {
-    dispatch(timerAction.startMultiTimer());
+    socketClient.current?.emit('start');
   };
 
   const [toastState, setToastState] = useState<boolean>(false);
