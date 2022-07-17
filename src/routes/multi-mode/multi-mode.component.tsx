@@ -35,7 +35,13 @@ export default function MultiMode(): JSX.Element {
   const [connect, setConnect] = useState<boolean>(false);
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState<any[]>([]);
-  console.log(time);
+  useEffect(() => {
+    return () => {
+      if (socketClient.current?.connected) {
+        socketClient.current.disconnect();
+      }
+    };
+  }, []);
   const getNickname = useCallback(async () => {
     if (nickName === '') {
       try {
