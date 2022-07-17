@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import LogoutImg from '../../assets/images/logout_button.png';
-import LogoutHoverImg from '../../assets/images/logout_hover_button.png';
-import LogoutActiveImg from '../../assets/images/logout_active_button.png';
 
 export const ProfileModalContainer = styled.div`
   padding: 0 32px;
@@ -104,17 +101,18 @@ export const LogoutButtonContainer = styled.div`
 `;
 
 export const LogoutButton = styled.div`
-  background-image: url(${LogoutImg});
+  background-image: url('images/logout_button.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 260px;
   height: 48px;
+  cursor: pointer;
 
   &:hover {
-    background-image: url(${LogoutHoverImg});
+    background-image: url('images/logout_hover_button.png');
   }
 
   &:active {
-    background-image: url(${LogoutActiveImg});
+    background-image: url('images/logout_active_button.png');
   }
 `;

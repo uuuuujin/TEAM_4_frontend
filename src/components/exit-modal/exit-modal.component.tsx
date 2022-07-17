@@ -7,11 +7,6 @@ import { timerAction } from '../../store/modules/timer/timer.slice';
 
 import { ExitModalContainer, MainTitle, SubTitle, ButtonContainer, Button } from './exit-modal.style';
 
-import ExitYesButtonImg from '../../assets/images/exit_yes_button.png';
-import ExitYesButtonActiveImg from '../../assets/images/exit_yes_button_active.png';
-import ExitNoButtonImg from '../../assets/images/exit_no_button.png';
-import ExitNoButtonActiveImg from '../../assets/images/exit_no_button_active.png';
-
 export default function ExitModal(): JSX.Element {
   const dispatch = useAppDispatch();
   const isExitModalOpen = useAppSelector(selectIsExitModalOpen);
@@ -30,11 +25,20 @@ export default function ExitModal(): JSX.Element {
       <SubTitle>*나가면 현재 뽀모 기록은 없어집니다.</SubTitle>
       <ButtonContainer>
         <Link to="/" style={{ textDecoration: 'none' }}>
-          <Button normalImg={ExitYesButtonImg} activeImg={ExitYesButtonActiveImg} onClick={clickYesButton}>
+          <Button
+            normalImg="images/exit_yes_button.png"
+            activeImg="images/exit_yes_button_active.png"
+            onClick={clickYesButton}
+          >
             예
           </Button>
         </Link>
-        <Button normalImg={ExitNoButtonImg} activeImg={ExitNoButtonActiveImg} buttonType="no" onClick={clickNoButton}>
+        <Button
+          normalImg="images/exit_no_button.png"
+          activeImg="images/exit_no_button_active.png"
+          buttonType="no"
+          onClick={clickNoButton}
+        >
           아니오
         </Button>
       </ButtonContainer>

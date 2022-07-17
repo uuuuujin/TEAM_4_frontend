@@ -13,10 +13,6 @@ import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { selectIsExplainModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 
-import PrevButtonImg from '../../assets/images/previous_button.png';
-import PrevButtonActiveImg from '../../assets/images/previous_button_active.png';
-import NextButtonImg from '../../assets/images/next_button.png';
-import NextButtonActiveImg from '../../assets/images/next_button_active.png';
 import explainAnimation from '../../assets/images/explain_animation.json';
 
 interface ContentType {
@@ -107,8 +103,8 @@ export default function ExplainModal(): JSX.Element {
         {content[page].description}
         <ButtonContainer>
           <PageMoveButton
-            normalImg={PrevButtonImg}
-            activeImg={PrevButtonActiveImg}
+            normalImg="images/previous_button.png"
+            activeImg="images/previous_button_active.png"
             buttonType="prev"
             clickDisabled={page === 0}
             onClick={previousPage}
@@ -116,8 +112,8 @@ export default function ExplainModal(): JSX.Element {
             이전
           </PageMoveButton>
           <PageMoveButton
-            normalImg={NextButtonImg}
-            activeImg={NextButtonActiveImg}
+            normalImg="images/next_button.png"
+            activeImg="images/next_button_active.png"
             clickDisabled={page === 2}
             onClick={nextPage}
           >

@@ -55,8 +55,8 @@ export const PomoCheckImage = styled.img`
   height: 24px;
 `;
 
-export const PomoCompleteButton = styled.div<{ normalImg: string; hoverImg?: string; activeImg?: string }>`
-  background-image: url(${({ normalImg }) => normalImg});
+export const PomoCompleteButton = styled.div`
+  background-image: url('images/pomo_complete_button.png');
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
@@ -76,11 +76,11 @@ export const PomoCompleteButton = styled.div<{ normalImg: string; hoverImg?: str
   left: 50%;
   transform: translate(-50%, 0%);
 
-  // &:hover {
-  //   background-image: url(${({ hoverImg }) => hoverImg});
-  // }
+  &:hover {
+    color: #00378e;
+  }
 
-  // &:active {
-  //   background-image: url(${({ activeImg }) => activeImg});
-  // }
+  &:active {
+    background-image: url('images/pomo_complete_button_active.png');
+  }
 `;

@@ -10,7 +10,6 @@ import multiReducer from './modules/multi/multi.slice';
 import mainReducer from './modules/main/main.slice';
 import modalReducer from './modules/modal/modal.slice';
 import TimerReducer from './modules/timer/timer.slice';
-import UserReducer from './modules/user/user.slice';
 
 const persistConfig = {
   key: 'root',
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
   main: mainReducer,
   modal: modalReducer,
   timer: TimerReducer,
-  user: UserReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

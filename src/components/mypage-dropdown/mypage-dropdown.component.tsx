@@ -8,15 +8,15 @@ import {
   LogoutButtonContainer,
 } from './mypage-dropdown.style';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { selectIsLoggedIn } from '../../store/modules/user/user.select';
-import { userAction } from '../../store/modules/user/user.slice';
+import { selectIsLoggedIn } from '../../store/modules/main/main.select';
+import { mainAction } from '../../store/modules/main/main.slice';
 
 export default function MypageDropdown(): JSX.Element {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const handleLogout = () => {
-    dispatch(userAction.logout());
+    dispatch(mainAction.logOut());
   };
 
   return (

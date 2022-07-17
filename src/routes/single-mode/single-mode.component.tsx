@@ -21,8 +21,6 @@ import {
   PomoCompleteButton,
 } from './single-mode.style';
 
-import PomoCompleteButtonImg from '../../assets/images/pomo_complete_button.png';
-
 export default function SingleMode(): JSX.Element {
   const dispatch = useAppDispatch();
   useRandomCharacter();
@@ -99,9 +97,7 @@ export default function SingleMode(): JSX.Element {
       </div>
 
       {pomoCycle === 4 && isFinished === true && (
-        <PomoCompleteButton normalImg={PomoCompleteButtonImg} onClick={handleResultModal}>
-          뽀모 완성!
-        </PomoCompleteButton>
+        <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>
       )}
 
       <StateBarContainer>
