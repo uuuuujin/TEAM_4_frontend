@@ -1,9 +1,4 @@
 import styled from 'styled-components';
-import { BaseButton } from '../../components/button/button.style';
-
-import PomoGuideBtnImg from '../../assets/images/pomoguide_button.png';
-import PomoGuideBtnHoverImg from '../../assets/images/pomoguide_button_hover.png';
-import PomoGuideBtnActiveImg from '../../assets/images/pomoguide_button_active.png';
 
 export const Container = styled.div`
   height: 100vh;
@@ -96,7 +91,7 @@ export const PomoGuideButtonText = styled.span`
 `;
 
 export const PomoGuideButtonContainer = styled.div`
-  background-image: url(${PomoGuideBtnImg});
+  background-image: url('images/pomoguide_button.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 166px;
@@ -108,14 +103,14 @@ export const PomoGuideButtonContainer = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-image: url(${PomoGuideBtnHoverImg});
+    background-image: url('images/pomoguide_button_hover.png');
     ${PomoGuideButtonText} {
       display: none;
     }
   }
 
   &:active {
-    background-image: url(${PomoGuideBtnActiveImg});
+    background-image: url('images/pomoguide_button_active.png');
     ${PomoGuideButtonText} {
       display: none;
     }

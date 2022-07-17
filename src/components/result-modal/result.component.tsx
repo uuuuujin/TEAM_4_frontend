@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from '../modal/modal.component';
-import CombinedCharacter from '../character-combine/character-combine.component';
 import { selectIsResultModalOpen } from '../../store/modules/modal/modal.select';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -14,14 +13,6 @@ import {
   ProfileModalBgImg,
   SingleCharacter,
 } from './result.style';
-
-import ShareButtonImg from '../../assets/images/share_button.png';
-import ShareButtonHoverImg from '../../assets/images/share_button_hover.png';
-import ShareButtonActiveImg from '../../assets/images/share_button_active.png';
-
-import DownloadButtonImg from '../../assets/images/download_button.png';
-import DownloadButtonHoverImg from '../../assets/images/download_button_hover.png';
-import DownloadButtonActiveImg from '../../assets/images/download_button_active.png';
 
 export interface ResultModalProp {
   characterImage: string;
@@ -70,15 +61,19 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
 
         <ButtonContainer>
           <ResultButton
-            normalImg={DownloadButtonImg}
-            hoverImg={DownloadButtonHoverImg}
-            activeImg={DownloadButtonActiveImg}
+            normalImg="images/download_button.png"
+            hoverImg="images/download_button_hover.png"
+            activeImg="images/download_button_active.png"
             onClick={() => downloadImage(characterImage)}
           >
             <DownloadButtonText>저장하기</DownloadButtonText>
           </ResultButton>
 
-          <ResultButton normalImg={ShareButtonImg} hoverImg={ShareButtonHoverImg} activeImg={ShareButtonActiveImg}>
+          <ResultButton
+            normalImg="images/share_button.png"
+            hoverImg="images/share_button_hover.png"
+            activeImg="images/share_button_active.png"
+          >
             <ResultButtonText>공유하기</ResultButtonText>
           </ResultButton>
         </ButtonContainer>

@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { mainAction, updateNicknameAsync, UpdateNicknameType } from '../../store/modules/main/main.slice';
+import { mainAction } from '../../store/modules/main/main.slice';
 import { selectIsProfileModalOpen } from '../../store/modules/modal/modal.select';
 import {
   selectNickname,
   selectCharacterImgCode,
   selectEmail,
   selectIsLoggedIn,
-  selectToken,
 } from '../../store/modules/main/main.select';
 import Modal from '../modal/modal.component';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
@@ -23,7 +22,6 @@ import {
   ProfileModalCharacterImg,
   ProfileModalNameEdit,
   ProfileModalEmail,
-  SocialLoginMenuContainer,
   LogoutButtonContainer,
   LogoutButton,
   FooterContainer,
@@ -37,41 +35,44 @@ export default function ProfileModal(): JSX.Element {
   const nickname = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
   const email = useAppSelector(selectEmail);
-  const accessToken = useAppSelector(selectToken);
 
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
-  const [newnewNickname, setNewNickname] = useState(nickname);
+  const [newNickname, setNewNickname] = useState(nickname);
 
-  const handleProfileModal = () => {
-    dispatch(modalAction.radioProfileModal());
-  };
-
-  const handleLogout = () => {
-    dispatch(mainAction.logOut());
-  };
-
-  // const updateNickname = ({ newNickname, token }: UpdateNicknameType) => {
-  //   updateNicknameAsync({ newNickname, token });
-  // };
-
-  const handleNicknameChange = ({ newNickname, token }: UpdateNicknameType) => {
-    if (isLoggedIn) setIsNicknameEditing((v) => !v);
-    if (isNicknameEditing) {
-      updateNicknameAsync({ newNickname, token });
-      setNewNickname(newnewNickname);
-      console.log(newNickname, token);
-    }
-  };
-
-  const onChangeNickname = (e: any) => {
-    setNewNickname(e.target.value);
-  };
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const cancelNicknameChange = () => {
     if (isNicknameEditing) {
       setIsNicknameEditing(false);
       setNewNickname(nickname);
     }
+  };
+  const handleProfileModal = () => {
+    dispatch(modalAction.radioProfileModal());
+    cancelNicknameChange();
+  };
+
+  const handleLogout = () => {
+    dispatch(mainAction.logOut());
+  };
+
+  const handleNicknameChange = (nick: string) => {
+    if (isLoggedIn) {
+      setIsNicknameEditing((v) => !v);
+    }
+    if (isNicknameEditing) {
+      dispatch(mainAction.updateNickname(nick));
+    }
+  };
+
+  useEffect(() => {
+    if (isNicknameEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isNicknameEditing]);
+
+  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewNickname(e.target.value);
   };
 
   return (
@@ -107,9 +108,15 @@ export default function ProfileModal(): JSX.Element {
         <ProfileModalContentContainer>
           <ProfileModalNameContainer>
             {isNicknameEditing ? (
-              <ProfileModalNameInput type="text" value={newnewNickname} onChange={onChangeNickname} maxLength={10} />
+              <ProfileModalNameInput
+                type="text"
+                value={newNickname}
+                onChange={onChangeNickname}
+                maxLength={10}
+                ref={inputRef}
+              />
             ) : (
-              <ProfileModalName>{newnewNickname}</ProfileModalName>
+              <ProfileModalName>{nickname}</ProfileModalName>
             )}
 
             <ProfileModalNameEdit
@@ -119,7 +126,7 @@ export default function ProfileModal(): JSX.Element {
                   : `${process.env.REACT_APP_IMG_URL}/modal/edit_active_icon.png`
               }
               isLoggedIn={isLoggedIn}
-              onClick={() => handleNicknameChange({ newNickname: newnewNickname, token: accessToken })}
+              onClick={() => handleNicknameChange(newNickname)}
             />
           </ProfileModalNameContainer>
           {!isLoggedIn && (

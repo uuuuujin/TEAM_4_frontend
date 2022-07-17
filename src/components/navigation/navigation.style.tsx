@@ -1,12 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-import MyPageImg from '../../assets/images/mypage.png';
-import MyPageHoverImg from '../../assets/images/mypage_hover.png';
-import MyPageActiveImg from '../../assets/images/mypage_active.png';
-import InfoImg from '../../assets/images/info.png';
-import InfoHoverImg from '../../assets/images/info_hover.png';
-import InfoActiveImg from '../../assets/images/info_active.png';
-import GuideImg from '../../assets/images/guide_screen.png';
 
 export const NavigationContainer = styled.div`
   height: 80px;
@@ -46,28 +38,28 @@ export const NavBox = styled.div`
 `;
 
 export const NavImg = styled.div<{ content: string }>`
-  background-image: url(${MyPageImg});
+  background-image: url('images/mypage.png');
   background-size: cover;
   width: 45px;
   height: 45px;
   cursor: pointer;
 
   &:hover {
-    background-image: url(${MyPageHoverImg});
+    background-image: url('images/mypage_hover.png');
   }
   &:active {
-    background-image: url(${MyPageActiveImg});
+    background-image: url('images/mypage_active.png');
   }
 
   ${({ content }) =>
     content === 'info' &&
     css`
-      background-image: url(${InfoImg});
+      background-image: url('images/info.png');
       &:hover {
-        background-image: url(${InfoHoverImg});
+        background-image: url('images/info_hover.png');
       }
       &:active {
-        background-image: url(${InfoActiveImg});
+        background-image: url($'images/info_active.png');
       }
     `}
 `;

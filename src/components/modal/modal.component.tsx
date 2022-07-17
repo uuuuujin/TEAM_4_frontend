@@ -10,9 +10,6 @@ import {
   CloseButton,
 } from './modal.style';
 
-import CloseBtnImg from '../../assets/images/close.png';
-import CloseHoverBtnImg from '../../assets/images/close_hover.png';
-
 export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
@@ -38,7 +35,7 @@ export default function Modal({
     <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
       <ModalContent width={contentWidth} backgroundColor={backgroundColor} onClick={(e) => e.stopPropagation()}>
         <ModalHeader>{title ? <ModalTitle titleColor={titleColor}>{title}</ModalTitle> : <div />}</ModalHeader>
-        <CloseButton normalImg={CloseBtnImg} hoverImg={CloseHoverBtnImg} onClick={onClose} />
+        <CloseButton onClick={onClose} />
         <ModalBody>{children}</ModalBody>
 
         {footer && <ModalFooter>{footer}</ModalFooter>}
