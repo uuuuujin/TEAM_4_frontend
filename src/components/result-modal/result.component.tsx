@@ -52,7 +52,7 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
     <Modal onClose={closeModal} contentWidth={440} title="뽀모합체!" backgroundColor="#E0FFD1" titleColor="#025a00">
       <ResultModalContainer>
         <ProfileModalBgImg>
-          {isTimerMode === 'single' && <SingleCharacter alt="profile" src={characterImage} />}
+          <SingleCharacter alt="profile" src={characterImage} />
         </ProfileModalBgImg>
 
         <ButtonContainer>

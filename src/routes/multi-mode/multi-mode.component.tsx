@@ -27,12 +27,14 @@ import Character from '../../components/character/character.component';
 import { selectTimerFinish } from '../../store/modules/timer/timer.select';
 import { PomoCompleteButton } from '../single-mode/single-mode.style';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import ResultModal from '../../components/result-modal/result.component';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
   const { roomIdParam } = useParams();
   const [imageUrl, setImageUrl] = useState<string>('');
   const socketClient = useRef<Socket>();
+  const finish = useAppSelector(selectTimerFinish);
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const [connect, setConnect] = useState<boolean>(false);
@@ -119,6 +121,24 @@ export default function MultiMode(): JSX.Element {
     dispatch(timerAction.startMultiTimer());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!finish) {
+      return;
+    }
+    const getImageUrl = async () => {
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/user/randomImage`, {
+          userList: members.map((value) => value.all),
+        })
+        .then((res) => {
+          console.log(res.data);
+          setImageUrl(res.data.link);
+          dispatch(modalAction.radioResultModal());
+        });
+    };
+    getImageUrl();
+  }, [finish, members, setImageUrl, dispatch]);
+
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
 
@@ -160,6 +180,7 @@ export default function MultiMode(): JSX.Element {
       <StateBarContainer>
         <StateBar>집중하는 중...</StateBar>
       </StateBarContainer>
+      <ResultModal characterImage={imageUrl} />
     </Container>
   );
 }
