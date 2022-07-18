@@ -56,7 +56,7 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
     >
       <ResultModalContainer>
         <ProfileModalBgImg>
-          {isTimerMode === 'single' && <SingleCharacter alt="profile" src={characterImage} />}
+          <SingleCharacter alt="profile" src={characterImage} />
         </ProfileModalBgImg>
 
         <ButtonContainer>
