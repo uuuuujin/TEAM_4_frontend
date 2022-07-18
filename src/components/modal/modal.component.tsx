@@ -11,7 +11,6 @@ import {
 } from './modal.style';
 
 export interface ModalProp {
-  isOpen: boolean;
   onClose: () => void;
   title?: string;
   contentWidth?: number;
@@ -22,7 +21,6 @@ export interface ModalProp {
 }
 
 export default function Modal({
-  isOpen,
   onClose,
   title,
   children,
@@ -32,7 +30,7 @@ export default function Modal({
   contentWidth = 500,
 }: ModalProp): JSX.Element {
   return (
-    <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
+    <ModalContainer className="show" onClick={onClose}>
       <ModalContent width={contentWidth} backgroundColor={backgroundColor} onClick={(e) => e.stopPropagation()}>
         <ModalHeader>{title ? <ModalTitle titleColor={titleColor}>{title}</ModalTitle> : <div />}</ModalHeader>
         <CloseButton onClick={onClose} />

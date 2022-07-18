@@ -5,9 +5,11 @@ import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 
 export default function SocialLoginModal(): JSX.Element {
   const [isOpen, setIsOpen] = useState(true);
+  if (isOpen) {
+    return <div />;
+  }
   return (
     <Modal
-      isOpen={isOpen}
       onClose={() => {
         setIsOpen(!isOpen);
       }}

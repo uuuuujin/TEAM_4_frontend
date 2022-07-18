@@ -8,6 +8,7 @@ export const Container = styled.div`
   background-size: cover, cover, cover;
   background-position: bottom, bottom, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
+  position: relative;
 `;
 
 export const LogoContainer = styled.div`
@@ -26,7 +27,7 @@ export const LogoImg = styled.img`
 
 export const TimerContainer = styled.div`
   position: absolute;
-  bottom: -7%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
@@ -36,6 +37,9 @@ export const ModeSelectButtonContainer = styled.div`
   display: flex;
   bottom: 13%;
   left: 50%;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
   transform: translate(-50%, 0);
 `;
 
@@ -43,10 +47,6 @@ export const ModeSelectButtonText = styled.span`
   font-family: 'neodgm';
   font-size: 24px;
   color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-38%, -50%);
 `;
 
 export const ModeSelectButton = styled.div<{ normalImg: string; hoverImg: string; activeImg: string }>`
@@ -54,13 +54,15 @@ export const ModeSelectButton = styled.div<{ normalImg: string; hoverImg: string
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
-  width: 284px;
-  height: 80px;
+  width: 100%;
+  height: 100%;
   margin: 0 23px;
   padding: 0;
   position: relative;
   cursor: pointer;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     background-image: url(${({ hoverImg }) => hoverImg});
     ${ModeSelectButtonText} {

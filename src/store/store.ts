@@ -4,7 +4,6 @@ import logger from 'redux-logger';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { multiMiddleware } from './middlewares/multi.middleware';
 import counterReducer from './modules/counter/counter.slice';
 import multiReducer from './modules/multi/multi.slice';
 import mainReducer from './modules/main/main.slice';
@@ -35,7 +34,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([multiMiddleware]),
+    }),
 });
 
 export const persistor = persistStore(store);

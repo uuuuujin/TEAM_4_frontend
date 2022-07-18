@@ -27,10 +27,12 @@ export default function MultiModeSelectModal(): JSX.Element {
     navigate('/multi/createRoom');
   };
 
+  if (!isMultiModeSelectModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       title="멀티모드"
-      isOpen={isMultiModeSelectModalOpen}
       onClose={() => {
         dispatch(modalAction.radioMultiModeSelectModal());
       }}

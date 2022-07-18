@@ -23,6 +23,9 @@ export const timerSlice = createSlice({
   reducers: {
     startMultiTimer: (state) => {
       state.mode = 'multi';
+      state.pomoTimerType = PomodoroTimerTypes.short_pomo;
+      state.finish = false;
+      state.start = true;
     },
     startSingleTimer: (state, action: PayloadAction<PomodoroTimerTypes>) => {
       state.mode = 'single';

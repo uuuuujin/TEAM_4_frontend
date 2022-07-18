@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import { start } from 'repl';
+import { Socket } from 'socket.io-client';
 import { PomodoroTimerContainer, TimerText, TimerTextContainer, TimerColon } from './pomodoro-timer.style';
 
 import useTimerInterval, { getPomoLimitCount } from '../../hooks/useTimerInterval.hook';
@@ -9,6 +8,7 @@ import {
   selectTimerStart,
   selectTimerCycle,
   selectTimerMode,
+  selectTimerFinish,
 } from '../../store/modules/timer/timer.select';
 import { timerAction } from '../../store/modules/timer/timer.slice';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
@@ -37,22 +37,29 @@ const calNextPomoType = (currentPomoType: PomodoroTimerTypes) => {
   return PomodoroTimerTypes.short_pomo;
 };
 type Props = {
-  time?: number;
+  client?: Socket;
 };
-export default function PomodoroTimer({ time }: Props): JSX.Element {
+export default function PomodoroTimer({ client }: Props) {
   const dispatch = useAppDispatch();
   const pomoType = useAppSelector(selectPomodoroTimerType);
   const pomoStart = useAppSelector(selectTimerStart);
   const pomoCycle = useAppSelector(selectTimerCycle);
+  const finish = useAppSelector(selectTimerFinish);
   const pomoMode = useAppSelector(selectTimerMode);
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    return () => dispatch(timerAction.resetTimer() as any);
+  }, [dispatch]);
 
   const intervalCallback = () => {
     if (count === 0) {
       if (pomoCycle === 4) {
+        console.log('finished');
+        if (pomoMode === 'multi') {
+          client?.disconnect();
+        }
         dispatch(timerAction.finishTimer());
-      } else if (pomoMode === 'multi') {
-        dispatch(timerAction.changeMultiTimer());
       } else {
         const pomo = calNextPomoType(pomoType);
         let cycle: number = pomoCycle;
@@ -69,7 +76,7 @@ export default function PomodoroTimer({ time }: Props): JSX.Element {
       }
       return true;
     }
-    if (pomoStart) {
+    if (pomoStart && pomoMode === 'single') {
       setCount(count - 1);
     }
     return false;
@@ -77,11 +84,20 @@ export default function PomodoroTimer({ time }: Props): JSX.Element {
 
   useEffect(() => {
     setCount(getPomoLimitCount(pomoType));
-  }, [pomoType]);
+  }, [pomoMode, pomoType]);
 
+  useEffect(() => {
+    client?.on('start', () => {
+      client?.on('time', () => {
+        if (!finish) {
+          setCount((prev) => prev - 1);
+        }
+      });
+    });
+  }, [client, finish, pomoStart]);
   useTimerInterval(intervalCallback, pomoType);
 
-  const timerDigits: number[] = time ? formatCount(time) : formatCount(count);
+  const timerDigits: number[] = formatCount(count);
 
   return (
     <PomodoroTimerContainer>

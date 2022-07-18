@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Lottie from 'lottie-react';
 import Modal from '../modal/modal.component';
 import {
   ButtonContainer,
@@ -84,14 +83,11 @@ export default function ExplainModal(): JSX.Element {
     },
   ];
 
+  if (!isExplainModalOpen) {
+    return <div />;
+  }
   return (
-    <Modal
-      isOpen={isExplainModalOpen}
-      onClose={closeModal}
-      title="뽀모도로란?"
-      contentWidth={580}
-      backgroundColor="#D9FDFF"
-    >
+    <Modal onClose={closeModal} title="뽀모도로란?" contentWidth={580} backgroundColor="#D9FDFF">
       <div>
         <DescriptionImgContainer>
           {page !== 1 ? (

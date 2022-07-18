@@ -29,10 +29,12 @@ export default function SingleModeSelectModal(): JSX.Element {
     dispatch(modalAction.radioSingleModeSelectModal());
   };
 
+  if (!isSingleModeSelectModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       title="싱글모드"
-      isOpen={isSingleModeSelectModalOpen}
       onClose={() => {
         dispatch(modalAction.radioSingleModeSelectModal());
       }}
