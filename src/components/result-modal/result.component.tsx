@@ -44,7 +44,9 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
         console.log('이미지 다운로드 실패', err);
       });
   };
-
+  if (!isResultModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       isOpen={isResultModalOpen}

@@ -74,7 +74,6 @@ export default function ProfileModal(): JSX.Element {
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewNickname(e.target.value);
   };
-
   return (
     <Modal
       isOpen={isProfileModalOpen}

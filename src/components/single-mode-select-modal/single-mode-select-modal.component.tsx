@@ -28,7 +28,9 @@ export default function SingleModeSelectModal(): JSX.Element {
     dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.long_pomo));
     dispatch(modalAction.radioSingleModeSelectModal());
   };
-
+  if (!isSingleModeSelectModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       title="싱글모드"

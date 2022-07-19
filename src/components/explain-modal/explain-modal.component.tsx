@@ -83,6 +83,9 @@ export default function ExplainModal(): JSX.Element {
     },
   ];
 
+  if (!isExplainModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       isOpen={isExplainModalOpen}

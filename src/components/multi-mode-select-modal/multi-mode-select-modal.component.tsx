@@ -26,7 +26,9 @@ export default function MultiModeSelectModal(): JSX.Element {
   const handleFriendClick = () => {
     navigate('/multi/createRoom');
   };
-
+  if (!isMultiModeSelectModalOpen) {
+    return <div />;
+  }
   return (
     <Modal
       title="멀티모드"
