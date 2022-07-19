@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Lottie from 'lottie-react';
 import Modal from '../modal/modal.component';
 import {
   ButtonContainer,

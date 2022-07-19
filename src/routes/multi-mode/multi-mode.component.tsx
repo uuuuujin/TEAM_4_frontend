@@ -24,11 +24,14 @@ import { timerAction } from '../../store/modules/timer/timer.slice';
 import { mainAction } from '../../store/modules/main/main.slice';
 import StateBar from '../../components/state-bar/state-bar.component';
 import Character from '../../components/character/character.component';
+import { selectTimerFinish } from '../../store/modules/timer/timer.select';
+import { PomoCompleteButton } from '../single-mode/single-mode.style';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
   const { roomIdParam } = useParams();
-  const [time, setTime] = useState<number>(0);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const socketClient = useRef<Socket>();
   const nickName = useAppSelector(selectNickname);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
@@ -54,11 +57,14 @@ export default function MultiMode(): JSX.Element {
       }
     }
   }, [dispatch, nickName]);
-
+  const handleResultModal = () => {
+    dispatch(modalAction.radioResultModal());
+  };
   const createRoom = useCallback(async () => {
     axios.get(`${process.env.REACT_APP_API_URL}/mode/friends`).then((res) => {
       setRoomId(res.data);
       // eslint-disable-next-line no-restricted-globals
+      // history.pushState({}, '', `${window.location.origin}/multi/${res.data}`);
       window.location.href = `${window.location.origin}/multi/${res.data}`;
     });
   }, [setRoomId]);
@@ -79,15 +85,9 @@ export default function MultiMode(): JSX.Element {
     socketClient.current?.on('leave', (data) => {
       setMembers(data);
     });
-    socketClient.current?.on('start', () => {
-      console.log('starting');
-      socketClient.current?.on('time', () => {
-        setTime((prev) => prev + 1);
-      });
-    });
   }, [imgCodeAll, nickName, roomIdParam]);
   useEffect(() => {
-    getNickname();
+    if (nickName === '') getNickname();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -115,6 +115,10 @@ export default function MultiMode(): JSX.Element {
     socketClient.current?.emit('start');
   };
 
+  useEffect(() => {
+    dispatch(timerAction.startMultiTimer());
+  }, [dispatch]);
+
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
 
@@ -123,7 +127,7 @@ export default function MultiMode(): JSX.Element {
       {nickName === '' && <div>hello</div>}
       {!connect && <Outlet />}
       <TimerContainer>
-        <PomodoroTimer time={time} />
+        <PomodoroTimer client={socketClient.current} />
       </TimerContainer>
       {members.map((item, index) => {
         return (
@@ -138,6 +142,8 @@ export default function MultiMode(): JSX.Element {
       <ButtonContainer>
         <Button onClick={startButtonHandler}>시작하기</Button>
       </ButtonContainer>
+
+      {imageUrl !== '' && <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>}
 
       <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>
       <LinkContainer>

@@ -12,7 +12,7 @@ export default function ExitModal(): JSX.Element {
   const isExitModalOpen = useAppSelector(selectIsExitModalOpen);
   const clickYesButton = () => {
     dispatch(modalAction.radioExitModal());
-    dispatch(timerAction.resetTimer());
+    // dispatch(timerAction.resetTimer());
   };
 
   const clickNoButton = () => {
