@@ -22,7 +22,7 @@ export const Container = styled.div<{ pomoState: string }>`
 
 export const TimerContainer = styled.div`
   position: absolute;
-  bottom: -7%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
