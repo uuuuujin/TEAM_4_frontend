@@ -5,7 +5,6 @@ import { Outlet, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import {
-  Container,
   TimerContainer,
   ButtonContainer,
   StartButton,
@@ -25,10 +24,11 @@ import { timerAction } from '../../store/modules/timer/timer.slice';
 import { mainAction } from '../../store/modules/main/main.slice';
 import StateBar from '../../components/state-bar/state-bar.component';
 import Character from '../../components/character/character.component';
-import { selectTimerFinish } from '../../store/modules/timer/timer.select';
-import { PomoCompleteButton } from '../single-mode/single-mode.style';
+import { selectPomodoroTimerType, selectTimerFinish } from '../../store/modules/timer/timer.select';
+import { Container, PomoCompleteButton } from '../single-mode/single-mode.style';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import ResultModal from '../../components/result-modal/result.component';
+import CheckPomoCycle from '../../components/pomo-counting/pomo-counting.component';
 
 export default function MultiMode(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,10 +37,20 @@ export default function MultiMode(): JSX.Element {
   const socketClient = useRef<Socket>();
   const finish = useAppSelector(selectTimerFinish);
   const nickName = useAppSelector(selectNickname);
+  const [characterMoving, setCharacterMoving] = useState<number>(1);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
   const [connect, setConnect] = useState<boolean>(false);
+  const pomoTimerType = useAppSelector(selectPomodoroTimerType);
+  console.log('pomo');
+  console.log(pomoTimerType);
+
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState<any[]>([]);
+  useEffect(() => {
+    const characterMovingTimer = setInterval(() => setCharacterMoving((v) => 3 - v), 500);
+
+    return () => clearInterval(characterMovingTimer);
+  }, []);
   useEffect(() => {
     return () => {
       if (socketClient.current?.connected) {
@@ -132,7 +142,6 @@ export default function MultiMode(): JSX.Element {
           userList: members.map((value) => value.all),
         })
         .then((res) => {
-          console.log(res.data);
           setImageUrl(res.data.link);
           dispatch(modalAction.radioResultModal());
         });
@@ -144,18 +153,21 @@ export default function MultiMode(): JSX.Element {
   ToastHook(toastState, setToastState);
 
   return (
-    <Container>
+    <Container pomoState={pomoTimerType}>
       {nickName === '' && <div>hello</div>}
       {!connect && <Outlet />}
       <TimerContainer>
         <PomodoroTimer client={socketClient.current} />
+        <CheckPomoCycle />
       </TimerContainer>
       {members.map((item, index) => {
         return (
           <ChracterPosition key={item.Nick} positionNum={index + 1}>
             <Character
               nickname={item.Nick}
-              characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/work/0${item.all}_01.png`}
+              characterImgSrc={`${process.env.REACT_APP_IMG_URL}/character/all/${
+                pomoTimerType.includes('break') ? 'rest' : 'work'
+              }/0${item.all}_0${characterMoving}.png`}
             />
           </ChracterPosition>
         );
@@ -170,7 +182,7 @@ export default function MultiMode(): JSX.Element {
       <LinkContainer>
         <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
       </LinkContainer>
-      <Chat socketClient={socketClient.current as Socket} />
+      {pomoTimerType.includes('break') && <Chat socketClient={socketClient.current as Socket} />}
       {toastState && (
         <CopyMsgContainer>
           <CopyMsg />
