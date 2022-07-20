@@ -45,8 +45,7 @@ export default function SingleMode(): JSX.Element {
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
-      // console.log('window');
-      // dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.short_pomo));
+      dispatch(timerAction.startSingleTimer(PomodoroTimerTypes.short_pomo));
     })();
     return () => {
       window.removeEventListener('beforeunload', preventClose);

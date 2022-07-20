@@ -48,9 +48,9 @@ export default function PomodoroTimer({ client }: Props) {
   const pomoMode = useAppSelector(selectTimerMode);
   const [count, setCount] = useState(0);
 
-  // useEffect(() => {
-  //   return () => dispatch(timerAction.resetTimer() as any);
-  // }, [dispatch]);
+  useEffect(() => {
+    return () => dispatch(timerAction.resetTimer() as any);
+  }, [dispatch]);
 
   const intervalCallback = () => {
     if (count === 0) {
