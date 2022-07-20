@@ -56,7 +56,7 @@ export const PomoCheckImage = styled.img`
 `;
 
 export const PomoCompleteButton = styled.div`
-  background-image: url('images/pomo_complete_button.png');
+  background-image: url('/images/pomo_complete_button.png');
   background-repeat: no-repeat;
   background-size: cover;
   border: none;

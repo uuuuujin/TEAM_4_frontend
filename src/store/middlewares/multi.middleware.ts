@@ -15,7 +15,6 @@ export const multiMiddleware: Middleware = (store) => {
       const mainStore = store.getState().main;
       socket = io(`${process.env.REACT_APP_API_URL}/room-FRIENDS`);
       socket.on('connect', () => {
-        console.log('socket connect');
         socket.emit('enter', {
           nickname: mainStore.nickname,
           logined: false,
@@ -34,7 +33,6 @@ export const multiMiddleware: Middleware = (store) => {
       });
 
       socket.on('message', (arg) => {
-        console.log(arg);
         const chat: ChatMessage = {
           id: arg.id,
           content: arg.content,

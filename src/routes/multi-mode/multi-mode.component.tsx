@@ -24,7 +24,12 @@ import { timerAction } from '../../store/modules/timer/timer.slice';
 import { mainAction } from '../../store/modules/main/main.slice';
 import StateBar from '../../components/state-bar/state-bar.component';
 import Character from '../../components/character/character.component';
-import { selectPomodoroTimerType, selectTimerFinish } from '../../store/modules/timer/timer.select';
+import {
+  selectPomodoroTimerType,
+  selectTimerCycle,
+  selectTimerFinish,
+  selectTimerStart,
+} from '../../store/modules/timer/timer.select';
 import { Container, PomoCompleteButton } from '../single-mode/single-mode.style';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import ResultModal from '../../components/result-modal/result.component';
@@ -39,11 +44,10 @@ export default function MultiMode(): JSX.Element {
   const nickName = useAppSelector(selectNickname);
   const [characterMoving, setCharacterMoving] = useState<number>(1);
   const imgCodeAll = useAppSelector(selectCharacterImgCode);
+  const cycleCount = useAppSelector(selectTimerCycle);
+  const start = useAppSelector(selectTimerStart);
   const [connect, setConnect] = useState<boolean>(false);
   const pomoTimerType = useAppSelector(selectPomodoroTimerType);
-  console.log('pomo');
-  console.log(pomoTimerType);
-
   const [roomId, setRoomId] = useState<string>('');
   const [members, setMembers] = useState<any[]>([]);
   useEffect(() => {
@@ -129,10 +133,6 @@ export default function MultiMode(): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(timerAction.startMultiTimer());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (!finish) {
       return;
     }
@@ -151,7 +151,6 @@ export default function MultiMode(): JSX.Element {
 
   const [toastState, setToastState] = useState<boolean>(false);
   ToastHook(toastState, setToastState);
-
   return (
     <Container pomoState={pomoTimerType}>
       {nickName === '' && <div>hello</div>}
@@ -172,13 +171,16 @@ export default function MultiMode(): JSX.Element {
           </ChracterPosition>
         );
       })}
-      <ButtonContainer>
-        <StartButton onClick={startButtonHandler}>시작하기</StartButton>
-      </ButtonContainer>
+
+      {!start && cycleCount === 1 && (
+        <ButtonContainer>
+          <StartButton onClick={startButtonHandler}>시작하기</StartButton>
+        </ButtonContainer>
+      )}
 
       {imageUrl !== '' && <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>}
 
-      <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>
+      {!start && cycleCount === 1 && <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>}
       <LinkContainer>
         <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
       </LinkContainer>

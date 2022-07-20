@@ -63,18 +63,18 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
 
         <ButtonContainer>
           <ResultButton
-            normalImg="images/download_button.png"
-            hoverImg="images/download_button_hover.png"
-            activeImg="images/download_button_active.png"
+            normalImg="/images/download_button.png"
+            hoverImg="/images/download_button_hover.png"
+            activeImg="/images/download_button_active.png"
             onClick={() => downloadImage(characterImage)}
           >
             <DownloadButtonText>저장하기</DownloadButtonText>
           </ResultButton>
 
           <ResultButton
-            normalImg="images/share_button.png"
-            hoverImg="images/share_button_hover.png"
-            activeImg="images/share_button_active.png"
+            normalImg="/images/share_button.png"
+            hoverImg="/images/share_button_hover.png"
+            activeImg="/images/share_button_active.png"
           >
             <ResultButtonText>공유하기</ResultButtonText>
           </ResultButton>

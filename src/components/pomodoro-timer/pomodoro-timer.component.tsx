@@ -55,7 +55,6 @@ export default function PomodoroTimer({ client }: Props) {
   const intervalCallback = () => {
     if (count === 0) {
       if (pomoCycle === 4) {
-        console.log('finished');
         if (pomoMode === 'multi') {
           client?.disconnect();
         }
@@ -88,13 +87,14 @@ export default function PomodoroTimer({ client }: Props) {
 
   useEffect(() => {
     client?.on('start', () => {
+      dispatch(timerAction.startMultiTimer());
       client?.on('time', () => {
         if (!finish) {
           setCount((prev) => prev - 1);
         }
       });
     });
-  }, [client, finish, pomoStart]);
+  }, [client, dispatch, finish, pomoStart]);
   useTimerInterval(intervalCallback, pomoType);
 
   const timerDigits: number[] = formatCount(count);
