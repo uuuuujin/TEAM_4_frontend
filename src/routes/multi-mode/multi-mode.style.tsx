@@ -68,6 +68,34 @@ export const ButtonContainer = styled.div`
   transform: translate(-50%, 0);
 `;
 
+export const StartButton = styled.div`
+  background-image: url('/images/start_button_hover.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  width: 284px;
+  height: 80px;
+  margin: 0 23px;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'neodgm';
+
+  &:hover {
+    color: #000;
+  }
+
+  &:active {
+    background-image: url('/images/start_button_click.png');
+    color: #000;
+  }
+`;
+
 export const GuidanceText = styled(ButtonContainer)`
   bottom: 20%;
 `;

@@ -26,16 +26,16 @@ export default function ExitModal(): JSX.Element {
       <ButtonContainer>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Button
-            normalImg="images/exit_yes_button.png"
-            activeImg="images/exit_yes_button_active.png"
+            normalImg="/images/exit_yes_button.png"
+            activeImg="/images/exit_yes_button_active.png"
             onClick={clickYesButton}
           >
             예
           </Button>
         </Link>
         <Button
-          normalImg="images/exit_no_button.png"
-          activeImg="images/exit_no_button_active.png"
+          normalImg="/images/exit_no_button.png"
+          activeImg="/images/exit_no_button_active.png"
           buttonType="no"
           onClick={clickNoButton}
         >

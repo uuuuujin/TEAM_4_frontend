@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Character from '../../components/character/character.component';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
@@ -14,10 +15,8 @@ import { mainAction } from '../../store/modules/main/main.slice';
 import {
   Container,
   TimerContainer,
-  LogoImg,
   CharacterContainer,
   ModeSelectButtonContainer,
-  LogoContainer,
   ModeSelectButton,
   ModeSelectButtonText,
   PomoGuideButtonContainer,
@@ -26,6 +25,7 @@ import {
 
 export default function Main(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const nickName = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
@@ -49,6 +49,10 @@ export default function Main(): JSX.Element {
     return response.data;
   };
 
+  const handleFriendClick = () => {
+    navigate('/multi/createRoom');
+  };
+
   useEffect(() => {
     const updateCharacter = async () => {
       const data = await getRandomCharacter();
@@ -63,9 +67,6 @@ export default function Main(): JSX.Element {
 
   return (
     <Container className="App">
-      {/* <LogoContainer>
-        <LogoImg src={`${process.env.REACT_APP_IMG_URL}/logo.png`} alt="포동포동 로고" />
-      </LogoContainer> */}
       <TimerContainer>
         <PomodoroTimer />
       </TimerContainer>
@@ -92,9 +93,9 @@ export default function Main(): JSX.Element {
           normalImg="images/multi_mode_button.png"
           hoverImg="images/multi_mode_button_hover.png"
           activeImg="images/multi_mode_button_active.png"
-          onClick={handleMultiModalClick}
+          onClick={handleFriendClick}
         >
-          <ModeSelectButtonText>멀티모드</ModeSelectButtonText>
+          <ModeSelectButtonText className="friend">친구랑하기</ModeSelectButtonText>
         </ModeSelectButton>
       </ModeSelectButtonContainer>
       <PomoGuideButtonContainer onClick={handleExplainModalClick}>
