@@ -8,6 +8,7 @@ import {
   Container,
   TimerContainer,
   ButtonContainer,
+  StartButton,
   LinkContainer,
   GuidanceText,
   CopyMsgContainer,
@@ -160,7 +161,7 @@ export default function MultiMode(): JSX.Element {
         );
       })}
       <ButtonContainer>
-        <Button onClick={startButtonHandler}>시작하기</Button>
+        <StartButton onClick={startButtonHandler}>시작하기</StartButton>
       </ButtonContainer>
 
       {imageUrl !== '' && <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>}
@@ -175,11 +176,9 @@ export default function MultiMode(): JSX.Element {
           <CopyMsg />
         </CopyMsgContainer>
       )}
-
-      {/* 이건 상태바 */}
-      <StateBarContainer>
+      {/* <StateBarContainer>
         <StateBar>집중하는 중...</StateBar>
-      </StateBarContainer>
+      </StateBarContainer> */}
       <ResultModal characterImage={imageUrl} />
     </Container>
   );

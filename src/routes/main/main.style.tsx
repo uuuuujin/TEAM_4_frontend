@@ -47,6 +47,10 @@ export const ModeSelectButtonText = styled.span`
   top: 50%;
   left: 50%;
   transform: translate(-38%, -50%);
+
+  &.friend {
+    transform: translate(-30%, -50%);
+  }
 `;
 
 export const ModeSelectButton = styled.div<{ normalImg: string; hoverImg: string; activeImg: string }>`

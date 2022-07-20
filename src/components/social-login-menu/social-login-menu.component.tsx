@@ -6,7 +6,7 @@ interface SocialLoginMenuProp {
 }
 
 export default function SocialLoginMenu({ isMyPomo }: SocialLoginMenuProp): JSX.Element {
-  const LOGIN_PLATFORM = ['naver', 'kakao', 'google'];
+  const LOGIN_PLATFORM = ['kakao', 'google'];
 
   return (
     <SocialLoginMenuContainer>
