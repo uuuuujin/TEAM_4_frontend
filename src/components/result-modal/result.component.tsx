@@ -41,6 +41,19 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
         console.log('이미지 다운로드 실패', err);
       });
   };
+  const kakaoShare = (imageUrl: string) => {
+    console.log(imageUrl);
+    const templateArgs = { image: imageUrl };
+    window.Kakao?.Link.sendCustom({
+      templateId: 80083,
+      templateArgs,
+      // fail: () => {
+      //   // eslint-disable-next-line no-alert
+      //   alert('공유에 실패했습니다 네트워크를 확인해 주세요');
+      // },
+    });
+  };
+
   if (!isResultModalOpen) {
     return <div />;
   }
@@ -69,6 +82,9 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
           </ResultButton>
 
           <ResultButton
+            onClick={() => {
+              kakaoShare(characterImage);
+            }}
             normalImg="/images/share_button.png"
             hoverImg="/images/share_button_hover.png"
             activeImg="/images/share_button_active.png"
