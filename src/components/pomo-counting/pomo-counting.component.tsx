@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useMemo } from 'react';
 import { useAppSelector } from '../../hooks/index.hook';
 import { selectTimerCycle } from '../../store/modules/timer/timer.select';
@@ -11,10 +12,18 @@ function CheckPomoCycle(): JSX.Element {
   return (
     <PomoCheckContainer>
       {progressArray.map(() => (
-        <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_on.png`} alt="pomo_check_on" />
+        <PomoCheckImage
+          key={nanoid()}
+          src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_on.png`}
+          alt="pomo_check_on"
+        />
       ))}
       {offArray.map(() => (
-        <PomoCheckImage src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_off.png`} alt="pomo_check_off" />
+        <PomoCheckImage
+          key={nanoid()}
+          src={`${process.env.REACT_APP_IMG_URL}/timer/pomo_check_off.png`}
+          alt="pomo_check_off"
+        />
       ))}
     </PomoCheckContainer>
   );
