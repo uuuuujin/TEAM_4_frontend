@@ -177,9 +177,11 @@ export default function MultiMode(): JSX.Element {
       {imageUrl !== '' && <PomoCompleteButton onClick={handleResultModal}>뽀모 완성!</PomoCompleteButton>}
 
       {!start && cycleCount === 1 && <GuidanceText>링크를 보내 친구들과 함꼐하자!</GuidanceText>}
-      <LinkContainer>
-        <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
-      </LinkContainer>
+      {!start && cycleCount === 1 && (
+        <LinkContainer>
+          <MultiLink setToastState={setToastState}>{`${window.location.origin}/multi/${roomId}`}</MultiLink>
+        </LinkContainer>
+      )}
       {pomoTimerType.includes('break') && <Chat socketClient={socketClient.current as Socket} />}
       {toastState && (
         <CopyMsgContainer>
