@@ -19,7 +19,6 @@ export default function App(): JSX.Element {
     const init = setInterval(() => {
       if (window.Kakao && !window.Kakao.isInitialized()) {
         window.Kakao.init('3356053e012f17635791f718e71b9038');
-
         clearInterval(init);
       }
     }, 100);
