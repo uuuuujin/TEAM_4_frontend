@@ -78,17 +78,17 @@ export default function Main(): JSX.Element {
       </CharacterContainer>
       <ModeSelectButtonContainer>
         <ModeSelectButton
-          normalImg="images/single_mode_button.png"
-          hoverImg="images/single_mode_button_hover.png"
-          activeImg="images/single_mode_button_active.png"
+          normalImg="/images/single_mode_button.png"
+          hoverImg="/images/single_mode_button_hover.png"
+          activeImg="/images/single_mode_button_active.png"
           onClick={handleSingleModalClick}
         >
           <ModeSelectButtonText>싱글모드</ModeSelectButtonText>
         </ModeSelectButton>
         <ModeSelectButton
-          normalImg="images/multi_mode_button.png"
-          hoverImg="images/multi_mode_button_hover.png"
-          activeImg="images/multi_mode_button_active.png"
+          normalImg="/images/multi_mode_button.png"
+          hoverImg="/images/multi_mode_button_hover.png"
+          activeImg="/images/multi_mode_button_active.png"
           onClick={handleFriendClick}
         >
           <ModeSelectButtonText className="friend">친구랑하기</ModeSelectButtonText>
