@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { timerAction } from '../../store/modules/timer/timer.slice';
 import { selectNickname, selectCharacterImgCode } from '../../store/modules/main/main.select';
 import { selectPomodoroTimerType, selectTimerCycle, selectTimerFinish } from '../../store/modules/timer/timer.select';
 import useRandomCharacter from '../../hooks/useRandomCharacter';
-import { PomodoroTimerTypes } from '../../store/modules/timer/timer.type';
 
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
 import Character from '../../components/character/character.component';

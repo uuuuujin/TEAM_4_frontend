@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImgContainer, CharacterComponent } from './character-combine.style';
 import bodyImg from '../../assets/images/cat_body.png';
 

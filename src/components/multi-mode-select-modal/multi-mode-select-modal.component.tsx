@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import Modal from '../modal/modal.component';
-import ModeSelectButton from '../mode-select-button/mode-select-button.component';
 import {
   MultiModeSelectModalContainer,
   MultiModeSelectModalContent,
@@ -10,9 +8,6 @@ import {
   ModeSelectImageWrap,
   ModeSelectImage,
 } from './multi-mode-select-modal.style';
-
-import MutliRandomButton from '../../assets/images/multi_random.png';
-import MutliFriendButton from '../../assets/images/multi_friend.png';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { selectIsMultiModeSelectModalOpen } from '../../store/modules/modal/modal.select';

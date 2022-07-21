@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Socket } from 'socket.io-client';
 import { PomodoroTimerContainer, TimerText, TimerTextContainer, TimerColon } from './pomodoro-timer.style';
 

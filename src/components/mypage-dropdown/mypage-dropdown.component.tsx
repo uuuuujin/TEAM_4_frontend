@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';
 import {
   MypageDropdownContainer,

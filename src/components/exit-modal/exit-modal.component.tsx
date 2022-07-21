@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';

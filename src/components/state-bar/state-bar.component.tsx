@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StateBarContainer } from './state-bar.style';
 
 export interface StateBarProp {

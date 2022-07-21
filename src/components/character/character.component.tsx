@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { useAppSelector } from '../../hooks/index.hook';
 import { selectPomodoroTimerType } from '../../store/modules/timer/timer.select';
 import { selectTriangleImgCode } from '../../store/modules/main/main.select';
 

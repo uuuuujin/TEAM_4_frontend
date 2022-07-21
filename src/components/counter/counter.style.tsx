@@ -57,7 +57,7 @@ export const TextBox = styled.input`
   width: 64px;
   text-align: center;
   margin-right: 4px;
-}`;
+`;
 
 export const AsyncButton = styled(Button)`
   position: relative;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StateBarContainer } from './copy-message.style';
 
 export default function CopyMsg(): JSX.Element {

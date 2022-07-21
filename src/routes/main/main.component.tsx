@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Character from '../../components/character/character.component';
@@ -29,10 +29,6 @@ export default function Main(): JSX.Element {
 
   const nickName = useAppSelector(selectNickname);
   const characterImgCode = useAppSelector(selectCharacterImgCode);
-
-  const handleMultiModalClick = () => {
-    dispatch(modalAction.radioMultiModeSelectModal());
-  };
 
   const handleSingleModalClick = () => {
     dispatch(modalAction.radioSingleModeSelectModal());

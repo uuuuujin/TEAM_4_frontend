@@ -1,9 +1,7 @@
-import React from 'react';
 import Modal from '../modal/modal.component';
 import { selectIsResultModalOpen } from '../../store/modules/modal/modal.select';
 import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { selectTimerMode } from '../../store/modules/timer/timer.select';
 import {
   ResultModalContainer,
   ButtonContainer,
@@ -22,7 +20,6 @@ export default function ResultModal({ characterImage }: ResultModalProp): JSX.El
   const dispatch = useAppDispatch();
 
   const isResultModalOpen = useAppSelector(selectIsResultModalOpen);
-  const isTimerMode = useAppSelector(selectTimerMode);
 
   const closeModal = () => {
     dispatch(modalAction.radioResultModal());

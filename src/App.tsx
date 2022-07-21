@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './routes/main/main.component';
 import SingleMode from './routes/single-mode/single-mode.component';

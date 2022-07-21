@@ -5,19 +5,15 @@ import { ChatContainer, ChatItemContainer, ChatForm, ChatInput } from './chat.st
 import Button, { ButtonTypeClasses } from '../button/button.component';
 import ChatItem from '../chat-item/chat-item.component';
 
-import { ChatMessage } from '../../store/modules/multi/multi.type';
-import { selectRoomId, selectMessages } from '../../store/modules/multi/multi.select';
-import { useAppSelector, useAppDispatch } from '../../hooks/index.hook';
+import { useAppSelector } from '../../hooks/index.hook';
 import { selectNickname } from '../../store/modules/main/main.select';
 
 type Props = {
   socketClient: Socket;
 };
 export default function Chat({ socketClient }: Props): JSX.Element {
-  const dispatch = useAppDispatch();
   const curNickName = useAppSelector(selectNickname);
   const [message, setMessage] = useState<any[]>([]);
-  const roomId = useAppSelector(selectRoomId);
   const [chatContent, setChatContent] = useState<string>('');
   useEffect(() => {
     if (!socketClient) return;

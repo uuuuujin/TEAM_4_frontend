@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ChatItemContainer, ChatItemName, ChatItemText, ChatItemDate } from './chat-item.style';
 import { ChatMessage } from '../../store/modules/multi/multi.type';
 

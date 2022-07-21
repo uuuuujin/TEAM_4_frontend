@@ -1,4 +1,3 @@
-import React from 'react';
 import { SocialLoginMenuContainer, LoginButton } from './social-login-menu.style';
 
 interface SocialLoginMenuProp {

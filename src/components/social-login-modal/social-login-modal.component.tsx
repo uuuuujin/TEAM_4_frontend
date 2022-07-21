@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Modal from '../modal/modal.component';
 import SocialLoginMenu from '../social-login-menu/social-login-menu.component';

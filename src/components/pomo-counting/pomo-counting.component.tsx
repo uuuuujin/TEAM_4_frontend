@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useAppSelector } from '../../hooks/index.hook';
 import { selectTimerCycle } from '../../store/modules/timer/timer.select';
 import { PomoCheckContainer, PomoCheckImage } from './pomo-counting.style';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LinkContainer, CopyBtn, LinkAddressContainer, LinkAddress } from './multi-link.style';
 
 interface LinkType {

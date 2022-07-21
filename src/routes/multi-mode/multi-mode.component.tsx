@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { io, Socket } from 'socket.io-client';
 import { Outlet, useParams } from 'react-router-dom';
@@ -11,18 +11,14 @@ import {
   LinkContainer,
   GuidanceText,
   CopyMsgContainer,
-  StateBarContainer,
   ChracterPosition,
 } from './multi-mode.style';
 import PomodoroTimer from '../../components/pomodoro-timer/pomodoro-timer.component';
-import Button from '../../components/button/button.component';
 import MultiLink from '../../components/multi-link/multi-link.component';
 import ToastHook from '../../hooks/toast.hook';
 import CopyMsg from '../../components/copy-message/copy-message.component';
 import Chat from '../../components/chat/chat.component';
-import { timerAction } from '../../store/modules/timer/timer.slice';
 import { mainAction } from '../../store/modules/main/main.slice';
-import StateBar from '../../components/state-bar/state-bar.component';
 import Character from '../../components/character/character.component';
 import {
   selectPomodoroTimerType,
