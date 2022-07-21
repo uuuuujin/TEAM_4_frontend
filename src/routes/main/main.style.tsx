@@ -98,7 +98,7 @@ export const PomoGuideButtonContainer = styled.div`
   background-image: url('/images/pomoguide_button.png');
   background-repeat: no-repeat;
   background-size: cover;
-  width: 166px;
+  width: 180px;
   height: 42px;
   position: absolute;
   bottom: 5%;

@@ -105,8 +105,8 @@ export default function ExplainModal(): JSX.Element {
         {content[page].description}
         <ButtonContainer>
           <PageMoveButton
-            normalImg="images/previous_button.png"
-            activeImg="images/previous_button_active.png"
+            normalImg="/images/previous_button.png"
+            activeImg="/images/previous_button_active.png"
             buttonType="prev"
             clickDisabled={page === 0}
             onClick={previousPage}
@@ -114,8 +114,8 @@ export default function ExplainModal(): JSX.Element {
             이전
           </PageMoveButton>
           <PageMoveButton
-            normalImg="images/next_button.png"
-            activeImg="images/next_button_active.png"
+            normalImg="/images/next_button.png"
+            activeImg="/images/next_button_active.png"
             clickDisabled={page === 2}
             onClick={nextPage}
           >
