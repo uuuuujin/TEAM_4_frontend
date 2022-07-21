@@ -27,11 +27,11 @@ export default function MultiLink({ children, setToastState }: LinkType): JSX.El
 
   return (
     <LinkContainer>
-      <CopyBtn onClick={() => handlerCopy(children)}>복사</CopyBtn>
-
       <LinkAddressContainer>
         <LinkAddress>{children.slice(0, 40)}...</LinkAddress>
       </LinkAddressContainer>
+
+      <CopyBtn onClick={() => handlerCopy(children)}>복사</CopyBtn>
     </LinkContainer>
   );
 }
